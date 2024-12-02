@@ -1,0 +1,25 @@
+# Eclipse specific files
+.metadata/
+*.log
+*.bak
+*.swp
+*.tmp
+*.DS_Store
+Thumbs.db
+
+# Eclipse project files
+.classpath
+.project
+.settings/
+
+# Output directories
+bin/
+target/
+
+# Maven specific
+.idea/
+*.iml
+
+# OS specific files
+.DS_Store
+Thumbs.db
