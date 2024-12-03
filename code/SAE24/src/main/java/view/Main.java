@@ -13,8 +13,14 @@ public class Main extends Application {
 		// TODO Auto-generated method stub
 		Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
 		primaryStage.setTitle("SAE24");
-		primaryStage.setScene(new Scene(root));
-        primaryStage.show();
+		Scene scene = new Scene(root);
+		
+		String css = this.getClass().getResource("application.css").toExternalForm();//
+		scene.getStylesheets().add(css);//
+		
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
 	}
 
 	public static void main(String[] args) {
