@@ -15,6 +15,10 @@ public class Main extends Application {
 		primaryStage.setTitle("SAE24");
 		Scene scene = new Scene(root);
 		
+		String css = this.getClass().getResource("/application.css").toExternalForm();
+		scene.getStylesheets().add(css);//
+		
+
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		

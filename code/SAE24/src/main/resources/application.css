@@ -1,0 +1,8 @@
+.label{
+	-fx-font-size: 20;
+	-fx-font-family: "Lucida Console";
+}
+#titleLabel{
+	-fx-font-size: 60;
+	-fx-text-fill: green;
+}
