@@ -7,30 +7,28 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManagerInterfaceController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManagerInterfaceController">
    <center>
-      <AnchorPane fx:id="contentPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </center>
-   <top>
-      <AnchorPane prefHeight="72.0" prefWidth="600.0" style="-fx-background-color: lightblue;" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="contentPane" prefHeight="677.0" prefWidth="715.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="266.0" layoutY="20.0" text="SAE 24">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
+            <Label layoutX="165.0" layoutY="192.0" text="Label" />
          </children>
       </AnchorPane>
-   </top>
+   </center>
    <left>
-      <AnchorPane prefHeight="283.0" prefWidth="152.0" style="-fx-background-color: lightgrey;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="781.0" prefWidth="190.0" style="-fx-background-color: #243054;" BorderPane.alignment="CENTER">
          <children>
-            <VBox layoutX="20.0" layoutY="23.0" prefHeight="281.0" prefWidth="113.0">
+            <VBox layoutX="1.0" layoutY="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="780.0" prefWidth="202.0" style="-fx-background-color: #243054;">
                <children>
-                  <Button mnemonicParsing="false" onAction="#inserimentoTask" prefHeight="59.0" prefWidth="113.0" text="Inserimento Task" />
-                  <Button mnemonicParsing="false" onAction="#visualizzaTask" prefHeight="66.0" prefWidth="133.0" text="Visualizza Task" />
-                  <Button mnemonicParsing="false" onAction="#gestionePersonale" prefHeight="66.0" prefWidth="133.0" text="Gestione Personale" />
+                  <Label fx:id="titleLabel" alignment="CENTER" prefHeight="137.0" prefWidth="202.0" stylesheets="@application.css" text="SAE 24" textFill="WHITE">
+                     <font>
+                        <Font name="Lucida Console" size="19.0" />
+                     </font>
+                  </Label>
+                  <Button mnemonicParsing="false" onAction="#profilo" prefHeight="88.0" prefWidth="205.0" styleClass="buttonMain1" stylesheets="@application.css" text="Profilo" textFill="WHITE" />
+                  <Button mnemonicParsing="false" onAction="#inserimentoTask" prefHeight="97.0" prefWidth="247.0" styleClass="buttonMain2" stylesheets="@application.css" text="Inserimento Task" textFill="WHITE" />
+                  <Button mnemonicParsing="false" onAction="#visualizzaTask" prefHeight="103.0" prefWidth="256.0" styleClass="buttonMain1" stylesheets="@application.css" text="Visualizza Task" textFill="WHITE" />
+                  <Button mnemonicParsing="false" onAction="#gestionePersonale" prefHeight="113.0" prefWidth="253.0" styleClass="buttonMain2" stylesheets="@application.css" text="Gestione Personale" textFill="WHITE" />
                </children>
             </VBox>
          </children>

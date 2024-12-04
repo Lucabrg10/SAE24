@@ -1,32 +1,65 @@
 .label{
-	-fx-font-size: 20;
-	-fx-font-family: "Lucida Console";
+	-fx-font-size: 12;
+	-fx-text-fill: black;
+	-fx-font-family: "Calibri Light";
 }
 #titleLabel{
-	-fx-font-size: 60;
-	-fx-text-fill: green;
+	-fx-font-size: 30;
+	-fx-text-fill: white;
+	-fx-font-family: "Calibri Light";
 }
 /* Stile per il bottone di conferma */
 .buttonConferma {
-    -fx-background-color: #4CAF50;  /* Colore di sfondo verde */
+    -fx-background-color: #3A466A;  /* Colore di sfondo verde */
     -fx-text-fill: white;            /* Colore del testo bianco */
     -fx-font-size: 16px;             /* Dimensione del font */
-    -fx-padding: 10px 20px;          /* Padding per il bottone (alto/basso, sinistra/destra) */
-    -fx-border-radius: 8px;         /* Angoli arrotondati */
-    -fx-background-radius: 8px;     /* Angoli arrotondati anche per lo sfondo */
-    -fx-border-color: #3e8e41;      /* Colore del bordo verde scuro */
-    -fx-border-width: 2px;          /* Spessore del bordo */
-    -fx-font-weight: bold;           /* Font in grassetto */
+    -fx-border-radius: 3px;         /* Angoli arrotondati */
+   /* -fx-background-radius: 8px;     /* Angoli arrotondati anche per lo sfondo */
+    -fx-border-color: #243054;      /* Colore del bordo verde scuro */
+  /*  -fx-border-width: 2px;          /* Spessore del bordo */
+ /*   -fx-font-weight: bold;           /* Font in grassetto */
 }
 
 /* Effetto hover per il bottone */
 .buttonConferma:hover {
-    -fx-background-color: #45a049;  /* Colore di sfondo più scuro quando hover */
-    -fx-border-color: #388e3c;      /* Colore del bordo più scuro quando hover */
+  /*  -fx-background-color: #45a049;  /* Colore di sfondo più scuro quando hover */
+    -fx-border-color: white;      /* Colore del bordo più scuro quando hover */
 }
 
 /* Effetto click per il bottone (stato pressato) */
 .buttonConferma:pressed {
-    -fx-background-color: #388e3c;  /* Colore di sfondo ancora più scuro quando premuto */
-    -fx-border-color: #2c6b2f;      /* Colore del bordo ancora più scuro quando premuto */
+    -fx-background-color: #243054;  /* Colore di sfondo ancora più scuro quando premuto */
+ /*   -fx-border-color: #2c6b2f;      /* Colore del bordo ancora più scuro quando premuto */
+    
+}
+.buttonMain1{
+	/*-fx-border-color: transparent;  /* Nessun bordo inizialmente */
+	-fx-pref-height: 75px;
+	-fx-background-color: #3A466A;
+	-fx-font-family: "Calibri Light";
+	-fx-font-size: 16;
+	-fx-text-fill: white;
+}
+
+.buttonMain2{
+	/*-fx-border-color: transparent;  /* Nessun bordo inizialmente */
+	-fx-pref-height: 75px;
+	-fx-background-color: #243054;
+	-fx-font-family: "Calibri Light";
+	-fx-font-size: 16;
+	-fx-text-fill: white;
+}
+.buttonMain2:focused{
+	-fx-border-color: yellow; 
+}
+
+.buttonMain1:focused{
+	-fx-border-color: yellow; 
+}
+
+.buttonMain2:hover {
+    -fx-border-color: white;
+}
+.buttonMain1:hover {
+    -fx-border-color: white;
 }

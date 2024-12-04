@@ -27,18 +27,23 @@ public class loginController {
 	public void handleLogin(ActionEvent event) {
 		 String username = usernameField.getText();
 	        String password = passwordField.getText();
-	        if ("admin".equals(username) && "admin".equals(password)) {
+	       
 	            try {
-	                Parent root = FXMLLoader.load(getClass().getResource("/profilo.fxml"));
+	                Parent root = FXMLLoader.load(getClass().getResource("/mainView.fxml"));
 	                Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+	                
+	                Scene scene = new Scene(root, 1400, 780);
 
-	                stage.setScene(new Scene(root));
+	                String css = this.getClass().getResource("/application.css").toExternalForm();
+	            	scene.getStylesheets().add(css);//
+
+	                stage.setScene(scene);
+	                stage.centerOnScreen();
+
+
 	            } catch (IOException e) {
 	                e.printStackTrace();
 	            }
-	        } else {
-	            
-	            errorLabel.setText("Invalid username or password.");
-	        }
+	        
 	    }
 }
