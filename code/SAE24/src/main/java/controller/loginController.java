@@ -27,9 +27,9 @@ public class loginController {
 	public void handleLogin(ActionEvent event) {
 		 String username = usernameField.getText();
 	        String password = passwordField.getText();
-	        if ("admin".equals(username) && "admin".equals(password)) {
+	        if ("".equals(username) && "".equals(password)) {
 	            try {
-	                Parent root = FXMLLoader.load(getClass().getResource("/profilo.fxml"));
+	                Parent root = FXMLLoader.load(getClass().getResource("/MainViewDipendente.fxml"));
 	                Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 
 	                stage.setScene(new Scene(root));

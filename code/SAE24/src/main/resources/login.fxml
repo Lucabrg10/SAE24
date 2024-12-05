@@ -9,32 +9,40 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="CENTER" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.loginController">
+<GridPane alignment="CENTER" hgap="10" vgap="10"
+	xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="controller.loginController">
 	<padding>
 		<Insets bottom="20" left="20" right="20" top="20" />
 	</padding>
 
-	<Label fx:id="titleLabel" style="-fx-font-size: 20px;" text="Login" GridPane.columnSpan="2" GridPane.halignment="CENTER" />
+	<Label fx:id="titleLabel" style="-fx-font-size: 20px;" text="Login"
+		GridPane.columnSpan="2" GridPane.halignment="CENTER" />
 
 	<Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-	<TextField fx:id="usernameField" promptText="Enter your username" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+	<TextField fx:id="usernameField" promptText="Enter your username"
+		GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
 	<Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-	<PasswordField fx:id="passwordField" promptText="Enter your password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+	<PasswordField fx:id="passwordField" promptText="Enter your password"
+		GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-	<Button onAction="#handleLogin" styleClass="buttonConferma" text="Login" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+	<Button onAction="#handleLogin" styleClass="buttonConferma" text="Login"
+		GridPane.columnIndex="1" GridPane.halignment="RIGHT"
+		GridPane.rowIndex="3" />
 
 
-	<Label fx:id="errorLabel" textFill="red" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-   <columnConstraints>
-      <ColumnConstraints />
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-   </rowConstraints>
+	<Label fx:id="errorLabel" textFill="red" GridPane.columnSpan="2"
+		GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+	<columnConstraints>
+		<ColumnConstraints />
+		<ColumnConstraints />
+	</columnConstraints>
+	<rowConstraints>
+		<RowConstraints />
+		<RowConstraints />
+		<RowConstraints />
+		<RowConstraints />
+		<RowConstraints />
+	</rowConstraints>
 </GridPane>
