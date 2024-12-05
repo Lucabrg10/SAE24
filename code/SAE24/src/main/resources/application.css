@@ -6,27 +6,37 @@
 	-fx-font-size: 60;
 	-fx-text-fill: green;
 }
-/* Stile per il bottone di conferma */
+/* Stile bottone di conferma */
 .buttonConferma {
-    -fx-background-color: #4CAF50;  /* Colore di sfondo verde */
-    -fx-text-fill: white;            /* Colore del testo bianco */
-    -fx-font-size: 16px;             /* Dimensione del font */
-    -fx-padding: 10px 20px;          /* Padding per il bottone (alto/basso, sinistra/destra) */
-    -fx-border-radius: 8px;         /* Angoli arrotondati */
-    -fx-background-radius: 8px;     /* Angoli arrotondati anche per lo sfondo */
-    -fx-border-color: #3e8e41;      /* Colore del bordo verde scuro */
-    -fx-border-width: 2px;          /* Spessore del bordo */
-    -fx-font-weight: bold;           /* Font in grassetto */
+    -fx-background-color: #4CAF50; 
+    -fx-text-fill: white;            
+    -fx-font-size: 16px;             
+    -fx-padding: 10px 20px;          
+    -fx-border-radius: 8px;         
+    -fx-background-radius: 8px;    
+    -fx-border-color: #3e8e41;    
+    -fx-border-width: 2px;          
+    -fx-font-weight: bold;          
 }
 
-/* Effetto hover per il bottone */
 .buttonConferma:hover {
-    -fx-background-color: #45a049;  /* Colore di sfondo più scuro quando hover */
-    -fx-border-color: #388e3c;      /* Colore del bordo più scuro quando hover */
+    -fx-background-color: #45a049;  
+    -fx-border-color: #388e3c;      
 }
 
-/* Effetto click per il bottone (stato pressato) */
 .buttonConferma:pressed {
-    -fx-background-color: #388e3c;  /* Colore di sfondo ancora più scuro quando premuto */
-    -fx-border-color: #2c6b2f;      /* Colore del bordo ancora più scuro quando premuto */
+    -fx-background-color: #388e3c; 
+    -fx-border-color: #2c6b2f;      
+}
+.taskgrid {
+    -fx-border-color: blue; 
+    -fx-border-width: 2px;
+    -fx-background-color: lightyellow;
+    -fx-hgap: 180px; 
+    -fx-vgap: 10px;
+    -fx-padding: 10px;
+
+}
+.taskgrid .column{
+
 }
