@@ -1,4 +1,5 @@
 package model;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,17 +8,18 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorValue("D")
 public class Dipendente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String nome;
     private String cognome;
     private String matricola;
     private String password;
+    private String reparto;
 
     // Getter e Setter
     public Long getId() {
@@ -59,4 +61,12 @@ public class Dipendente {
     public void setPassword(String password) {
         this.password = password;
     }
+
+	public String getReparto() {
+		return reparto;
+	}
+
+	public void setReparto(String reparto) {
+		this.reparto = reparto;
+	}
 }

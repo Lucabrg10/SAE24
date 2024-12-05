@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@DiscriminatorValue("M")
 public class Manager extends Dipendente {
 
 	@Transient

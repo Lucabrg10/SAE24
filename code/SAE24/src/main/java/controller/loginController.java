@@ -30,27 +30,29 @@ public class loginController {
 	public void handleLogin(ActionEvent event) throws IOException {
 		String username = usernameField.getText();
 		String password = passwordField.getText();
-		
+
 		LoginService service = new LoginService();
 		Object user = service.authenticate(username, password);
 		if (user != null) {
-            if (user instanceof Dipendente) {
-            	Parent root = null;
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainViewDipendente.fxml"));
-				root=loader.load();
-				MainViewDipendenteController controller = loader.getController(); 
-				controller.setDipendente((Dipendente)user);
-    			Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-    			stage.setScene(new Scene(root));
-            } else if (user instanceof Manager) {
+			System.out.println(user);
+			if (user instanceof Manager) {
 				Parent root = null;
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainView.fxml"));
 				root = loader.load();
 				Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 				stage.setScene(new Scene(root));
+			} else if (user instanceof Dipendente) {
+				Parent root = null;
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainViewDipendente.fxml"));
+				root = loader.load();
+				MainViewDipendenteController controller = loader.getController();
+				controller.setDipendente((Dipendente) user);
+				Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+				stage.setScene(new Scene(root));
+
+			} else {
+				System.out.println("Credenziali non valide.");
 			}
-		} else {
-			System.out.println("Credenziali non valide.");
-        }
+		}
 	}
 }

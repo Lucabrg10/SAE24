@@ -38,7 +38,7 @@ public class LoginService {
     }
 
     private Manager findManagerByMatricola(String matricola) {
-        TypedQuery<Manager> query = entityManager.createQuery("SELECT m FROM Manager m WHERE m.matricola = :matricola", Manager.class);
+        TypedQuery<Manager> query = entityManager.createQuery("SELECT d FROM Dipendente d WHERE d.matricola = :matricola", Manager.class);
         query.setParameter("matricola", matricola);
         return query.getResultList().stream().findFirst().orElse(null);
     }
