@@ -39,22 +39,18 @@ public class loginController {
 				try {
 					root = FXMLLoader.load(getClass().getResource("/mainView.fxml"));
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
     			Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-
     			stage.setScene(new Scene(root));
             } else if (user instanceof Manager) {
             	Parent root = null;
 				try {
 					root = FXMLLoader.load(getClass().getResource("/mainView.fxml"));
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
     			Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-
     			stage.setScene(new Scene(root));
             }
         } else {
