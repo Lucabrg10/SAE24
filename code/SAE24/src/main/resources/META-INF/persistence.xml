@@ -12,7 +12,8 @@
 		<!-- Entity Class -->
 		<class>model.Dipendente</class>
 		<class>model.Manager</class>
-
+		<class>model.Commessa</class>
+		<class>model.Task</class>
 		<properties>	
 			<!-- Connection properties -->
 			<property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />
