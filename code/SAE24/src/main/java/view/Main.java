@@ -18,7 +18,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		 // Crea l'EntityManagerFactory
-		Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/Login.fxml"));
 		primaryStage.setTitle("SAE24");
 		Scene scene = new Scene(root);
 		

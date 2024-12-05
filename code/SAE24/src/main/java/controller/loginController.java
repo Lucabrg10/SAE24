@@ -37,7 +37,7 @@ public class loginController {
             if (user instanceof Dipendente) {
             	Parent root = null;
 				try {
-					root = FXMLLoader.load(getClass().getResource("/mainView.fxml"));
+					root = FXMLLoader.load(getClass().getResource("/MainViewDipendente.fxml"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -46,7 +46,7 @@ public class loginController {
             } else if (user instanceof Manager) {
             	Parent root = null;
 				try {
-					root = FXMLLoader.load(getClass().getResource("/mainView.fxml"));
+					root = FXMLLoader.load(getClass().getResource("/MainView.fxml"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
