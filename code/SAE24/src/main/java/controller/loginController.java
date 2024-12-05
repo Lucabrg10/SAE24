@@ -27,7 +27,7 @@ public class loginController {
 
 	// Event Listener on Button.onAction
 	@FXML
-	public void handleLogin(ActionEvent event) {
+	public void handleLogin(ActionEvent event) throws IOException {
 		String username = usernameField.getText();
 		String password = passwordField.getText();
 		
@@ -36,25 +36,21 @@ public class loginController {
 		if (user != null) {
             if (user instanceof Dipendente) {
             	Parent root = null;
-				try {
-					root = FXMLLoader.load(getClass().getResource("/MainViewDipendente.fxml"));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainViewDipendente.fxml"));
+				root=loader.load();
+				MainViewDipendenteController controller = loader.getController(); 
+				controller.setDipendente((Dipendente)user);
     			Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
     			stage.setScene(new Scene(root));
             } else if (user instanceof Manager) {
-            	Parent root = null;
-				try {
-					root = FXMLLoader.load(getClass().getResource("/MainView.fxml"));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-    			Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-    			stage.setScene(new Scene(root));
-            }
-        } else {
-            System.out.println("Credenziali non valide.");
+				Parent root = null;
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainView.fxml"));
+				root = loader.load();
+				Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+				stage.setScene(new Scene(root));
+			}
+		} else {
+			System.out.println("Credenziali non valide.");
         }
 	}
 }

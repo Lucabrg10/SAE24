@@ -7,24 +7,16 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-	prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1"
-	xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProfiloController">
 	<children>
-		<Label fx:id="titleLabel" graphicTextGap="0.0" layoutX="65.0"
-			layoutY="84.0" text="NOME:" />
-		<ImageView fitHeight="150.0" fitWidth="200.0"
-			layoutX="396.0" layoutY="36.0" pickOnBounds="true"
-			preserveRatio="true">
+		<Label fx:id="titleLabel" graphicTextGap="0.0" layoutX="65.0" layoutY="84.0" text="NOME:" />
+		<ImageView fitHeight="150.0" fitWidth="200.0" layoutX="396.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@img/user.png" />
 			</image>
 		</ImageView>
 		<Label layoutX="65.0" layoutY="146.0" text="COGNOME:" />
-		<Button layoutX="471.0" layoutY="348.0" mnemonicParsing="false"
-			styleClass="buttonConferma" text="salva modifiche" />
+		<Button layoutX="471.0" layoutY="348.0" mnemonicParsing="false" styleClass="buttonConferma" text="salva modifiche" />
 		<PasswordField layoutX="176.0" layoutY="230.0" />
 		<Label layoutX="176.0" layoutY="84.0" text="Mario" />
 		<Label layoutX="176.0" layoutY="146.0" text="Rossi" />
