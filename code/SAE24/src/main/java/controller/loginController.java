@@ -56,6 +56,5 @@ public class loginController {
         } else {
             System.out.println("Credenziali non valide.");
         }
-
 	}
 }
