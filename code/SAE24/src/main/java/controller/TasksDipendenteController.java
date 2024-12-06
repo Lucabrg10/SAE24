@@ -15,9 +15,11 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.TaskService;
 
 import java.awt.Color;
 import java.io.IOException;
+import java.util.List;
 
 import javafx.event.ActionEvent;
 
@@ -27,46 +29,58 @@ public class TasksDipendenteController {
 
 	@FXML
 	private GridPane gridContainer;
+private Long matricola;
+	
+	TaskService service = new TaskService();
+	List<Object[]> taskDipendente = service.findTaskByMatricola(matricola);
 
 	public void initialize() {
-		int num_task = 100;
+		int num_task = taskDipendente.size();
+		
+		if (taskDipendente != null && !taskDipendente.isEmpty()) {
+			for (Object[] listtask : taskDipendente) {
+				GridPane newGrid = new GridPane();
 
-		for (int i = 0; i < num_task; i++) {
-			final int taskIndex = i;
-			GridPane newGrid = new GridPane();
+				Label task = new Label("task " + (listtask[1]));
+				task.setId("taskLabel" + listtask[0]);
+				newGrid.add(task, 0, 0);
 
-			Label task = new Label("task " + (taskIndex + 1));
-			task.setId("taskLabel" + taskIndex);
-			newGrid.add(task, 0, 0);
+				// Bottone Start
+				Button start = new Button("Start");
+				start.setId("start" + listtask[0]);
+				start.setOnAction(e -> startTask((Integer) listtask[0]));
+				newGrid.add(start, 0, 1);
 
-			// Bottone Start
-			Button start = new Button("Start");
-			start.setId("start" + taskIndex);
-			start.setOnAction(e -> startTask(taskIndex));
-			newGrid.add(start, 0, 1);
+				// Bottone Stop
+				Button stop = new Button("Stop");
+				stop.setId("stop" + listtask[0]);
+				stop.setOnAction(e -> stopTask((Integer) listtask[0]));
+				newGrid.add(stop, 1, 1);
 
-			// Bottone Stop
-			Button stop = new Button("Stop");
-			stop.setId("stop" + taskIndex);
-			stop.setOnAction(e -> stopTask(taskIndex));
-			newGrid.add(stop, 1, 1);
+				// Bottone Sospendi
+				Button sospendi = new Button("Sospendi");
+				sospendi.setId("sospendi" + listtask[0]);
+				sospendi.setOnAction(e -> {
+					try {
+						sospendiTask((Integer)listtask[0]);
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				});
+				newGrid.add(sospendi, 2, 1);
 
-			// Bottone Sospendi
-			Button sospendi = new Button("Sospendi");
-			sospendi.setId("sospendi" + taskIndex);
-			sospendi.setOnAction(e -> {
-				try {
-					sospendiTask(taskIndex);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			});
-			newGrid.add(sospendi, 2, 1);
-
-			mainContainer.getChildren().add(newGrid);
-			newGrid.getStyleClass().add("taskgrid");
-			newGrid.setId("" + taskIndex);
+				mainContainer.getChildren().add(newGrid);
+				newGrid.getStyleClass().add("taskgrid");
+				newGrid.setId("" + listtask[0]);
+			}
+		    
+		    }
+		
+	else {
+		    System.out.println("Nessun task trovato per la matricola: " + matricola);
 		}
+
+		
 
 	}
 
