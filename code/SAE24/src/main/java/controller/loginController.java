@@ -27,6 +27,7 @@ public class loginController {
 
 	// Event Listener on Button.onAction
 	@FXML
+
 	public void handleLogin(ActionEvent event) throws IOException {
 		String username = usernameField.getText();
 		String password = passwordField.getText();
@@ -56,3 +57,4 @@ public class loginController {
 		}
 	}
 }
+
