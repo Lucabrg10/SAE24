@@ -17,7 +17,7 @@ import javafx.scene.control.Label;
 
 import javafx.scene.control.PasswordField;
 
-public class loginController {
+public class LoginController {
 	@FXML
 	private TextField usernameField;
 	@FXML
@@ -34,13 +34,20 @@ public class loginController {
 
 		LoginService service = new LoginService();
 		Object user = service.authenticate(username, password);
+		
+		
 		if (user != null) {
 			System.out.println(user);
 			if (user instanceof Manager) {
 				Parent root = null;
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainView.fxml"));
 				root = loader.load();
+				ManagerInterfaceController controller = loader.getController();
+				
+				
+				controller.setManager((Manager) user);
 				Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+
 				stage.setScene(new Scene(root));
 			} else if (user instanceof Dipendente) {
 				Parent root = null;

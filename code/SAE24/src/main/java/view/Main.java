@@ -18,14 +18,9 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		 // Crea l'EntityManagerFactory
 		Parent root = FXMLLoader.load(getClass().getResource("/Login.fxml"));
 		primaryStage.setTitle("SAE24");
 		Scene scene = new Scene(root);
-		
-		//Image icon = new Image("img/logo.jpg");
-		//primaryStage.getIcons().add(icon);
-		
 		String css = this.getClass().getResource("/application.css").toExternalForm();
 		scene.getStylesheets().add(css);
 		primaryStage.setScene(scene);

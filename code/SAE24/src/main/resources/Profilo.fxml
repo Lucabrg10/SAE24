@@ -7,7 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1198.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1198.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProfiloController">
    <children>
       <Label graphicTextGap="0.0" layoutX="110.0" layoutY="120.0" text="NOME:" />
       <ImageView fitHeight="119.0" fitWidth="126.0" layoutX="794.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
@@ -17,11 +17,11 @@
       </ImageView>
       <Label layoutX="110.0" layoutY="147.0" text="COGNOME:" />
       <Button layoutX="804.0" layoutY="256.0" mnemonicParsing="false" styleClass="buttonConferma" text="salva modifiche" />
-      <PasswordField layoutX="213.0" layoutY="234.0" />
-      <Label layoutX="221.0" layoutY="120.0" text="Mario" />
-      <Label layoutX="221.0" layoutY="147.0" text="Rossi" />
+      <PasswordField fx:id="password" layoutX="213.0" layoutY="234.0" />
+      <Label fx:id="nome" layoutX="221.0" layoutY="120.0" text="Mario" />
+      <Label fx:id="cognome" layoutX="221.0" layoutY="147.0" text="Rossi" />
       <Label layoutX="107.0" layoutY="238.0" text="PASSWORD:" />
       <Label layoutX="110.0" layoutY="172.0" text="REPARTO" />
-      <Label layoutX="221.0" layoutY="172.0" text="Manager" />
+      <Label fx:id="reparto" layoutX="221.0" layoutY="172.0" text="Manager" />
    </children>
 </AnchorPane>
