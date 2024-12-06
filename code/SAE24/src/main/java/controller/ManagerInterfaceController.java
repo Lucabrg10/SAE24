@@ -37,7 +37,7 @@ public class ManagerInterfaceController {
 	        System.out.println("inserimento task");
 
 	        // Carica il file FXML di inserimentoTask.fxml
-	        Parent root1 = FXMLLoader.load(getClass().getResource("/InserimentoTask.fxml"));
+	        Parent root1 = FXMLLoader.load(getClass().getResource("/AssegnazioneTask.fxml"));
 
 	        contentPane.getChildren().clear();  // Rimuovi il contenuto precedente
 	        contentPane.getChildren().add(root1);  // Aggiungi il nuovo contenuto
@@ -48,7 +48,7 @@ public class ManagerInterfaceController {
 	        System.out.println("visualizzaTask");
 
 	        // Carica il file FXML di inserimentoTask.fxml
-	        Parent root2 = FXMLLoader.load(getClass().getResource("/VisualizzaTask.fxml"));
+	        Parent root2 = FXMLLoader.load(getClass().getResource("/VisualizzaCommesse.fxml"));
 
 	        contentPane.getChildren().clear();  // Rimuovi il contenuto precedente
 	        contentPane.getChildren().add(root2);  // Aggiungi il nuovo contenuto
