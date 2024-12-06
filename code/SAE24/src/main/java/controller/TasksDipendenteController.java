@@ -48,13 +48,14 @@ private Long matricola;
 				// Bottone Start
 				Button start = new Button("Start");
 				start.setId("start" + listtask[0]);
-				start.setOnAction(e -> startTask((Integer) listtask[0]));
+				start.setOnAction(e -> startTask(convertToLong(listtask[0])));
 				newGrid.add(start, 0, 1);
 
 				// Bottone Stop
 				Button stop = new Button("Stop");
 				stop.setId("stop" + listtask[0]);
-				stop.setOnAction(e -> stopTask((Integer) listtask[0]));
+				
+				stop.setOnAction(e -> stopTask(convertToLong(listtask[0])));
 				newGrid.add(stop, 1, 1);
 
 				// Bottone Sospendi
@@ -62,7 +63,7 @@ private Long matricola;
 				sospendi.setId("sospendi" + listtask[0]);
 				sospendi.setOnAction(e -> {
 					try {
-						sospendiTask((Integer)listtask[0]);
+						sospendiTask(convertToLong(listtask[0]));
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
@@ -75,7 +76,6 @@ private Long matricola;
 			}
 		    
 		    }
-		
 	else {
 		    System.out.println("Nessun task trovato per la matricola: " + matricola);
 		}
@@ -86,19 +86,29 @@ private Long matricola;
 
 	// Event Listener on Button.onAction
 
-	public void startTask(int taskIndex) {
-
+	public void startTask(Long taskIndex) {
+		 Button button = (Button) mainContainer.lookup("#start" + taskIndex);
+		 if (button != null) {
+	            button.setDisable(true); 
+	        } else {
+	            System.out.println("Button not found with id: " + taskIndex);
+	        }
 		GridPane gridPane = (GridPane) mainContainer.lookup("#" + taskIndex);
 		if (gridPane != null) {
 			Label taskLabel = (Label) gridPane.lookup("#taskLabel" + taskIndex);
 			if (taskLabel != null) {
 				String taskText = taskLabel.getText();
 				System.out.println("inizia: " + taskText);
+				
+				service.iniziaAttività(taskIndex);
+				
+				
+				
 			}
 		}
 	}
 	@FXML
-	public void sospendiTask(int taskIndex) throws IOException {
+	public void sospendiTask(Long taskIndex) throws IOException {
 		try {
 			GridPane gridPane = (GridPane) mainContainer.lookup("#" + taskIndex);
 
@@ -130,7 +140,7 @@ private Long matricola;
 
 	// Event Listener on Button.onAction
 	@FXML
-	public void stopTask(int taskIndex) {
+	public void stopTask(Long taskIndex) {
 
 		GridPane gridPane = (GridPane) mainContainer.lookup("#" + taskIndex);
 
@@ -141,6 +151,8 @@ private Long matricola;
 			if (taskLabel != null) {
 				String taskText = taskLabel.getText();
 				System.out.println("stoppa: " + taskText);
+				
+				service.stoppAttività(taskIndex);
 
 			}
 		}
@@ -151,6 +163,16 @@ private Long matricola;
 		Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 
 		stage.setScene(new Scene(root));
+	}
+	
+	private Long convertToLong(Object obj) {
+	    if (obj instanceof Integer) {
+	        return ((Integer) obj).longValue();  // Converti Integer a Long
+	    } else if (obj instanceof Long) {
+	        return (Long) obj;  // Restituisci direttamente il Long
+	    } else {
+	        throw new IllegalArgumentException("Expected Integer or Long, but got: " + obj.getClass());
+	    }
 	}
 
 }
