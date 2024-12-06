@@ -14,6 +14,8 @@ Durante il primo Sprint, il team si concentrerà sulla creazione dell'architettu
 - Configurazione dell'ambiente di sviluppo (Eclipse con JavaFx, SceneBuilder e Maven).
 - Definizione delle User Stories iniziali.
 
+### Sprint 1 Review: 22 novembre - 5 dicembre
+  Inizialmente ci sono state diverse difficoltà in particolare cone le nuove tecnologie adottate tra cui JavaFx per l'interfaccia e EclipseLink come ORM per la creazione del database. Dopo aver superato le principali difficoltà di configurazione i membri del team attraverso branch diversi sono riusciti a lavorare in modo corretto e puntuale. Il primo sprint è andato come previsto.
   
 ## Sprint 2: 6 dicembre - 19 dicembre
 **Scrum Master**: [Nome Scrum Master 2]
