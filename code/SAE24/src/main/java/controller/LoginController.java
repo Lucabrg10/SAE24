@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import model.Dipendente;
 import model.Manager;
 import model.LoginService;
@@ -42,12 +43,9 @@ public class LoginController {
 				Parent root = null;
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainView.fxml"));
 				root = loader.load();
-				ManagerInterfaceController controller = loader.getController();
-				
-				
+				ManagerInterfaceController controller = loader.getController();			
 				controller.setManager((Manager) user);
 				Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-
 				stage.setScene(new Scene(root));
 			} else if (user instanceof Dipendente) {
 				Parent root = null;

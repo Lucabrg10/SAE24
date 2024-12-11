@@ -8,12 +8,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TerminaTurnoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="backPane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TerminaTurnoController">
    <children>
-      <ScrollPane layoutX="8.0" layoutY="8.0" prefHeight="230.0" prefWidth="591.0">
+      <ScrollPane layoutX="70.0" layoutY="52.0" prefHeight="579.0" prefWidth="1064.0">
          <content>
-            <VBox fx:id="mainContainer" prefHeight="230.0" prefWidth="575.0">
+            <VBox fx:id="mainContainer" prefHeight="561.0" prefWidth="1039.0">
                <children>
                   <GridPane fx:id="gridContainer">
                     <columnConstraints>
@@ -30,7 +29,7 @@
             </VBox>
          </content>
       </ScrollPane>
-      <Button layoutX="480.0" layoutY="360.0" mnemonicParsing="false" onAction="#terminaGiornata" text="conferma attività" />
-      <Button layoutX="24.0" layoutY="360.0" mnemonicParsing="false" onAction="#annulla" text="Annulla" />
+      <Button layoutX="1007.0" layoutY="692.0" mnemonicParsing="false" onAction="#terminaGiornata" styleClass="buttonConferma" stylesheets="@application.css" text="conferma attività" />
+      <Button layoutX="61.0" layoutY="688.0" mnemonicParsing="false" onAction="#annulla" styleClass="buttonConferma" stylesheets="@application.css" text="Annulla" />
    </children>
 </AnchorPane>

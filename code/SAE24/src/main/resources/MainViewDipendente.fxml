@@ -9,7 +9,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainViewDipendenteController">
   <center>
-     <AnchorPane fx:id="contentPane" prefHeight="677.0" prefWidth="715.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+     <AnchorPane fx:id="contentPane" prefHeight="677.0" prefWidth="715.0" styleClass="backPane" stylesheets="@application.css" BorderPane.alignment="CENTER">
         <children>
            <Label layoutX="165.0" layoutY="192.0" text="Label" />
         </children>
@@ -26,8 +26,8 @@
                     </font>
                  </Label>
                  <Button mnemonicParsing="false" onAction="#visualizzaProfilo" prefHeight="88.0" prefWidth="205.0" styleClass="buttonMain1" stylesheets="@application.css" text="Profilo" textFill="WHITE" />
-                 <Button mnemonicParsing="false" onAction="#visualizzaTask" prefHeight="103.0" prefWidth="256.0" styleClass="buttonMain1" stylesheets="@application.css" text="Visualizza Task" textFill="WHITE" />
-                 <Button mnemonicParsing="false" prefHeight="113.0" prefWidth="253.0" styleClass="buttonMain2" stylesheets="@application.css" text="Gestione Personale" textFill="WHITE" />
+                 <Button mnemonicParsing="false" onAction="#visualizzaTask" prefHeight="103.0" prefWidth="256.0" styleClass="buttonMain2" stylesheets="@application.css" text="Visualizza Task" textFill="WHITE" />
+                 <Button mnemonicParsing="false" prefHeight="113.0" prefWidth="253.0" styleClass="buttonMain1" stylesheets="@application.css" text="Gestione Personale" textFill="WHITE" />
               </children>
            </VBox>
         </children>

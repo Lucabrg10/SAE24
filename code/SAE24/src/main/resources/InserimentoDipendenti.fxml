@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="contentPane3" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.InserimentoDipendentiController">
+<AnchorPane fx:id="contentPane3" prefHeight="600.0" prefWidth="1000.0" styleClass="backPane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.InserimentoDipendentiController">
     <children>
-        <GridPane hgap="30" layoutX="50.0" layoutY="50.0" vgap="20">
+        <GridPane hgap="30" layoutX="342.0" layoutY="200.0" vgap="20">
             <columnConstraints>
                 <ColumnConstraints halignment="LEFT" prefWidth="200.0" />
                 <ColumnConstraints halignment="LEFT" prefWidth="300.0" />
@@ -25,24 +25,23 @@
             </rowConstraints>
             
             <Label text="Nome" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <TextField fx:id="nomeTextField" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <TextField fx:id="nomeTextField" minHeight="25.0" prefWidth="250.0" styleClass="textField" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.rowIndex="0" />
             
             <Label text="Cognome" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <TextField fx:id="cognomeTextField" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="cognomeTextField" prefWidth="250.0" styleClass="textField" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             
             <Label text="Data nascita" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <TextField fx:id="dataNascitaTextField" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="dataNascitaTextField" prefWidth="250.0" styleClass="textField" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             
             <Label text="Matricola" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <TextField fx:id="matricolaTextField" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="matricolaTextField" prefWidth="250.0" styleClass="textField" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
         </GridPane>
         
-        <VBox layoutX="600.0" layoutY="50.0" spacing="15">
-            <Label text="Reparto" />
-            <ComboBox fx:id="repartoComboBox" prefWidth="200.0" />
-        </VBox>
+        <VBox layoutX="600.0" layoutY="50.0" spacing="15" />
         
-        <Button fx:id="inserisciButton" layoutX="800.0" layoutY="450.0" prefHeight="40.0" prefWidth="100.0" text="Inserisci" />
-      <Button layoutX="104.0" layoutY="477.0" mnemonicParsing="false" onAction="#SwitchToGestione" text="Indietro" />
+        <Button fx:id="inserisciButton" layoutX="979.0" layoutY="678.0" prefHeight="40.0" prefWidth="100.0" styleClass="buttonConferma" stylesheets="@application.css" text="Inserisci" />
+      <Button layoutX="82.0" layoutY="678.0" mnemonicParsing="false" onAction="#SwitchToGestione" styleClass="buttonConferma" stylesheets="@application.css" text="Indietro" />
+         <ComboBox fx:id="repartoComboBox" layoutX="574.0" layoutY="457.0" prefWidth="200.0" />
+         <Label layoutX="345.0" layoutY="457.0" text="Reparto" />
     </children>
 </AnchorPane>
