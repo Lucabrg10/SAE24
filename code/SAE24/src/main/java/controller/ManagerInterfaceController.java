@@ -10,72 +10,85 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import model.Dipendente;
+import model.Manager;
 
 public class ManagerInterfaceController {
 
+	@FXML
+	private AnchorPane contentPane; // Pannello centrale per i contenuti
+
+	private Manager manager;
 	
-	
-	 @FXML
-	    private AnchorPane contentPane;   // Pannello centrale per i contenuti
-
-	 
-	    public void initialize() throws IOException {
-	        // Carica il file FXML di inserimentoTask.fxml all'avvio
-	        System.out.println("Caricamento Inserimento Task all'avvio");
-
-	        // Carica il file FXML di inserimentoTask.fxml
-	        Parent root = FXMLLoader.load(getClass().getResource("/profilo.fxml"));
-
-	        // Rimuovi il contenuto precedente e aggiungi il nuovo contenuto
-	        contentPane.getChildren().clear();
-	        contentPane.getChildren().add(root);
-	    }
-	 
-	 
-	    // Metodo chiamato al clic del pulsante Inserimento Task
-	    public void inserimentoTask(ActionEvent e) throws IOException {
-	        System.out.println("inserimento task");
-
-	        // Carica il file FXML di inserimentoTask.fxml
-	        Parent root1 = FXMLLoader.load(getClass().getResource("/AssegnazioneTask.fxml"));
-
-	        contentPane.getChildren().clear();  // Rimuovi il contenuto precedente
-	        contentPane.getChildren().add(root1);  // Aggiungi il nuovo contenuto
-	    }
-	    
-	    // Metodo chiamato al clic del pulsante "Visualizza Task"
-	    public void visualizzaTask(ActionEvent e) throws IOException {
-	        System.out.println("visualizzaTask");
-
-	        // Carica il file FXML di inserimentoTask.fxml
-	        Parent root2 = FXMLLoader.load(getClass().getResource("/VisualizzaCommesse.fxml"));
-
-	        contentPane.getChildren().clear();  // Rimuovi il contenuto precedente
-	        contentPane.getChildren().add(root2);  // Aggiungi il nuovo contenuto
-	    }
-	    
-	    // Metodo chiamato al clic del pulsante "Gestione personale"
-	    public void gestionePersonale(ActionEvent e) throws IOException {
-	        System.out.println("gestionePersonale");
-
-	        // Carica il file FXML di inserimentoTask.fxml
-	        Parent root3 = FXMLLoader.load(getClass().getResource("/GestionePersonale.fxml"));
-
-	        contentPane.getChildren().clear();  // Rimuovi il contenuto precedente
-	        contentPane.getChildren().add(root3);  // Aggiungi il nuovo contenuto
-	    }
-	    
-	    // Metodo chiamato al clic del pulsante "Gestione personale"
-	    public void profilo(ActionEvent e) throws IOException {
-	        System.out.println("profilo");
-
-	        // Carica il file FXML di inserimentoTask.fxml
-	        Parent root4 = FXMLLoader.load(getClass().getResource("/profilo.fxml"));
-
-	        contentPane.getChildren().clear();  // Rimuovi il contenuto precedente
-	        contentPane.getChildren().add(root4);  // Aggiungi il nuovo contenuto
-	    }
-
+	public void initialize() throws IOException {
+		// Carica il file FXML di inserimentoTask.fxml all'avvio
+		System.out.println("Caricamento Inserimento Task all'avvio");
+		Parent root = null;
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/profilo.fxml"));
+		root = loader.load();
+		ProfiloController controller = loader.getController();
+		controller.setDipendente(manager);
+		controller.show();
+		contentPane.getChildren().clear();
+		contentPane.getChildren().add(root);
+		
 	}
-    
+
+	// Metodo chiamato al clic del pulsante Inserimento Task
+	public void inserimentoTask(ActionEvent e) throws IOException {
+		System.out.println("inserimento task");
+
+		// Carica il file FXML di inserimentoTask.fxml
+		Parent root1 = FXMLLoader.load(getClass().getResource("/AssegnazioneTask.fxml"));
+
+		contentPane.getChildren().clear(); // Rimuovi il contenuto precedente
+		contentPane.getChildren().add(root1); // Aggiungi il nuovo contenuto
+	}
+
+	// Metodo chiamato al clic del pulsante "Visualizza Task"
+	public void visualizzaTask(ActionEvent e) throws IOException {
+		System.out.println("visualizzaTask");
+
+		// Carica il file FXML di inserimentoTask.fxml
+		Parent root2 = FXMLLoader.load(getClass().getResource("/VisualizzaCommesse.fxml"));
+
+		contentPane.getChildren().clear(); // Rimuovi il contenuto precedente
+		contentPane.getChildren().add(root2); // Aggiungi il nuovo contenuto
+	}
+
+	// Metodo chiamato al clic del pulsante "Gestione personale"
+	public void gestionePersonale(ActionEvent e) throws IOException {
+		System.out.println("gestionePersonale");
+
+		// Carica il file FXML di inserimentoTask.fxml
+		Parent root3 = FXMLLoader.load(getClass().getResource("/GestionePersonale.fxml"));
+
+		contentPane.getChildren().clear(); // Rimuovi il contenuto precedente
+		contentPane.getChildren().add(root3); // Aggiungi il nuovo contenuto
+	}
+
+	// Metodo chiamato al clic del pulsante "Gestione personale"
+	public void profilo(ActionEvent e) throws IOException {
+		System.out.println("profilo");
+
+		// Carica il file FXML di inserimentoTask.fxml
+		
+		Parent root4 = null;
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/profilo.fxml"));
+		root4 = loader.load();
+		ProfiloController controller = loader.getController();
+		controller.setDipendente(manager);
+		contentPane.getChildren().clear(); // Rimuovi il contenuto precedente
+		contentPane.getChildren().add(root4); // Aggiungi il nuovo contenuto
+	}
+
+	public Manager getManager() {
+		return manager;
+	}
+
+	public void setManager(Manager manager) {
+		this.manager = manager;
+	}
+
+}
 

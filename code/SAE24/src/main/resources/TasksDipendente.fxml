@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="contentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="761.0" prefWidth="1195.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TasksDipendenteController">
+<AnchorPane fx:id="contentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="761.0" prefWidth="1195.0" styleClass="backPane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TasksDipendenteController">
    <children>
       <ScrollPane fx:id="contentPane" prefHeight="622.0" prefWidth="1141.0">
          <content>
@@ -29,6 +29,6 @@
             </VBox>
          </content>
       </ScrollPane>
-      <Button layoutX="1033.0" layoutY="694.0" mnemonicParsing="false" onAction="#terminaTurno" text="Termina turno" />
+      <Button layoutX="989.0" layoutY="692.0" mnemonicParsing="false" onAction="#terminaTurno" styleClass="buttonConferma" stylesheets="@application.css" text="Termina turno" />
    </children>
 </AnchorPane>

@@ -20,8 +20,7 @@ public class Dipendente {
     private String matricola;
     private String password;
     private String reparto;
-
-    // Getter e Setter
+    
     public Long getId() {
         return id;
     }

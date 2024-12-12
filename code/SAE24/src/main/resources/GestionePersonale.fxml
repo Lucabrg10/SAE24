@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="contentPane2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1198.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GestionePersonaleController">
+<AnchorPane fx:id="contentPane2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="backPane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GestionePersonaleController">
    <children>
-      <Button layoutX="1055.0" layoutY="665.0" mnemonicParsing="false" onAction="#SwitchToInserimento" prefHeight="49.0" prefWidth="54.0" text="+">
+      <Button layoutX="1055.0" layoutY="665.0" mnemonicParsing="false" onAction="#SwitchToInserimento" prefHeight="49.0" prefWidth="54.0" styleClass="buttonAggiungi" stylesheets="@application.css" text="+">
          <font>
             <Font size="26.0" />
          </font></Button>

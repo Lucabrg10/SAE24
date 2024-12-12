@@ -9,7 +9,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManagerInterfaceController">
    <center>
-      <AnchorPane fx:id="contentPane" prefHeight="677.0" prefWidth="715.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="contentPane" styleClass="backPane" stylesheets="@application.css" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="165.0" layoutY="192.0" text="Label" />
          </children>

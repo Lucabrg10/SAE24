@@ -7,21 +7,21 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1198.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1198.0" styleClass="backPane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProfiloController">
    <children>
-      <Label graphicTextGap="0.0" layoutX="110.0" layoutY="120.0" text="NOME:" />
-      <ImageView fitHeight="119.0" fitWidth="126.0" layoutX="794.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
+      <Label graphicTextGap="0.0" layoutX="225.0" layoutY="259.0" text="NOME:" />
+      <ImageView fitHeight="201.0" fitWidth="246.0" layoutX="781.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/user.png" />
          </image>
       </ImageView>
-      <Label layoutX="110.0" layoutY="147.0" text="COGNOME:" />
-      <Button layoutX="804.0" layoutY="256.0" mnemonicParsing="false" styleClass="buttonConferma" text="salva modifiche" />
-      <PasswordField layoutX="213.0" layoutY="234.0" />
-      <Label layoutX="221.0" layoutY="120.0" text="Mario" />
-      <Label layoutX="221.0" layoutY="147.0" text="Rossi" />
-      <Label layoutX="107.0" layoutY="238.0" text="PASSWORD:" />
-      <Label layoutX="110.0" layoutY="172.0" text="REPARTO" />
-      <Label layoutX="221.0" layoutY="172.0" text="Manager" />
+      <Label layoutX="223.0" layoutY="309.0" text="COGNOME:" />
+      <Button layoutX="984.0" layoutY="676.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="151.0" styleClass="buttonConferma" stylesheets="@application.css" text="Salva modifiche" />
+      <PasswordField fx:id="password" layoutX="418.0" layoutY="432.0" prefHeight="36.0" prefWidth="194.0" promptText="Inserire password" styleClass="passwordField" stylesheets="@application.css" />
+      <Label fx:id="nome" layoutX="413.0" layoutY="259.0" text="Mario" />
+      <Label fx:id="cognome" layoutX="413.0" layoutY="309.0" text="Rossi" />
+      <Label layoutX="225.0" layoutY="439.0" text="PASSWORD:" />
+      <Label layoutX="225.0" layoutY="357.0" text="REPARTO" />
+      <Label fx:id="reparto" layoutX="413.0" layoutY="357.0" text="Manager" />
    </children>
 </AnchorPane>
