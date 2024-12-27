@@ -49,6 +49,7 @@ public class LoginController {
 				root = loader.load();
 				ManagerInterfaceController controller = loader.getController();			
 				controller.setManager((Manager) user);
+				controller.show();
 				Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 				stage.setScene(new Scene(root));
 			} else if (user instanceof Dipendente) {

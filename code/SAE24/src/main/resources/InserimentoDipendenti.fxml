@@ -43,5 +43,6 @@
       <Button layoutX="82.0" layoutY="678.0" mnemonicParsing="false" onAction="#SwitchToGestione" styleClass="buttonConferma" stylesheets="@application.css" text="Indietro" />
          <ComboBox fx:id="repartoComboBox" layoutX="574.0" layoutY="457.0" prefWidth="200.0" />
          <Label layoutX="345.0" layoutY="457.0" text="Reparto" />
+      <Label fx:id="errorLabel" layoutX="349.0" layoutY="543.0" />
     </children>
 </AnchorPane>
