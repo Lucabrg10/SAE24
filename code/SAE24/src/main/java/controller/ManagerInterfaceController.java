@@ -23,15 +23,7 @@ public class ManagerInterfaceController {
 	public void show() throws IOException {
 		// Carica il file FXML di inserimentoTask.fxml all'avvio
 		System.out.println("Caricamento Inserimento Task all'avvio");
-		Parent root = null;
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/profilo.fxml"));
-		root = loader.load();
-		ProfiloController controller = loader.getController();
-		
-		controller.setDipendente(manager);
-		controller.show();
-		contentPane.getChildren().clear();
-		contentPane.getChildren().add(root);
+		profilo(null);
 		
 	}
 
@@ -74,13 +66,15 @@ public class ManagerInterfaceController {
 
 		// Carica il file FXML di inserimentoTask.fxml
 		
-		Parent root4 = null;
+		Parent root = null;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/profilo.fxml"));
-		root4 = loader.load();
+		root = loader.load();
 		ProfiloController controller = loader.getController();
+		
 		controller.setDipendente(manager);
-		contentPane.getChildren().clear(); // Rimuovi il contenuto precedente
-		contentPane.getChildren().add(root4); // Aggiungi il nuovo contenuto
+		controller.show();
+		contentPane.getChildren().clear();
+		contentPane.getChildren().add(root);
 	}
 
 	public Manager getManager() {

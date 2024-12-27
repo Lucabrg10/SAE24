@@ -50,7 +50,7 @@ public class ManagerService {
 	 * @return Lista di dipendenti.
 	 */
 	public List<Dipendente> getAllDipendenti() {
-		TypedQuery<Dipendente> query = entityManager.createQuery("SELECT e FROM Employee e", Dipendente.class);
+		TypedQuery<Dipendente> query = entityManager.createQuery("SELECT e FROM Dipendente e", Dipendente.class);
 		return query.getResultList();
 	}
 
