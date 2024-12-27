@@ -22,10 +22,7 @@ public class Dipendente {
     @Column(nullable = false)
     private String nome;
     private String cognome;
-    
-    @Column(unique=true)
     private String matricola;
-    
     private String password;
     
     @Enumerated(EnumType.STRING)
