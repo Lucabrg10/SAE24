@@ -52,7 +52,11 @@ public class InserimentoDipendentiController {
 	private Button inserisciButton;
 	@FXML
 	private ComboBox<Reparto> repartoComboBox;
+	@FXML
+	private Label errorLabel;
 
+	
+	
 	private Reparto repartoSelezionato;
 	private ArrayList<Object> valori = new ArrayList<>();
 
@@ -91,16 +95,13 @@ public class InserimentoDipendentiController {
 			}
 
 			ManagerService service = new ManagerService();
-			service.addEmployee(nome, cognome, matricola, repartoSelezionato);
-			Parent root2 = null;
-			try {
-				root2 = FXMLLoader.load(getClass().getResource("/GestionePersonale.fxml"));
-			} catch (IOException e) {
-				e.printStackTrace();
+			String error = service.addEmployee(nome, cognome, matricola, repartoSelezionato);
+			if(error==null) {
+				errorLabel.setText("Il dipendente "+nome+" "+cognome+" è stato aggiunto correttamente!");
+			}else {
+				errorLabel.setText(error);
 			}
-
-			contentPane3.getChildren().clear(); // Rimuovi il contenuto precedente
-			contentPane3.getChildren().add(root2); // Aggiungi il nuovo contenuto
+			
 		});
 	}
 

@@ -2,6 +2,7 @@ package model;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class ManagerService {
 	 *
 	 * @param name Nome del dipendente.
 	 */
-	public void addEmployee(String nome, String cognome, String matricola, Reparto reparto) {
+	public String addEmployee(String nome, String cognome, String matricola, Reparto reparto) throws IllegalStateException{
 		Dipendente dipendente=null;
 		if(reparto.toString().equals("MANAGER")) {
 			dipendente = new Manager();
@@ -29,8 +30,18 @@ public class ManagerService {
 		dipendente.setReparto(reparto);
 
 		entityManager.getTransaction().begin();
-		entityManager.persist(dipendente);
-		entityManager.getTransaction().commit();
+		try {
+			entityManager.persist(dipendente);
+			entityManager.getTransaction().commit();
+        } catch (PersistenceException e) {
+        	if (entityManager.getTransaction().isActive()) {
+        		entityManager.getTransaction().rollback();  // Fai il rollback in caso di errore
+            }
+        	
+           return("Errore: la matricola non è univoca o si è verificato un altro errore.");
+            
+        }
+		return null;
 	}
 
 	/**
