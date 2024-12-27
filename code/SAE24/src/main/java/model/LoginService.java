@@ -8,7 +8,7 @@ import javax.persistence.TypedQuery;
 
 public class LoginService {
 
-    private EntityManager entityManager = Persistence.createEntityManagerFactory("dip").createEntityManager();;
+    private EntityManager entityManager = Persistence.createEntityManagerFactory("dip").createEntityManager();
 
     public LoginService() {
         

@@ -1,6 +1,6 @@
 package controller;
 
-import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 
 import java.io.IOException;
 
@@ -33,13 +33,13 @@ public class TerminaTurnoController {
             newGrid.add(task, 0, 0);
             
             // Bottone Start
-            TextField start = new TextField("start");
+            Label start = new Label("start");
             start.setId("start" + taskIndex);   
       
             newGrid.add(start, 1, 0);
             
             // Bottone Stop
-            TextField stop = new TextField("stop"); 
+            Label stop = new Label("stop"); 
             stop.setId("stop" + taskIndex);  
           
             newGrid.add(stop, 2, 0);

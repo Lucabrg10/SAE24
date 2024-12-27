@@ -23,14 +23,15 @@ public class ProfiloController {
 	Dipendente dipendente;
 
 	public void show() throws IOException {
-		if(dipendente == null) {
-			System.out.println("null");}
-		else {	nome.setText(dipendente.getNome());
-		cognome.setText(dipendente.getCognome());
-		reparto.setText(dipendente.getReparto());
+		if (dipendente == null) {
+			System.out.println("null");
+		} else {
+			nome.setText(dipendente.getNome());
+			cognome.setText(dipendente.getCognome());
+			reparto.setText(dipendente.getReparto().toString());
+		}
 	}
-	}
-	
+
 	public Dipendente getDipendente() {
 		return dipendente;
 	}
@@ -38,9 +39,5 @@ public class ProfiloController {
 	public void setDipendente(Dipendente dipendente) {
 		this.dipendente = dipendente;
 	}
-	
-	
-	
-	
-	
+
 }
