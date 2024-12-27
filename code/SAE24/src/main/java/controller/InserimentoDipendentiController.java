@@ -100,6 +100,7 @@ public class InserimentoDipendentiController {
 				errorLabel.setText("Il dipendente "+nome+" "+cognome+" è stato aggiunto correttamente!");
 			}else {
 				errorLabel.setText(error);
+
 			}
 			
 		});
