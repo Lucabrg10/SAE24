@@ -91,7 +91,7 @@ public class InserimentoDipendentiController {
 			}
 
 			ManagerService service = new ManagerService();
-			service.addEmployee(nome, cognome, matricola, repartoSelezionato);
+			service.addDipendente(nome, cognome, matricola, repartoSelezionato);
 			Parent root2 = null;
 			try {
 				root2 = FXMLLoader.load(getClass().getResource("/GestionePersonale.fxml"));

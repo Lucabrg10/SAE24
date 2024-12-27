@@ -14,7 +14,7 @@ public class ManagerService {
 	 *
 	 * @param name Nome del dipendente.
 	 */
-	public void addEmployee(String nome, String cognome, String matricola, Reparto reparto) {
+	public void addDipendente(String nome, String cognome, String matricola, Reparto reparto) {
 		Dipendente dipendente=null;
 		if(reparto.toString().equals("MANAGER")) {
 			dipendente = new Manager();
