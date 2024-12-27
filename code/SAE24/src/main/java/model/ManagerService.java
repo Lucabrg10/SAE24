@@ -15,7 +15,7 @@ public class ManagerService {
 	 *
 	 * @param name Nome del dipendente.
 	 */
-	public String addEmployee(String nome, String cognome, String matricola, Reparto reparto) throws IllegalStateException{
+	public String addDipendente(String nome, String cognome, String matricola, Reparto reparto) throws IllegalStateException{
 		Dipendente dipendente=null;
 		if(reparto.toString().equals("MANAGER")) {
 			dipendente = new Manager();
