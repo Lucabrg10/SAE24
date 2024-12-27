@@ -2,7 +2,7 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import model.Dipendente;
@@ -17,14 +17,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 public class LoginController {
+	
 	@FXML
 	private TextField usernameField;
 	@FXML
 	private PasswordField passwordField;
 	@FXML
 	private Label errorLabel;
+	@FXML
+	private Label titleLabel;
 
 	// Event Listener on Button.onAction
 	@FXML

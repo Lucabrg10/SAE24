@@ -1,6 +1,9 @@
 package model;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,11 +18,15 @@ public class Dipendente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(nullable = false)
     private String nome;
     private String cognome;
     private String matricola;
     private String password;
-    private String reparto;
+    
+    @Enumerated(EnumType.STRING)
+    private Reparto reparto;
     
     public Long getId() {
         return id;
@@ -61,11 +68,11 @@ public class Dipendente {
         this.password = password;
     }
 
-	public String getReparto() {
+	public Reparto getReparto() {
 		return reparto;
 	}
 
-	public void setReparto(String reparto) {
-		this.reparto = reparto;
+	public void setReparto(Reparto string) {
+		this.reparto = string;
 	}
 }
