@@ -30,10 +30,8 @@ public class ManagerInterfaceController {
 	// Metodo chiamato al clic del pulsante Inserimento Task
 	public void inserimentoTask(ActionEvent e) throws IOException {
 		System.out.println("inserimento task");
-
 		// Carica il file FXML di inserimentoTask.fxml
 		Parent root1 = FXMLLoader.load(getClass().getResource("/AssegnazioneTask.fxml"));
-
 		contentPane.getChildren().clear(); // Rimuovi il contenuto precedente
 		contentPane.getChildren().add(root1); // Aggiungi il nuovo contenuto
 	}
@@ -41,10 +39,8 @@ public class ManagerInterfaceController {
 	// Metodo chiamato al clic del pulsante "Visualizza Task"
 	public void visualizzaTask(ActionEvent e) throws IOException {
 		System.out.println("visualizzaTask");
-
 		// Carica il file FXML di inserimentoTask.fxml
 		Parent root2 = FXMLLoader.load(getClass().getResource("/VisualizzaCommesse.fxml"));
-
 		contentPane.getChildren().clear(); // Rimuovi il contenuto precedente
 		contentPane.getChildren().add(root2); // Aggiungi il nuovo contenuto
 	}

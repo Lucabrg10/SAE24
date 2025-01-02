@@ -3,6 +3,11 @@
 	-fx-text-fill: black;
 	-fx-font-family: "Calibri Light";
 }
+.labelErr{
+	-fx-font-size: 12;
+	-fx-text-fill: red;
+	-fx-font-family: "Calibri Light";
+}
 #titleLabel{
 	-fx-font-size: 30;
 	-fx-text-fill: white;

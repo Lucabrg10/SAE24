@@ -1,15 +1,15 @@
 package model;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-public class ManagerService {
+public class ManagerService extends DipendenteService {
 
-	private final EntityManager entityManager = Persistence.createEntityManagerFactory("dip").createEntityManager();
-
+	
 	/**
 	 * Aggiungi un nuovo dipendente/manager.
 	 *
@@ -31,7 +31,7 @@ public class ManagerService {
 		dipendente.setPassword(matricola);
 		dipendente.setReparto(reparto);
 
-		entityManager.getTransaction().begin();
+		this.entityManager.getTransaction().begin();
 		try {
 			entityManager.persist(dipendente);
 			entityManager.getTransaction().commit();
@@ -56,16 +56,6 @@ public class ManagerService {
 		return query.getResultList();
 	}
 
-	/**
-	 * Recupera tutte le task assegnate a un dipendente.
-	 *
-	 * @param employeeId ID del dipendente.
-	 * @return Lista di task del dipendente.
-	 */
-	public List<Task> getTasksByDipendente(Long dipendenteId) {
-		TypedQuery<Task> query = entityManager.createQuery("SELECT t FROM Task t WHERE t.dipendente.id = :dipendenteId",
-				Task.class);
-		query.setParameter("dipendenteId", dipendenteId);
-		return query.getResultList();
-	}
+	
+
 }

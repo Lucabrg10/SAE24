@@ -17,16 +17,21 @@ public class LoginService {
     public Object authenticate(String matricola, String password) {
         // Verifica prima se è un dipendente
         Dipendente dipendente = findDipendenteByMatricola(matricola);
-        if (dipendente != null && dipendente.getPassword().equals(password)) {
-            return dipendente;  // Autenticazione riuscita per dipendente
+        if (dipendente != null ) {
+        	if(dipendente.getPassword().equals(password)) {
+				return dipendente; // Autenticazione riuscita per dipendente
+			}else
+				return null;
         }
 
         // Se non è un dipendente, verifica se è un manager
         Manager manager = findManagerByMatricola(matricola);
-        if (manager != null && manager.getPassword().equals(password)) {
-            return manager;  // Autenticazione riuscita per manager
+        if (manager != null ) {
+        	if(manager.getPassword().equals(password)) {
+				return manager; // Autenticazione riuscita per manager
+			}else
+				return null;
         }
-
         // Se nessuna delle due autenticazioni ha avuto successo, ritorna null
         return null;
     }

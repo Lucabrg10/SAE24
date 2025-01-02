@@ -61,9 +61,11 @@ public class LoginController {
 				Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 				stage.setScene(new Scene(root));
 
-			} else {
-				System.out.println("Credenziali non valide.");
 			}
+		} else {
+			System.out.println("Error");
+
+			errorLabel.setText("Credenziali non valide.");
 		}
 	}
 }
