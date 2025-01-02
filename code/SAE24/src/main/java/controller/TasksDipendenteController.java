@@ -120,7 +120,7 @@ private Long matricola;
 					System.out.println("sospendi: " + taskText);
 
 					// Carica il file FXML
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("/MotivazioneSospensione.fxml"));
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/dipendente/MotivazioneSospensione.fxml"));
 					Parent root = loader.load();
 
 					// Ottieni il controller e passa il parametro
@@ -159,7 +159,7 @@ private Long matricola;
 	}
 
 	public void terminaTurno(ActionEvent event) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("/TerminaTurno.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/dipendente/TerminaTurno.fxml"));
 		Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 
 		stage.setScene(new Scene(root));

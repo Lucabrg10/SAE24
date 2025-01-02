@@ -26,7 +26,7 @@ public class VisualizzaCommesseController {
 		 System.out.println("sono entrato in modalità generazione commesse");
 
 	        // Carica il file FXML di inserimentoTask.fxml
-	        Parent root = FXMLLoader.load(getClass().getResource("/GenerazioneCommesse.fxml"));
+	        Parent root = FXMLLoader.load(getClass().getResource("/manager/GenerazioneCommesse.fxml"));
 
 	        contentPaneVisualizzaCommesse.getChildren().clear();  // Rimuovi il contenuto precedente
 	        contentPaneVisualizzaCommesse.getChildren().add(root);  // Aggiungi il nuovo contenuto

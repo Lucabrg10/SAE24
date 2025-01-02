@@ -108,7 +108,7 @@ public class GestionePersonaleController {
 		System.out.println("sono entrato in modalità inserimento personale");
 
 		// Carica il file FXML di inserimentoTask.fxml
-		Parent root1 = FXMLLoader.load(getClass().getResource("/InserimentoDipendenti.fxml"));
+		Parent root1 = FXMLLoader.load(getClass().getResource("/manager/InserimentoDipendenti.fxml"));
 
 		contentPane2.getChildren().clear(); // Rimuovi il contenuto precedente
 		contentPane2.getChildren().add(root1); // Aggiungi il nuovo contenuto

@@ -62,7 +62,7 @@ public class InserimentoDipendentiController {
 
 	public void SwitchToGestione() throws IOException {
 		System.out.println("sono entrato in modalità gestione personale");
-		Parent root2 = FXMLLoader.load(getClass().getResource("/GestionePersonale.fxml"));
+		Parent root2 = FXMLLoader.load(getClass().getResource("/manager/GestionePersonale.fxml"));
 
 		contentPane3.getChildren().clear(); // Rimuovi il contenuto precedente
 		contentPane3.getChildren().add(root2); // Aggiungi il nuovo contenuto

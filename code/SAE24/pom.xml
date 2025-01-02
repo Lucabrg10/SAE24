@@ -52,7 +52,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<mainClass>view.Main</mainClass>
+					<mainClass>main.Main</mainClass>
 				</configuration>
 			</plugin>
 		</plugins>
