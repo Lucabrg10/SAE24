@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -63,8 +64,11 @@ public class GestionePersonaleController {
 	private TableColumn<Dipendente, String> idCol; // Colonna per il ruolo
 	@FXML
 	private TableColumn<Dipendente, Reparto> repartoCol; // Colonna per il ruolo
+	@FXML
+	private TableColumn<Dipendente, Void> deleteColumn;
 
 	private  ObservableList<Dipendente> dipendenti ;
+
 
 	public void initialize() {
 
@@ -76,8 +80,32 @@ public class GestionePersonaleController {
 		nomeCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
 		cognomeCol.setCellValueFactory(new PropertyValueFactory<>("cognome"));
 		repartoCol.setCellValueFactory(new PropertyValueFactory<>("reparto"));
+		deleteColumn.setCellFactory(param -> new TableCell<Dipendente, Void>() {
+		        private final Button deleteButton = new Button("Elimina");
 
+		        {
+		            deleteButton.setOnAction(event -> {
+		                Dipendente dipendente = getTableView().getItems().get(getIndex());
+		                dipendenti.remove(dipendente); // Rimuovi dalla lista visibile
+		                ManagerService service = new ManagerService();
+		                service.deleteDipendente(dipendente.getId()); // Elimina dal database
+		            });
+		        }
+
+		        @Override
+		        public void updateItem(Void item, boolean empty) {
+		            super.updateItem(item, empty);
+		            if (empty) {
+		                setGraphic(null);
+		            } else {
+		                setGraphic(deleteButton);
+		            }
+		        }
+		    });
+		
+		
 		tableView.setItems(dipendenti);
+		tableView.setEditable(true);
 		/*
 		 * for (int i = 0; i < 20; i++) { final int dipendenteIndex = i; GridPane
 		 * newGrid = new GridPane();

@@ -10,8 +10,10 @@
 }
 #titleLabel{
 	-fx-font-size: 30;
-	-fx-text-fill: white;
+	-fx-text-fill: black;
 	-fx-font-family: "Calibri Light";
+	-fx-font-weight: bold;
+	
 }
 /* Stile bottone di conferma */
 .buttonConferma {

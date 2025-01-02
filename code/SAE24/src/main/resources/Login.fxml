@@ -15,7 +15,7 @@
 		<Insets bottom="20" left="20" right="20" top="20" />
 	</padding>
 
-	<Label fx:id="titleLabel" style="-fx-font-size: 20px;" text="Login" GridPane.columnSpan="2" GridPane.halignment="CENTER">
+	<Label fx:id="titleLabel" style="-fx-font-size: 20px;" stylesheets="@application.css" text="Login" GridPane.columnSpan="2" GridPane.halignment="CENTER">
       <font>
          <Font name="System Bold" size="18.0" />
       </font></Label>
