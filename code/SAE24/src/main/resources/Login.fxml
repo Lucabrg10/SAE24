@@ -8,13 +8,17 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<GridPane alignment="CENTER" hgap="10" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="233.0" prefWidth="256.0" vgap="10" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+<GridPane alignment="CENTER" hgap="10" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="296.0" prefWidth="395.0" vgap="10" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
 	<padding>
 		<Insets bottom="20" left="20" right="20" top="20" />
 	</padding>
 
-	<Label fx:id="titleLabel" style="-fx-font-size: 20px;" text="Login" GridPane.columnSpan="2" GridPane.halignment="CENTER" />
+	<Label fx:id="titleLabel" style="-fx-font-size: 20px;" text="Login" GridPane.columnSpan="2" GridPane.halignment="CENTER">
+      <font>
+         <Font name="System Bold" size="18.0" />
+      </font></Label>
 
 	<Label text="Username:" GridPane.rowIndex="1" />
 	<TextField fx:id="usernameField" promptText="Enter your username" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -25,7 +29,7 @@
 	<Button onAction="#handleLogin" styleClass="buttonConferma" text="Login" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
 
 
-	<Label fx:id="errorLabel" textFill="red" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+	<Label fx:id="errorLabel" styleClass="labelErr" stylesheets="@application.css" textFill="red" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
 	<columnConstraints>
 		<ColumnConstraints />
 		<ColumnConstraints />
