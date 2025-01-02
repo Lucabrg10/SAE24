@@ -46,6 +46,7 @@ public class MainViewDipendenteController {
 		root=loader.load();
 		ProfiloController controller = loader.getController();
 		controller.setDipendente(dipendente);
+		controller.show();
 		contentPane.getChildren().clear(); // Rimuovi il contenuto precedente
 		contentPane.getChildren().add(root); // Aggiungi il nuovo contenuto
 		String css = this.getClass().getResource("/application.css").toExternalForm();

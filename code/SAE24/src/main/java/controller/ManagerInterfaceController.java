@@ -23,7 +23,7 @@ public class ManagerInterfaceController {
 	public void show() throws IOException {
 		// Carica il file FXML di inserimentoTask.fxml all'avvio
 		System.out.println("Caricamento Inserimento Task all'avvio");
-		profilo(null);
+		visualizzaProfilo(null);
 		
 	}
 
@@ -61,7 +61,7 @@ public class ManagerInterfaceController {
 	}
 
 	// Metodo chiamato al clic del pulsante "Gestione personale"
-	public void profilo(ActionEvent e) throws IOException {
+	public void visualizzaProfilo(ActionEvent e) throws IOException {
 		System.out.println("profilo");
 
 		// Carica il file FXML di inserimentoTask.fxml
@@ -75,6 +75,8 @@ public class ManagerInterfaceController {
 		controller.show();
 		contentPane.getChildren().clear();
 		contentPane.getChildren().add(root);
+		String css = this.getClass().getResource("/application.css").toExternalForm();
+		root.getStylesheets().add(css);//
 	}
 
 	public Manager getManager() {
