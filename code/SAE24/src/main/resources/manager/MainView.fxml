@@ -27,7 +27,7 @@
                   </Label>
                   <Button mnemonicParsing="false" onAction="#visualizzaProfilo" prefHeight="88.0" prefWidth="205.0" styleClass="buttonMain1" stylesheets="@application.css" text="Profilo" textFill="WHITE" />
                   <Button mnemonicParsing="false" onAction="#inserimentoTask" prefHeight="97.0" prefWidth="247.0" styleClass="buttonMain2" stylesheets="@application.css" text="Inserimento Task" textFill="WHITE" />
-                  <Button mnemonicParsing="false" onAction="#visualizzaTask" prefHeight="103.0" prefWidth="256.0" styleClass="buttonMain1" stylesheets="@application.css" text="Visualizza Commesse" textFill="WHITE" />
+                  <Button mnemonicParsing="false" onAction="#visualizzaCommesse" prefHeight="103.0" prefWidth="256.0" styleClass="buttonMain1" stylesheets="@application.css" text="Visualizza Commesse" textFill="WHITE" />
                   <Button mnemonicParsing="false" onAction="#gestionePersonale" prefHeight="113.0" prefWidth="253.0" styleClass="buttonMain2" stylesheets="@application.css" text="Gestione Personale" textFill="WHITE" />
                </children>
             </VBox>

@@ -9,11 +9,19 @@ public class Commessa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String nome;
-    private String reparto;
-    private Double tempoStimato;
-    private Double tempoCalcolato;
+    private String descrizione;
+    public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+	@Enumerated(EnumType.STRING)
+	private Reparto reparto;
+    private String tempoStimato;
+    private String tempoCalcolato;
 
     @ManyToOne
     @JoinColumn(name = "commessa_padre_id")
@@ -24,7 +32,7 @@ public class Commessa {
 
     public Commessa() {}
 
-    public Commessa(String nome, String reparto, Double tempoStimato, Double tempoCalcolato) {
+    public Commessa(String nome, Reparto reparto, String tempoStimato, String tempoCalcolato) {
         this.nome = nome;
         this.reparto = reparto;
         this.tempoStimato = tempoStimato;
@@ -47,27 +55,27 @@ public class Commessa {
         this.nome = nome;
     }
 
-    public String getReparto() {
+    public Reparto getReparto() {
         return reparto;
     }
 
-    public void setReparto(String reparto) {
+    public void setReparto(Reparto reparto) {
         this.reparto = reparto;
     }
 
-    public Double getTempoStimato() {
+    public String getTempoStimato() {
         return tempoStimato;
     }
 
-    public void setTempoStimato(Double tempoStimato) {
+    public void setTempoStimato(String tempoStimato) {
         this.tempoStimato = tempoStimato;
     }
 
-    public Double getTempoCalcolato() {
+    public String getTempoCalcolato() {
         return tempoCalcolato;
     }
 
-    public void setTempoCalcolato(Double tempoCalcolato) {
+    public void setTempoCalcolato(String tempoCalcolato) {
         this.tempoCalcolato = tempoCalcolato;
     }
 

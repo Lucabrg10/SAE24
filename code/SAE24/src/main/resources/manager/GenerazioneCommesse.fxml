@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextArea?>
@@ -15,11 +16,13 @@
          <font>
             <Font name="Calibri Light" size="28.0" />
          </font></Button>
-      <TextField fx:id="nomeCommessaTF" layoutX="130.0" layoutY="176.0" prefHeight="38.0" prefWidth="215.0" promptText="Inserisci il nome della commessa" styleClass="textField" stylesheets="@application.css" />
-      <Label fx:id="idGeneratoLabel" layoutX="530.0" layoutY="174.0" prefHeight="29.0" prefWidth="190.0" text="Label" />
-      <Label layoutX="530.0" layoutY="128.0" prefHeight="29.0" prefWidth="190.0" text="id generato:" />
-      <TextArea fx:id="descrizioneTA" layoutX="130.0" layoutY="305.0" prefHeight="222.0" prefWidth="898.0" promptText="Inserisci una descrizione della commessa (facoltativa)" />
-      <Spinner fx:id="durataMassimaTF" layoutX="878.0" layoutY="176.0" />
-      <Label layoutX="878.0" layoutY="143.0" text="DurataLabel" />
+      <TextField fx:id="nomeCommessaTF" layoutX="228.0" layoutY="101.0" prefHeight="38.0" prefWidth="215.0" promptText="Inserisci il nome della commessa" styleClass="textField" stylesheets="@application.css" />
+      <TextArea fx:id="descrizioneTA" layoutX="133.0" layoutY="294.0" prefHeight="222.0" prefWidth="816.0" promptText="Inserisci una descrizione della commessa (facoltativa)" />
+      <Spinner fx:id="durataMassimaTF" layoutX="279.0" layoutY="204.0" />
+      <Label layoutX="133.0" layoutY="205.0" text="Durata stimata" />
+      <Label layoutX="135.0" layoutY="103.0" text="Nome" />
+      <Label layoutX="135.0" layoutY="252.0" prefHeight="26.0" prefWidth="95.0" text="Descrizione" />
+      <Label layoutX="135.0" layoutY="156.0" text="Reparto" />
+      <ComboBox fx:id="comboReparto" layoutX="228.0" layoutY="154.0" prefHeight="26.0" prefWidth="250.0" />
    </children>
 </AnchorPane>

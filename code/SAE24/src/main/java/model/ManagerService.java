@@ -55,6 +55,10 @@ public class ManagerService extends DipendenteService {
 		TypedQuery<Dipendente> query = entityManager.createQuery("SELECT e FROM Dipendente e", Dipendente.class);
 		return query.getResultList();
 	}
+	public List<Commessa> getAllCommesse() {
+		TypedQuery<Commessa> query = entityManager.createQuery("SELECT e FROM Commessa e", Commessa.class);
+		return query.getResultList();
+	}
 	 public void deleteDipendente(Long long1) {
 	        // Inizia una transazione
 	      

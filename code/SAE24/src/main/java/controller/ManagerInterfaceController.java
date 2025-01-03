@@ -37,7 +37,7 @@ public class ManagerInterfaceController {
 	}
 
 	// Metodo chiamato al clic del pulsante "Visualizza Task"
-	public void visualizzaTask(ActionEvent e) throws IOException {
+	public void visualizzaCommesse(ActionEvent e) throws IOException {
 		System.out.println("visualizzaTask");
 		// Carica il file FXML di inserimentoTask.fxml
 		Parent root2 = FXMLLoader.load(getClass().getResource("/manager/VisualizzaCommesse.fxml"));
