@@ -84,11 +84,26 @@ public class VisualizzaCommesseController {
 	        }
 	    });
 		
-		
-		
 		tableViewCommesse.setItems(commesse);
 	}
 
+	@FXML
+	public void assegnaCommessa(ActionEvent event) {
+		 Commessa selectedItem = tableViewCommesse.getSelectionModel().getSelectedItem();
+         if (selectedItem != null) {
+             System.out.println("Assegna: " + selectedItem);
+         }
+	}
+	
+	@FXML
+	public void modificaCommessa(ActionEvent event) {
+		 Commessa selectedItem = tableViewCommesse.getSelectionModel().getSelectedItem();
+         if (selectedItem != null) {
+             System.out.println("Modifica: " + selectedItem);
+         }
+	}
+	
+	
 	@FXML
 	public void switchToInserimento(ActionEvent event) throws IOException {
 

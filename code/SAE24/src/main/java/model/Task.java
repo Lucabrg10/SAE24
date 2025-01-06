@@ -25,6 +25,11 @@ public class Task {
     private LocalDate data;             
 
     public Task() {}
+    
+    public Task(Commessa c, Dipendente d) {
+    	this.commessa = c;
+    	this.dipendente =d;
+    }
 
     public Task(Commessa commessa, Dipendente dipendente, String stato, LocalDateTime orarioInizio, LocalDateTime orarioFine, LocalDate data) {
         this.commessa = commessa;

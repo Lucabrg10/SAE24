@@ -31,7 +31,7 @@ public class TasksDipendenteController {
 	private GridPane gridContainer;
 private Long matricola;
 	
-	TaskService service = new TaskService();
+	TaskService service = new TaskService("");
 	List<Object[]> taskDipendente = service.findTaskByMatricola(matricola);
 
 	public void initialize() {
@@ -152,7 +152,7 @@ private Long matricola;
 				String taskText = taskLabel.getText();
 				System.out.println("stoppa: " + taskText);
 				
-				service.stoppAttività(taskIndex);
+				service.stopAttività(taskIndex);
 
 			}
 		}
