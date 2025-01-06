@@ -1,4 +1,4 @@
-package view;
+package main;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,11 +15,15 @@ import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import model.Dipendente;
+import model.ManagerService;
+import model.Reparto;
 
 public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		ManagerService service = new ManagerService("");
+		service.addDipendente("admin", "admin", "admin",Reparto.MANAGER );
 		Parent root = FXMLLoader.load(getClass().getResource("/Login.fxml"));
 		primaryStage.setTitle("SAE24");
 		Scene scene = new Scene(root); 

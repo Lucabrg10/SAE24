@@ -31,7 +31,7 @@ public class MainViewDipendenteController {
 	// Event Listener on Button.onAction
 	@FXML
 	public void visualizzaTask(ActionEvent event) throws IOException {
-		Parent root2 = FXMLLoader.load(getClass().getResource("/TasksDipendente.fxml"));
+		Parent root2 = FXMLLoader.load(getClass().getResource("/dipendente/TasksDipendente.fxml"));
 		contentPane.getChildren().clear(); // Rimuovi il contenuto precedente
 		contentPane.getChildren().add(root2); // Aggiungi il nuovo contenuto
 

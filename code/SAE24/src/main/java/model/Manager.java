@@ -9,6 +9,8 @@ public class Manager extends Dipendente {
 
 	@Transient
 	private List<Dipendente> dipendenti;
+	@Transient
+	private List<Commessa> commesse;
 	public Manager() {
 		super();
 	}

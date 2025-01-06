@@ -44,17 +44,17 @@ private String taskText;
 		if(selezione.equals("Fine turno"))
 		{
 			//registrare sospensione
-			fxmlPath = "/TerminaTurno.fxml";
+			fxmlPath = "/dipendente/TerminaTurno.fxml";
 		}
 		else if(selezione.equals("Pausa"))
 		{
 			//registrare sospensione
-			fxmlPath = "/login.fxml";
+			fxmlPath = "/dipendente/login.fxml";
 		}
 		else
 		{
 			//registrare sospensione
-			fxmlPath = "/MainViewDipendente.fxml";
+			fxmlPath = "/dipendente/MainViewDipendente.fxml";
 			
 		}
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
@@ -70,7 +70,7 @@ private String taskText;
 	public void annulla() throws IOException
 	{
 		String fxmlPath;
-			fxmlPath = "/MainViewDipendente.fxml";
+			fxmlPath = "/dipendente/MainViewDipendente.fxml";
 	
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
 	    Scene newScene = new Scene(loader.load());

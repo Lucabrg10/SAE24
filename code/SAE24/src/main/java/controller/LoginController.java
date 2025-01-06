@@ -45,7 +45,7 @@ public class LoginController {
 			System.out.println(user);
 			if (user instanceof Manager) {
 				Parent root = null;
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainView.fxml"));
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/manager/MainView.fxml"));
 				root = loader.load();
 				ManagerInterfaceController controller = loader.getController();			
 				controller.setManager((Manager) user);
@@ -54,7 +54,7 @@ public class LoginController {
 				stage.setScene(new Scene(root));
 			} else if (user instanceof Dipendente) {
 				Parent root = null;
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainViewDipendente.fxml"));
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/dipendente/MainViewDipendente.fxml"));
 				root = loader.load();
 				MainViewDipendenteController controller = loader.getController();
 				controller.setDipendente((Dipendente) user);

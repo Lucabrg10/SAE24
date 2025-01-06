@@ -60,7 +60,7 @@ public class TerminaTurnoController {
 	public void terminaGiornata() throws IOException
 	{
 		String fxmlPath;
-			fxmlPath = "/loginController.fxml";
+			fxmlPath = "/Login.fxml";
 	
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
 	    Scene newScene = new Scene(loader.load());
@@ -72,7 +72,7 @@ public class TerminaTurnoController {
 	public void annulla() throws IOException
 	{
 		String fxmlPath;
-			fxmlPath = "/MainViewDipendente.fxml";
+			fxmlPath = "/dipendente/MainViewDipendente.fxml";
 	
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
 	    Scene newScene = new Scene(loader.load());

@@ -22,6 +22,7 @@
                   <TableColumn fx:id="cognomeCol" prefWidth="274.1333923339844" text="COGNOME" />
                   <TableColumn fx:id="matricolaCol" prefWidth="213.3333740234375" text="MATRICOLA" />
                   <TableColumn fx:id="repartoCol" prefWidth="233.60003662109375" text="REPARTO" />
+                  <TableColumn fx:id="deleteColumn" prefWidth="75.0" />
               </columns>
             </TableView>
          </children>

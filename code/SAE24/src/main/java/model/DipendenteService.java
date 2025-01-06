@@ -8,8 +8,17 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 public class DipendenteService {
-	protected final EntityManager entityManager = Persistence.createEntityManagerFactory("dip").createEntityManager();
+	protected final EntityManager entityManager;
 
+	public DipendenteService(String utilizzo) {
+		if(utilizzo.equals("test")) {
+			this.entityManager = Persistence.createEntityManagerFactory("dip-test").createEntityManager();
+		}else {
+			this.entityManager = Persistence.createEntityManagerFactory("dip").createEntityManager();
+		}
+	}
+	
+	
 	/**
 	 * Recupera tutte le task assegnate a un dipendente.
 	 *
