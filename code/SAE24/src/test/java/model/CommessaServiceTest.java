@@ -14,6 +14,10 @@ public class CommessaServiceTest {
 	private EntityManager em;
 	private CommessaService commessaService;
 
+	public CommessaServiceTest() {
+		commessaService= new CommessaService("test");
+	}
+	
 	@Before
 	public void setUp() {
 		try {
@@ -36,8 +40,6 @@ public class CommessaServiceTest {
 
 	@Test
 	public void testAddCommessaSuccess() {
-		// Dati di test
-		commessaService = new CommessaService("test");
 		String nome = "Commessa Test";
 		String descrizione = "Descrizione di test";
 		String durata = "11 giorni";
@@ -61,10 +63,7 @@ public class CommessaServiceTest {
 
 	@Test
     public void testDeleteCommessa_Success() {
-		commessaService = new CommessaService("test");
 		 em.getTransaction().begin();
-
-        // Aggiungi una commessa principale senza commesse figlie
         Commessa commessa = new Commessa();
         commessa.setNome("Commessa 1");
         em.persist(commessa);
@@ -96,7 +95,6 @@ public class CommessaServiceTest {
         
         commessaService.deleteCommessa(parentCommessa.getId());
         em.clear();
-        // Verifica che la commessa principale non sia stata eliminata
         Commessa foundCommessa = em.find(Commessa.class, parentCommessa.getId());
         assertNotNull("La commessa non è stata eliminata", foundCommessa);
     }
