@@ -2,6 +2,12 @@
 
 Come descritto nel **Project Plan**, il nostro team segue il framework **Scrum** per la gestione del progetto. Ogni iterazione (Sprint) dura due settimane e al termine di ogni Sprint, il team si riunisce per una **Sprint Retrospective** per valutare il processo e apportare miglioramenti. Il ruolo di **Scrum Master** cambia ad ogni iterazione, con un nuovo membro del team che assume il ruolo di Scrum Master all'inizio di ogni Sprint. Lo Scrum Master è responsabile di facilitare le cerimonie Scrum (Sprint Planning, Daily Stand-ups, Sprint Review e Sprint Retrospective) e di rimuovere gli ostacoli che il team potrebbe incontrare.
 
+## Ciclo di vita dello sviluppo di una funzionalita
+
+
+
+
+# SPRINT:
 ## Sprint 1: 22 novembre - 5 dicembre
 **Scrum Master**: [Luca Brugnetti]
 
