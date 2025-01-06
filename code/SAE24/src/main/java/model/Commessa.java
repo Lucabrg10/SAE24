@@ -27,7 +27,7 @@ public class Commessa {
     @JoinColumn(name = "commessa_padre_id")
     private Commessa commessaPadre;
 
-    @OneToMany(mappedBy = "commessaPadre", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "commessaPadre",fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Commessa> commesseFiglie = new ArrayList<>();
 
     public Commessa() {}
@@ -93,22 +93,14 @@ public class Commessa {
 
     public void addCommessaFiglia(Commessa commessaFiglia) {
         commesseFiglie.add(commessaFiglia);
-        commessaFiglia.setCommessaPadre(this);
     }
 
     public void removeCommessaFiglia(Commessa commessaFiglia) {
         commesseFiglie.remove(commessaFiglia);
-        commessaFiglia.setCommessaPadre(null);
     }
 
     @Override
     public String toString() {
-        return "Commessa{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", reparto='" + reparto + '\'' +
-                ", tempoStimato=" + tempoStimato +
-                ", tempoCalcolato=" + tempoCalcolato +
-                '}';
+        return nome;
     }
 }

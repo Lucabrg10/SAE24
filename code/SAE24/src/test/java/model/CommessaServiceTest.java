@@ -16,14 +16,13 @@ public class CommessaServiceTest {
 
 	@Before
 	public void setUp() {
-		// Usa l'unità di persistenza di test
-		 try {
-		        emf = Persistence.createEntityManagerFactory("dip-test");  // Usa "dip"
-		        em = emf.createEntityManager();
-		        commessaService = new CommessaService(em);
-		    } catch (Exception e) {
-		        e.printStackTrace();
-		    }
+		try {
+			emf = Persistence.createEntityManagerFactory("dip-test");
+			em = emf.createEntityManager();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@After
@@ -38,13 +37,14 @@ public class CommessaServiceTest {
 	@Test
 	public void testAddCommessaSuccess() {
 		// Dati di test
+		commessaService = new CommessaService("test");
 		String nome = "Commessa Test";
 		String descrizione = "Descrizione di test";
-		String durata = "10 giorni";
+		String durata = "11 giorni";
 		Reparto reparto = Reparto.CONFIGURAZIONE; // Supponiamo che il reparto sia già presente nel database
 
 		// Chiama il metodo addCommessa
-		String risultato = commessaService.addCommessa(nome, descrizione, durata, reparto);
+		String risultato = commessaService.addCommessa(nome, descrizione, durata, reparto, null);
 
 		// Verifica che il risultato sia nullo (indica successo)
 		assertNull("La commessa non è stata aggiunta correttamente", risultato);
@@ -60,8 +60,44 @@ public class CommessaServiceTest {
 	}
 
 	@Test
-	public void testAddCommessaFailure() {
-		
-	}
+    public void testDeleteCommessa_Success() {
+		commessaService = new CommessaService("test");
+		 em.getTransaction().begin();
 
+        // Aggiungi una commessa principale senza commesse figlie
+        Commessa commessa = new Commessa();
+        commessa.setNome("Commessa 1");
+        em.persist(commessa);
+
+        // Effettua il commit per rendere persistente la commessa
+        em.getTransaction().commit();
+
+        // Prova a eliminare la commessa
+        commessaService.deleteCommessa(commessa.getId());
+        em.clear();
+        em.getTransaction().begin();
+        Commessa deletedCommessa = em.find(Commessa.class, commessa.getId());
+        em.getTransaction().commit();
+        assertNull("La commessa dovrebbe essere eliminata.",deletedCommessa);
+    }
+
+    @Test
+    public void testDeleteCommessa_Fail_HasFiglie() {
+    	commessaService = new CommessaService("test");
+    	 
+
+        Commessa parentCommessa = new Commessa();
+        parentCommessa.setNome("Commessa Principale");
+        em.getTransaction().begin();
+        em.persist(parentCommessa);
+        em.getTransaction().commit();
+        commessaService.addCommessa("Figlia", null, null, null, parentCommessa);
+        
+        
+        commessaService.deleteCommessa(parentCommessa.getId());
+        em.clear();
+        // Verifica che la commessa principale non sia stata eliminata
+        Commessa foundCommessa = em.find(Commessa.class, parentCommessa.getId());
+        assertNotNull("La commessa non è stata eliminata", foundCommessa);
+    }
 }

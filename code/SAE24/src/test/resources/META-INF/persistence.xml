@@ -9,10 +9,11 @@
 		<class>model.Task</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:sqlite::memory:" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:mydb-test.db" />
             <property name="javax.persistence.jdbc.user" value="" />
             <property name="javax.persistence.jdbc.password" value="" />
             <property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
+       	 <property name="eclipselink.logging.level" value="INFO" />
         </properties>
     </persistence-unit>
 </persistence>

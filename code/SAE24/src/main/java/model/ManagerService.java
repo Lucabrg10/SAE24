@@ -10,6 +10,10 @@ import java.util.List;
 public class ManagerService extends DipendenteService {
 
 	
+	public ManagerService(String utilizzo) {
+		super(utilizzo);
+	}
+
 	/**
 	 * Aggiungi un nuovo dipendente/manager.
 	 *

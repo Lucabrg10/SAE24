@@ -9,7 +9,7 @@
 
 <AnchorPane fx:id="contentPane2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="backPane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.VisualizzaCommesseController">
    <children>
-      <Button layoutX="1055.0" layoutY="665.0" mnemonicParsing="false" onAction="#SwitchToInserimento" prefHeight="49.0" prefWidth="54.0" styleClass="buttonAggiungi" stylesheets="@application.css" text="+">
+      <Button layoutX="1055.0" layoutY="665.0" mnemonicParsing="false" onAction="#switchToInserimento" prefHeight="49.0" prefWidth="54.0" styleClass="buttonAggiungi" stylesheets="@application.css" text="+">
          <font>
             <Font size="26.0" />
          </font></Button>
@@ -19,10 +19,11 @@
               <columns>
                 <TableColumn fx:id="idCol" prefWidth="100.00002366304398" text="ID" />
                 <TableColumn fx:id="nomeCol" prefWidth="264.2666549682617" text="NOME" />
-                  <TableColumn fx:id="descrizioneCol" prefWidth="274.1333923339844" text="DESCRIZIONE" />
-                  <TableColumn fx:id="repartoCol" prefWidth="213.3333740234375" text="REPARTO" />
-                  <TableColumn fx:id="durataCol" prefWidth="180.0" text="DURATA" />
-                  <TableColumn fx:id="padreIdCol" prefWidth="129.5999755859375" text="ID Padre" />
+                  <TableColumn fx:id="descrizioneCol" prefWidth="252.79995727539062" text="DESCRIZIONE" />
+                  <TableColumn fx:id="repartoCol" prefWidth="152.800048828125" text="REPARTO" />
+                  <TableColumn fx:id="durataCol" prefWidth="110.4000244140625" text="DURATA" />
+                  <TableColumn fx:id="padreIdCol" prefWidth="190.39996337890625" text="Commessa padre" />
+                  <TableColumn fx:id="eliminaCol" prefWidth="168.0" />
               </columns>
             </TableView>
          </children>

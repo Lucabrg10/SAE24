@@ -22,7 +22,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		ManagerService service = new ManagerService();
+		ManagerService service = new ManagerService("");
 		service.addDipendente("admin", "admin", "admin",Reparto.MANAGER );
 		Parent root = FXMLLoader.load(getClass().getResource("/Login.fxml"));
 		primaryStage.setTitle("SAE24");

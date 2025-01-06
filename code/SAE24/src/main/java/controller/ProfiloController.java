@@ -41,7 +41,7 @@ public class ProfiloController {
 		if (dipendente == null) {
 			System.out.println("null");
 		} else {
-			ManagerService service = new ManagerService();
+			ManagerService service = new ManagerService("");
 			dipendente = service.getDipendenteByMatricola(dipendente.getMatricola());
 			
 			nome.setText(dipendente.getNome());
@@ -70,7 +70,7 @@ public class ProfiloController {
 	
 	public void modificaPassword() {
 		String newPassword = password.getText();
-		ManagerService service = new ManagerService();
+		ManagerService service = new ManagerService("");
 		String mess = service.modificaPasswordDipendente(dipendente.getMatricola(), newPassword);
 		messaggio.setText(mess);
 	}

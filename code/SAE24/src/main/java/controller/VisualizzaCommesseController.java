@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.layout.VBox;
 import model.Commessa;
+import model.CommessaService;
 import model.Dipendente;
 import model.ManagerService;
 import model.Reparto;
@@ -41,32 +43,60 @@ public class VisualizzaCommesseController {
 	@FXML
 	private TableColumn<Commessa, String> durataCol;
 	@FXML
-	private TableColumn<Commessa, Long> padreIdCol;
+	private TableColumn<Commessa, Void>  eliminaCol;
+	@FXML
+	private TableColumn<Commessa, String> padreIdCol;
+	private ObservableList<Commessa> commesse;
 
-	private  ObservableList<Commessa> commesse ;
-
-	
 	public void initialize() {
 
-		ManagerService service = new ManagerService();
+		ManagerService service = new ManagerService("");
 		commesse = FXCollections.observableArrayList(service.getAllCommesse());
-		
+
 		idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 		nomeCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
 		descrizioneCol.setCellValueFactory(new PropertyValueFactory<>("descrizione"));
 		repartoCol.setCellValueFactory(new PropertyValueFactory<>("reparto"));
-	//	padreIdCol.setCellValueFactory(new PropertyValueFactory<>("commessaPadre"));
+		padreIdCol.setCellValueFactory(new PropertyValueFactory<>("commessaPadre"));
+		eliminaCol.setCellFactory(param -> new TableCell<Commessa, Void>() {
+	        private final Button eliminaColButton = new Button("Elimina");
+
+	        {
+	        	eliminaColButton.setOnAction(event -> {
+	                Commessa commessa = getTableView().getItems().get(getIndex());
+	                // Rimuovi dalla lista visibile
+	                CommessaService service = new CommessaService("");
+	                if(service.deleteCommessa(commessa.getId())) {
+	                	commesse.remove(commessa);
+	                }
+	                	
+	            });
+	        }
+
+	        @Override
+	        public void updateItem(Void item, boolean empty) {
+	            super.updateItem(item, empty);
+	            if (empty) {
+	                setGraphic(null);
+	            } else {
+	                setGraphic(eliminaColButton);
+	            }
+	        }
+	    });
+		
+		
 		
 		tableViewCommesse.setItems(commesse);
 	}
+
 	@FXML
-	public void SwitchToInserimento(ActionEvent event) throws IOException {
+	public void switchToInserimento(ActionEvent event) throws IOException {
 
 		System.out.println("sono entrato in modalità generazione commessa");
 
 		// Carica il file FXML di inserimentoTask.fxml
-		Parent root1 = FXMLLoader.load(getClass().getResource("/manager/GenerazioneCommesse.fxml"));
-
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/manager/GenerazioneCommesse.fxml"));
+		Parent root1 = loader.load();
 		contentPane2.getChildren().clear(); // Rimuovi il contenuto precedente
 		contentPane2.getChildren().add(root1); // Aggiungi il nuovo contenuto
 	}

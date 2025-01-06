@@ -72,7 +72,7 @@ public class GestionePersonaleController {
 
 	public void initialize() {
 
-		ManagerService service = new ManagerService();
+		ManagerService service = new ManagerService("");
 		dipendenti = FXCollections.observableArrayList(service.getAllDipendenti());
 		
 		idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -87,7 +87,7 @@ public class GestionePersonaleController {
 		            deleteButton.setOnAction(event -> {
 		                Dipendente dipendente = getTableView().getItems().get(getIndex());
 		                dipendenti.remove(dipendente); // Rimuovi dalla lista visibile
-		                ManagerService service = new ManagerService();
+		                ManagerService service = new ManagerService("");
 		                service.deleteDipendente(dipendente.getId()); // Elimina dal database
 		            });
 		        }

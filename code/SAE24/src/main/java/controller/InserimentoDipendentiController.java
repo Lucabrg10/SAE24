@@ -94,7 +94,7 @@ public class InserimentoDipendentiController {
 				return;
 			}
 
-			ManagerService service = new ManagerService();
+			ManagerService service = new ManagerService("");
 			String error = service.addDipendente(nome, cognome, matricola, repartoSelezionato);
 			if(error==null) {
 				errorLabel.setText("Il dipendente "+nome+" "+cognome+" è stato aggiunto correttamente!");
