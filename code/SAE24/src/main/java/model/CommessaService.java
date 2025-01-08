@@ -3,6 +3,7 @@ package model;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
 
 public class CommessaService {
 	protected EntityManager entityManager = Persistence.createEntityManagerFactory("dip").createEntityManager();
@@ -78,5 +79,43 @@ public class CommessaService {
 		}
 		return false;
 	}
+	
+	public void assegnaTasks(Commessa c, long id) {
+		
+		for (Commessa commessa : c.getCommesseFiglie()) {
+			if(commessa.getCommesseFiglie().isEmpty())
+			{
+				Task t = new Task(commessa,id);
+				Dipendente dipendente = scegliDipendente(commessa.getReparto());
+				TaskDipendente td= new TaskDipendente(t, dipendente);
+			}else {
+				assegnaTasks(commessa, id);
+			}
+			
+		}
+		
+		
+		
+		
+	}
+
+	public Dipendente scegliDipendente(Reparto reparto) {
+    
+        Dipendente dipendente = null;
+
+        try {
+            TypedQuery<Dipendente> query = entityManager.createQuery(
+                "SELECT d FROM Dipendente d WHERE d.reparto = :reparto ORDER BY d.id ASC", Dipendente.class);
+            query.setParameter("reparto", reparto);
+
+            dipendente = query.setMaxResults(1).getSingleResult();
+        } catch (Exception e) {
+            System.err.println("Errore durante la selezione del dipendente: " + e.getMessage());
+        } finally {
+        	entityManager.close();
+        }
+
+        return dipendente;
+    }
 
 }

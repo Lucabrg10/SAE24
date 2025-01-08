@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.layout.VBox;
 import model.Commessa;
+import model.CommessaInstance;
 import model.CommessaService;
 import model.Dipendente;
 import model.ManagerService;
@@ -91,7 +92,13 @@ public class VisualizzaCommesseController {
 	public void assegnaCommessa(ActionEvent event) {
 		 Commessa selectedItem = tableViewCommesse.getSelectionModel().getSelectedItem();
          if (selectedItem != null) {
-             System.out.println("Assegna: " + selectedItem);
+            
+        	 CommessaService service = new CommessaService("");
+        	 CommessaInstance cm = new CommessaInstance(selectedItem);
+        	 service.assegnaTasks(selectedItem,cm.getId());
+        	 
+        	 
+        	 
          }
 	}
 	
