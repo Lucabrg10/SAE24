@@ -95,7 +95,7 @@ public class VisualizzaCommesseController {
             
         	 CommessaService service = new CommessaService("");
         	 CommessaInstance cm = new CommessaInstance(selectedItem);
-        	 service.assegnaTasks(selectedItem,cm.getId());
+        	 service.assegnaTasksSistema(selectedItem,cm.getId());
         	 
         	 
         	 

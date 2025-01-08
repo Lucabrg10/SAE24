@@ -21,13 +21,11 @@ public class TaskService {
 
 	}
 
-	public String assegnaTask(Commessa c, Dipendente d) {
-
-		Task nuovaTask = new Task(c, d);
+	public String creaTask(Task t) {
 
 		this.entityManager.getTransaction().begin();
 
-		entityManager.persist(nuovaTask);
+		entityManager.persist(t);
 		entityManager.getTransaction().commit();
 
 		return "ok";
@@ -69,9 +67,9 @@ public class TaskService {
 
 			if (taskEntity != null) {
 				// Impostiamo i nuovi valori
-				taskEntity.setOrarioInizio(orarioInizio);
-				taskEntity.setData(data);
-				taskEntity.setStato("in lavorazione");
+		//		taskEntity.setOrarioInizio(orarioInizio);
+		//		taskEntity.setData(data);
+		//		taskEntity.setStato("in lavorazione");
 
 				// Merge delle modifiche
 				entityManager.merge(taskEntity);
@@ -116,10 +114,10 @@ public class TaskService {
 
 			if (taskEntity != null) {
 				// Impostiamo i nuovi valori
-				taskEntity.setOrarioFine(orarioFine);
+			//	taskEntity.setOrarioFine(orarioFine);
 				// taskEntity.setData(data);
-				taskEntity.setStato("Terminata");
-
+		//		taskEntity.setStato("Terminata");
+//
 				// Merge delle modifiche
 				entityManager.merge(taskEntity);
 

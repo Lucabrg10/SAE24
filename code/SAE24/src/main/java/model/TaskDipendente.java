@@ -2,27 +2,36 @@ package model;
 
 public class TaskDipendente {
 
-	Task t;
-	Dipendente d;
+	Task task;
+	Dipendente dipendente;
+	String status;
 	
 	public TaskDipendente(Task t, Dipendente d) {
-		this.t=t;
-		this.d=d;
+		this.task=t;
+		this.dipendente=d;
+		this.status="ASSEGNATA";
 	}
 	
-	public Task getT() {
-		return t;
+	public Task getTask() {
+		return task;
 	}
-	public void setT(Task t) {
-		this.t = t;
+	public void setTask(Task t) {
+		this.task = t;
 	}
-	public Dipendente getD() {
-		return d;
+	public Dipendente getDipendente() {
+		return dipendente;
 	}
-	public void setD(Dipendente d) {
-		this.d = d;
+	public void setDipendente(Dipendente d) {
+		this.dipendente = d;
 	}
-	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	
 	
 }

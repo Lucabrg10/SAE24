@@ -14,15 +14,14 @@ public class Task {
     @JoinColumn(name = "commessa_id")
     private Commessa commessa;
 
-    @ManyToOne
-    @JoinColumn(name = "dipendente_id")
-    private long idCommessaInstance;
+    private long commessaInstance;
 
-    public Task() {}
+	public Task() {}
     
   
     public Task(Commessa commessa2, long id2) {
-    	
+    	this.commessa=commessa2;
+    	this.commessaInstance = id2;
     	
 	}
 
@@ -38,7 +37,15 @@ public class Task {
     public void setCommessa(Commessa commessa) {
         this.commessa = commessa;
     }
-   
+    public long getCommessaInstance() {
+		return commessaInstance;
+	}
+
+
+	public void setCommessaInstance(long commessaInstance) {
+		this.commessaInstance = commessaInstance;
+	}
+
 }
 
        
