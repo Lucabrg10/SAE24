@@ -10,8 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import model.Dipendente;
-import model.Manager;
+import model.entity.Dipendente;
+import model.entity.Manager;
 
 public class ManagerInterfaceController {
 

@@ -12,8 +12,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 
 import javafx.scene.layout.AnchorPane;
-import model.Dipendente;
-import model.Task;
+import model.entity.Dipendente;
+import model.entity.Task;
 
 public class MainViewDipendenteController {
 	@FXML

@@ -30,7 +30,7 @@
                <contextMenu>
                   <ContextMenu>
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Assegna a un dipendente" onAction="#assegnaCommessa" />
+                        <MenuItem mnemonicParsing="false" text="Assegna commessa" onAction="#assegnaCommessa" />
                         <MenuItem mnemonicParsing="false" text="Modifica" onAction="#modificaCommessa"/>
                     </items>
                   </ContextMenu>

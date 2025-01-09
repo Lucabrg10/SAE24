@@ -3,12 +3,12 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
     <persistence-unit name="dip-test">
-		<class>model.Dipendente</class>
-		<class>model.Manager</class>
-		<class>model.Commessa</class>
-		<class>model.CommessaInstance</class>
-		<class>model.Task</class>
-		<class>model.TaskDipendente</class>
+	<class>model.entity.Dipendente</class>
+		<class>model.entity.Manager</class>
+		<class>model.entity.Commessa</class>
+		<class>model.entity.CommessaInstance</class>
+		<class>model.entity.Task</class>
+		<class>model.entity.TaskDipendente</class>	
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />
             <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:mydb-test.db" />

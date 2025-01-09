@@ -1,10 +1,11 @@
-package model;
+package model.service;
 
-import model.Dipendente;
-import model.Manager;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+
+import model.entity.Dipendente;
+import model.entity.Manager;
 
 public class LoginService {
 

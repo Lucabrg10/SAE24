@@ -1,7 +1,8 @@
-package model;
+package model.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,25 +12,27 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class CommessaInstance {
+	private static long instanceCounter = 0;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@ManyToOne
 	@JoinColumn(name = "commessa_id", nullable = false)
 	Commessa commessa;
+	@Column
+	private long instance;
+	
 	Date dataInizio;
 
-	 public CommessaInstance() {
-	    }
-	
+	public CommessaInstance() {
+	}
+
 	public CommessaInstance(Commessa c) {
 		this.commessa = c;
+		this.instance = ++instanceCounter;
 
 	}
-	public CommessaInstance(Commessa c, Long id) {
-		this.commessa = c;
-		this.id =id;
-	}
+
 
 	public Commessa getCommessa() {
 		return commessa;

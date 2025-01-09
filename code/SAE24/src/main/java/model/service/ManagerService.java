@@ -1,10 +1,16 @@
-package model;
+package model.service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
+
+import model.entity.Commessa;
+import model.entity.Dipendente;
+import model.entity.Manager;
+import model.entity.Reparto;
+
 import java.util.List;
 
 public class ManagerService extends DipendenteService {

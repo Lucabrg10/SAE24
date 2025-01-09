@@ -15,7 +15,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import model.TaskService;
+import model.service.TaskService;
 
 import java.awt.Color;
 import java.io.IOException;
