@@ -10,7 +10,7 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 public class CommessaService {
-	protected EntityManager entityManager = Persistence.createEntityManagerFactory("dip").createEntityManager();
+	protected EntityManager entityManager ;
 
 	public CommessaService(String utilizzo) {
 		if (utilizzo.equals("test")) {
@@ -20,6 +20,13 @@ public class CommessaService {
 		}
 	}
 
+	public void creaCommessaInstance(CommessaInstance c) {
+		entityManager.getTransaction().begin();
+		entityManager.persist(c);
+		entityManager.getTransaction().commit();
+		
+	}
+	
 	// Metodo per aggiungere una commessa
 	public String addCommessa(String nome, String desc, String durata, Reparto reparto, Commessa padre) {
 
@@ -36,7 +43,10 @@ public class CommessaService {
 			if (padre != null) {
 			    Commessa managedPadre = entityManager.find(Commessa.class, padre.getId());
 			    if (managedPadre != null) {
+			    	commessa.setCommessaPadre(managedPadre);
 			        managedPadre.addCommessaFiglia(commessa);
+			        entityManager.persist(managedPadre);
+			        
 			    } else {
 			        throw new IllegalStateException("Commessa padre non trovata nel contesto di persistenza.");
 			    }
@@ -55,7 +65,24 @@ public class CommessaService {
 		}
 		return null;
 	}
+	
+	  public Commessa retrieveCommessa(String nomeCommessa) {
+	        try {
+	            // Creazione della query JPQL per recuperare la Commessa in base al nome
+	            String jpql = "SELECT c FROM Commessa c WHERE c.nome = :nome";
+	            TypedQuery<Commessa> query = entityManager.createQuery(jpql, Commessa.class);
+	            query.setParameter("nome", nomeCommessa);
 
+	            // Esecuzione della query e restituzione del risultato
+	            Commessa commessa = query.getSingleResult();
+	            return commessa;
+
+	        } catch (Exception e) {
+	            // Gestione dell'errore se non viene trovata nessuna commessa o se si verifica un altro errore
+	            e.printStackTrace();
+	            return null;
+	        }
+	  }
 	public boolean deleteCommessa(Long id) {
 		try {
 			entityManager.clear();
@@ -84,20 +111,22 @@ public class CommessaService {
 		return false;
 	}
 	
-	public void assegnaTasksSistema(Commessa c, long idInstance) {
-//		TaskService service = new TaskService("");
-		
+	public int assegnaTasksSistema(Commessa c, CommessaInstance instance) {
+		int cont=0;//serve solo per il test
 		for (Commessa commessa : c.getCommesseFiglie()) {
 			if(commessa.getCommesseFiglie().isEmpty())
 			{
-				Task t = new Task(commessa,idInstance);
+				System.out.println("entro");
+				Task t = new Task(commessa,instance);
 				Dipendente dipendente = scegliDipendente(commessa.getReparto());
 				TaskDipendente td= new TaskDipendente(t, dipendente);
+				cont++;
 			}else {
-				assegnaTasksSistema(commessa, idInstance);
+				assegnaTasksSistema(commessa, instance);
 			}
 			
 		}
+		return cont;
 	}
 	
 	public void completaTask(TaskDipendente t) {
@@ -105,8 +134,8 @@ public class CommessaService {
 		t.setStatus("COMPLETATO");
 		Commessa commessaPadre = t.getTask().getCommessa().getCommessaPadre();
 		if(commessaPadre!=null) {
-			if(statusFigli(commessaPadre, t.getTask().getCommessaInstance())) {
-				Task newTask = new Task(commessaPadre,t.getTask().getId());
+			if(statusFigli(commessaPadre, t.getTask().getCommessaInstance().getId())) {
+				Task newTask = new Task(commessaPadre,t.getTask().getCommessaInstance());
 				Dipendente d = scegliDipendente(commessaPadre.getReparto());
 				TaskDipendente td = new TaskDipendente(newTask, d);
 			}
@@ -161,7 +190,6 @@ public class CommessaService {
 	public Dipendente scegliDipendente(Reparto reparto) {
     
         Dipendente dipendente = null;
-
         try {
             TypedQuery<Dipendente> query = entityManager.createQuery(
                 "SELECT d FROM Dipendente d WHERE d.reparto = :reparto ORDER BY d.id ASC", Dipendente.class);
@@ -170,8 +198,6 @@ public class CommessaService {
             dipendente = query.setMaxResults(1).getSingleResult();
         } catch (Exception e) {
             System.err.println("Errore durante la selezione del dipendente: " + e.getMessage());
-        } finally {
-        	entityManager.close();
         }
 
         return dipendente;

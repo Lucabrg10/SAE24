@@ -1,11 +1,32 @@
 package model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class TaskDipendente {
 
-	Task task;
-	Dipendente dipendente;
-	String status;
-	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Genera automaticamente l'ID
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "task_id", nullable = false) // Collega alla tabella Task
+    private Task task;
+
+    @ManyToOne
+    @JoinColumn(name = "dipendente_id", nullable = false) // Collega alla tabella Dipendente
+    private Dipendente dipendente;
+
+    @Column
+    private String status;
+	public TaskDipendente() {}
+    
 	public TaskDipendente(Task t, Dipendente d) {
 		this.task=t;
 		this.dipendente=d;

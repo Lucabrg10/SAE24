@@ -31,7 +31,15 @@ public class Dipendente {
     @Enumerated(EnumType.STRING)
     private Reparto reparto;
     
-    public Long getId() {
+    public Dipendente() {}
+    
+    //serve per test CommessaService assegnatasks
+    public Dipendente(String string, Reparto reparto) {
+		this.nome=string;
+		this.reparto=reparto;
+	}
+
+	public Long getId() {
         return id;
     }
 

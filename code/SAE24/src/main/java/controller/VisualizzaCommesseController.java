@@ -92,10 +92,10 @@ public class VisualizzaCommesseController {
 	public void assegnaCommessa(ActionEvent event) {
 		 Commessa selectedItem = tableViewCommesse.getSelectionModel().getSelectedItem();
          if (selectedItem != null) {
-            
+            //devi implemntare Instance come static per contare quante instanze
         	 CommessaService service = new CommessaService("");
         	 CommessaInstance cm = new CommessaInstance(selectedItem);
-        	 service.assegnaTasksSistema(selectedItem,cm.getId());
+        	 service.assegnaTasksSistema(selectedItem,cm);
         	 
         	 
         	 

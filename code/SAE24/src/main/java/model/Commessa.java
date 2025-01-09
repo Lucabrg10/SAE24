@@ -23,11 +23,11 @@ public class Commessa {
     private String tempoStimato;
     private String tempoCalcolato;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "commessa_padre_id")
     private Commessa commessaPadre;
 
-    @OneToMany(mappedBy = "commessaPadre",fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "commessaPadre", cascade =CascadeType.ALL)
     private List<Commessa> commesseFiglie = new ArrayList<>();
 
     public Commessa() {}
