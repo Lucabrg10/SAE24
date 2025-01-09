@@ -21,15 +21,14 @@ public class CommessaInstance {
 	Commessa commessa;
 	@Column
 	private long instance;
-	
 	Date dataInizio;
 
 	public CommessaInstance() {
 	}
 
-	public CommessaInstance(Commessa c) {
+	public CommessaInstance(Commessa c, long i) {
 		this.commessa = c;
-		this.instance = ++instanceCounter;
+		this.instance = i;
 
 	}
 
@@ -57,4 +56,15 @@ public class CommessaInstance {
 	public void setDataInizio(Date dataInizio) {
 		this.dataInizio = dataInizio;
 	}
+
+	public long getInstance() {
+		return instance;
+	}
+
+	public void setInstance(long instance) {
+		this.instance = instance;
+	}
+	
+	
+	
 }

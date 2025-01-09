@@ -1,5 +1,7 @@
 package model.service;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
@@ -21,6 +23,10 @@ public class TaskDipendenteService {
 		em.getTransaction().begin();
 		em.persist(c);
 		em.getTransaction().commit();
+	}
+	
+	public List<TaskDipendente> retrieveListOfTasksDipendente(){
+		  return em.createQuery("SELECT t FROM TaskDipendente t", TaskDipendente.class).getResultList();
 	}
 	
 	

@@ -86,4 +86,8 @@ public class Dipendente {
 	public void setReparto(Reparto string) {
 		this.reparto = string;
 	}
+	@Override
+	public String toString() {
+		return (nome +" "+cognome);
+	}
 }

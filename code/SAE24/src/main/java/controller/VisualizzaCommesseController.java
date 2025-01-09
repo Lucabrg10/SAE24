@@ -95,8 +95,9 @@ public class VisualizzaCommesseController {
          if (selectedItem != null) {
             //devi implemntare Instance come static per contare quante instanze
         	 CommessaService service = new CommessaService("");
-        	 CommessaInstance cm = new CommessaInstance(selectedItem);
         	 CommessaInstanceService serviceInstance = new CommessaInstanceService("");
+        	 CommessaInstance cm = serviceInstance.creaNewCommessaInstance(selectedItem);
+        	
         	 serviceInstance.salvaCommessaInstance(cm);
         	 service.assegnaTasksSistema(selectedItem,cm);
         	 

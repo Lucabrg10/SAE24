@@ -23,7 +23,7 @@ public class CommessaServiceTest2 {
 		figlio2.setCommessaPadre(padre);
 		padre.addCommessaFiglia(figlio2);
 		padre.addCommessaFiglia(figlio1);
-		CommessaInstance cm = new CommessaInstance(padre);
+		CommessaInstance cm = new CommessaInstance(padre,1);
 		int numTask = service.assegnaTasksSistema(padre, cm);
 		assertEquals(2, numTask);
 		
