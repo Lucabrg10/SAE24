@@ -26,6 +26,7 @@ public class TaskDipendenteService {
 	}
 	
 	public List<TaskDipendente> retrieveListOfTasksDipendente(){
+		em.clear();
 		  return em.createQuery("SELECT t FROM TaskDipendente t", TaskDipendente.class).getResultList();
 	}
 	

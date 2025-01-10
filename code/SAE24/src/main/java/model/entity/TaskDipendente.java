@@ -1,5 +1,7 @@
 package model.entity;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,6 +27,9 @@ public class TaskDipendente {
 
     @Column
     private String status;
+    private LocalDateTime inizio;
+    private LocalDateTime fine;
+    
 	public TaskDipendente() {}
     
 	public TaskDipendente(Task t, Dipendente d) {

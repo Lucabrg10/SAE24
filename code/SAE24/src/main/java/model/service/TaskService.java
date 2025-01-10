@@ -10,6 +10,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import model.entity.Task;
+import model.entity.TaskDipendente;
 
 public class TaskService {
 	private EntityManager entityManager;
@@ -30,7 +31,7 @@ public class TaskService {
 		entityManager.getTransaction().commit();
 	}
 
-	public List<Object[]> findTaskByMatricola(Long id) {
+	public List<TaskDipendente> findTaskByMatricola(Long id) {
 		System.out.println("Long ID: " + id);
 
 		String sql = "SELECT t.id, c.nome FROM Task t " + "JOIN Commessa c ON t.commessa_id = c.id "

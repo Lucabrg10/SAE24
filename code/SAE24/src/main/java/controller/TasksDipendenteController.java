@@ -15,6 +15,8 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.entity.Dipendente;
+import model.entity.TaskDipendente;
 import model.service.TaskService;
 
 import java.awt.Color;
@@ -29,10 +31,10 @@ public class TasksDipendenteController {
 
 	@FXML
 	private GridPane gridContainer;
-	private Long matricola;
+	private Dipendente d;
 
 	TaskService service = new TaskService("");
-	List<Object[]> taskDipendente = service.findTaskByMatricola(matricola);
+	List<TaskDipendente> taskDipendente = service.findTaskByMatricola(matricola);
 
 	public void initialize() {
 		int num_task = taskDipendente.size();
