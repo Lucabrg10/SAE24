@@ -17,7 +17,7 @@ public class TaskDipendente {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Genera automaticamente l'ID
     private Long id;
 
-    @ManyToOne
+	@ManyToOne
     @JoinColumn(name = "task_id", nullable = false) // Collega alla tabella Task
     private Task task;
 
@@ -58,6 +58,9 @@ public class TaskDipendente {
 		this.status = status;
 	}
 
-	
+    public Long getId() {
+		return id;
+	}
+
 	
 }

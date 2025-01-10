@@ -58,6 +58,7 @@ public class LoginController {
 				root = loader.load();
 				MainViewDipendenteController controller = loader.getController();
 				controller.setDipendente((Dipendente) user);
+				controller.show();
 				Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 				stage.setScene(new Scene(root));
 
