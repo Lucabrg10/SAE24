@@ -15,6 +15,9 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.entity.Dipendente;
+import model.entity.TaskDipendente;
+import model.service.TaskDipendenteService;
 import model.service.TaskService;
 
 import java.awt.Color;
@@ -29,41 +32,43 @@ public class TasksDipendenteController {
 
 	@FXML
 	private GridPane gridContainer;
-	private Long matricola;
+	private Dipendente dipendente;
 
-	TaskService service = new TaskService("");
-	List<Object[]> taskDipendente = service.findTaskByMatricola(matricola);
+	TaskDipendenteService service = new TaskDipendenteService("");
+	List<TaskDipendente> taskDipendente;
 
-	public void initialize() {
-		int num_task = taskDipendente.size();
+	public void show() {
+		taskDipendente = service.findTasksDipendente(dipendente);
 
+		System.out.println(taskDipendente);
+		
 		if (taskDipendente != null && !taskDipendente.isEmpty()) {
-			for (Object[] listtask : taskDipendente) {
+			for (TaskDipendente taskD : taskDipendente) {
 				GridPane newGrid = new GridPane();
 
-				Label task = new Label("task " + (listtask[1]));
-				task.setId("taskLabel" + listtask[0]);
+				Label task = new Label("task " + (taskD.getTask().getCommessa().getNome()));
+				task.setId("taskLabel" + taskD.getId());
 				newGrid.add(task, 0, 0);
 
 				// Bottone Start
 				Button start = new Button("Start");
-				start.setId("start" + listtask[0]);
-				start.setOnAction(e -> startTask(convertToLong(listtask[0])));
+				start.setId("start" + taskD.getId());
+				start.setOnAction(e -> startTask(convertToLong(taskD.getId())));
 				newGrid.add(start, 0, 1);
 
 				// Bottone Stop
 				Button stop = new Button("Stop");
-				stop.setId("stop" + listtask[0]);
+				stop.setId("stop" + taskD.getId());
 
-				stop.setOnAction(e -> stopTask(convertToLong(listtask[0])));
+				stop.setOnAction(e -> stopTask(convertToLong(taskD.getId())));
 				newGrid.add(stop, 1, 1);
 
 				// Bottone Sospendi
 				Button sospendi = new Button("Sospendi");
-				sospendi.setId("sospendi" + listtask[0]);
+				sospendi.setId("sospendi" + taskD.getId());
 				sospendi.setOnAction(e -> {
 					try {
-						sospendiTask(convertToLong(listtask[0]));
+						sospendiTask(convertToLong(taskD.getId()));
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
@@ -72,16 +77,13 @@ public class TasksDipendenteController {
 
 				mainContainer.getChildren().add(newGrid);
 				newGrid.getStyleClass().add("taskgrid");
-				newGrid.setId("" + listtask[0]);
+				newGrid.setId("" + taskD.getId());
 			}
 
 		} else {
-			System.out.println("Nessun task trovato per la matricola: " + matricola);
+			System.out.println("Nessun task trovato per la matricola: " + dipendente.getMatricola());
 		}
-
 	}
-
-	// Event Listener on Button.onAction
 
 	public void startTask(Long taskIndex) {
 		Button button = (Button) mainContainer.lookup("#start" + taskIndex);
@@ -170,6 +172,14 @@ public class TasksDipendenteController {
 		} else {
 			throw new IllegalArgumentException("Expected Integer or Long, but got: " + obj.getClass());
 		}
+	}
+
+	public Dipendente getDipendente() {
+		return dipendente;
+	}
+
+	public void setDipendente(Dipendente dipendente) {
+		this.dipendente = dipendente;
 	}
 
 }

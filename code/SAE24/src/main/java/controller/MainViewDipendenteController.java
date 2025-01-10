@@ -24,19 +24,23 @@ public class MainViewDipendenteController {
 	private Dipendente dipendente;
 	private List<Task>tasks;
 
-	public void initialize() throws IOException {
+	public void show() throws IOException {
 		visualizzaTask(null);
 
 	}
 	// Event Listener on Button.onAction
 	@FXML
 	public void visualizzaTask(ActionEvent event) throws IOException {
-		Parent root2 = FXMLLoader.load(getClass().getResource("/dipendente/TasksDipendente.fxml"));
+		Parent root = null;
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/dipendente/TasksDipendente.fxml"));
+		root=loader.load();
+		TasksDipendenteController controller = loader.getController();
+		controller.setDipendente(dipendente);
+		controller.show();
 		contentPane.getChildren().clear(); // Rimuovi il contenuto precedente
-		contentPane.getChildren().add(root2); // Aggiungi il nuovo contenuto
-
+		contentPane.getChildren().add(root); // Aggiungi il nuovo contenuto
 		String css = this.getClass().getResource("/application.css").toExternalForm();
-		root2.getStylesheets().add(css);//
+		root.getStylesheets().add(css);//
 
 	}
 

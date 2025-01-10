@@ -1,5 +1,7 @@
 package model.entity;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +17,7 @@ public class TaskDipendente {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Genera automaticamente l'ID
     private Long id;
 
-    @ManyToOne
+	@ManyToOne
     @JoinColumn(name = "task_id", nullable = false) // Collega alla tabella Task
     private Task task;
 
@@ -25,6 +27,9 @@ public class TaskDipendente {
 
     @Column
     private String status;
+    private LocalDateTime inizio;
+    private LocalDateTime fine;
+    
 	public TaskDipendente() {}
     
 	public TaskDipendente(Task t, Dipendente d) {
@@ -53,6 +58,9 @@ public class TaskDipendente {
 		this.status = status;
 	}
 
-	
+    public Long getId() {
+		return id;
+	}
+
 	
 }
