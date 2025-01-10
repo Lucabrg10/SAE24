@@ -58,21 +58,14 @@ public class TaskDipendenteService {
 
 			// Otteniamo l'orario di inizio e la data attuale
 			LocalDateTime orarioInizio = LocalDateTime.now(); // Orario di inizio attuale
-			LocalDate data = LocalDate.now(); // Data attuale
 
-			System.out.println("Commessa ID: " + task);
-			System.out.println("Orario Inizio: " + orarioInizio);
-			System.out.println("Data: " + data);
+			System.out.println("ID: " + task);
+			System.out.println("Inizio: " + orarioInizio);
 
 			// Otteniamo il Task dalla base di dati
-			Task taskEntity = em.find(Task.class, task);
+			TaskDipendente taskEntity = em.find(TaskDipendente.class, task);
 
 			if (taskEntity != null) {
-				// Impostiamo i nuovi valori
-		//		taskEntity.setOrarioInizio(orarioInizio);
-		//		taskEntity.setData(data);
-		//		taskEntity.setStato("in lavorazione");
-
 				// Merge delle modifiche
 				em.merge(taskEntity);
 
@@ -112,7 +105,7 @@ public class TaskDipendenteService {
 			System.out.println("Orario fine: " + orarioFine);
 
 			// Otteniamo il Task dalla base di dati
-			Task taskEntity = em.find(Task.class, task);
+			TaskDipendente taskEntity = em.find(TaskDipendente.class, task);
 
 			if (taskEntity != null) {
 				// Impostiamo i nuovi valori
