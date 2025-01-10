@@ -24,9 +24,8 @@ public class TaskService {
 	}
 
 	public void salvaTask(Task t) {
-
-		this.entityManager.getTransaction().begin();
-
+		entityManager.clear();
+		entityManager.getTransaction().begin();
 		entityManager.persist(t);
 		entityManager.getTransaction().commit();
 	}
