@@ -1,5 +1,6 @@
 package model.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -21,7 +22,7 @@ public class CommessaInstance {
 	Commessa commessa;
 	@Column
 	private long instance;
-	Date dataInizio;
+	LocalDate dataInizio;
 
 	public CommessaInstance() {
 	}
@@ -29,7 +30,7 @@ public class CommessaInstance {
 	public CommessaInstance(Commessa c, long i) {
 		this.commessa = c;
 		this.instance = i;
-
+		this.dataInizio = LocalDate.now();
 	}
 
 
@@ -49,11 +50,11 @@ public class CommessaInstance {
 		this.id = id;
 	}
 
-	public Date getDataInizio() {
+	public LocalDate getDataInizio() {
 		return dataInizio;
 	}
 
-	public void setDataInizio(Date dataInizio) {
+	public void setDataInizio(LocalDate dataInizio) {
 		this.dataInizio = dataInizio;
 	}
 
