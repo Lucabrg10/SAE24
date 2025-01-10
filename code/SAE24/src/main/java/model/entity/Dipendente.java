@@ -1,4 +1,4 @@
-package model;
+package model.entity;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -85,5 +85,9 @@ public class Dipendente {
 
 	public void setReparto(Reparto string) {
 		this.reparto = string;
+	}
+	@Override
+	public String toString() {
+		return (nome +" "+cognome);
 	}
 }

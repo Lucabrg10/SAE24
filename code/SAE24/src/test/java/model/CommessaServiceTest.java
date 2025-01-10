@@ -3,6 +3,11 @@ package model;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import model.entity.Commessa;
+import model.entity.Reparto;
+import model.service.CommessaService;
+
 import static org.junit.Assert.*;
 
 import javax.persistence.EntityManager;

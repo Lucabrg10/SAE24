@@ -28,9 +28,9 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import model.Dipendente;
-import model.ManagerService;
-import model.Reparto;
+import model.entity.Dipendente;
+import model.entity.Reparto;
+import model.service.ManagerService;
 
 import java.awt.Color;
 import java.io.IOException;

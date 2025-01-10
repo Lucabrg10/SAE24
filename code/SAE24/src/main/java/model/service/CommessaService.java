@@ -1,4 +1,4 @@
-package model;
+package model.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,13 @@ import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
+
+import model.entity.Commessa;
+import model.entity.CommessaInstance;
+import model.entity.Dipendente;
+import model.entity.Reparto;
+import model.entity.Task;
+import model.entity.TaskDipendente;
 
 public class CommessaService {
 	protected EntityManager entityManager ;
@@ -113,13 +120,17 @@ public class CommessaService {
 	
 	public int assegnaTasksSistema(Commessa c, CommessaInstance instance) {
 		int cont=0;//serve solo per il test
+		TaskDipendenteService serviceTaskDip = new TaskDipendenteService("");
+		TaskService serviceTask = new TaskService("");
 		for (Commessa commessa : c.getCommesseFiglie()) {
 			if(commessa.getCommesseFiglie().isEmpty())
 			{
 				System.out.println("entro");
 				Task t = new Task(commessa,instance);
+				serviceTask.salvaTask(t);
 				Dipendente dipendente = scegliDipendente(commessa.getReparto());
 				TaskDipendente td= new TaskDipendente(t, dipendente);
+				serviceTaskDip.salvaTaskDipendente(td);
 				cont++;
 			}else {
 				assegnaTasksSistema(commessa, instance);
@@ -131,7 +142,7 @@ public class CommessaService {
 	
 	public void completaTask(TaskDipendente t) {
 		
-		t.setStatus("COMPLETATO");
+		t.setStatus("COMPLETATA");
 		Commessa commessaPadre = t.getTask().getCommessa().getCommessaPadre();
 		if(commessaPadre!=null) {
 			if(statusFigli(commessaPadre, t.getTask().getCommessaInstance().getId())) {

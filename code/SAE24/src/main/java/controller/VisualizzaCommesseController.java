@@ -13,12 +13,13 @@ import javafx.event.ActionEvent;
 import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.layout.VBox;
-import model.Commessa;
-import model.CommessaInstance;
-import model.CommessaService;
-import model.Dipendente;
-import model.ManagerService;
-import model.Reparto;
+import model.entity.Commessa;
+import model.entity.CommessaInstance;
+import model.entity.Dipendente;
+import model.entity.Reparto;
+import model.service.CommessaInstanceService;
+import model.service.CommessaService;
+import model.service.ManagerService;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.Parent;
@@ -94,7 +95,10 @@ public class VisualizzaCommesseController {
          if (selectedItem != null) {
             //devi implemntare Instance come static per contare quante instanze
         	 CommessaService service = new CommessaService("");
-        	 CommessaInstance cm = new CommessaInstance(selectedItem);
+        	 CommessaInstanceService serviceInstance = new CommessaInstanceService("");
+        	 CommessaInstance cm = serviceInstance.creaNewCommessaInstance(selectedItem);
+        	
+        	 serviceInstance.salvaCommessaInstance(cm);
         	 service.assegnaTasksSistema(selectedItem,cm);
         	 
         	 

@@ -15,7 +15,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import model.TaskService;
+import model.service.TaskService;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -29,14 +29,14 @@ public class TasksDipendenteController {
 
 	@FXML
 	private GridPane gridContainer;
-private Long matricola;
-	
+	private Long matricola;
+
 	TaskService service = new TaskService("");
 	List<Object[]> taskDipendente = service.findTaskByMatricola(matricola);
 
 	public void initialize() {
 		int num_task = taskDipendente.size();
-		
+
 		if (taskDipendente != null && !taskDipendente.isEmpty()) {
 			for (Object[] listtask : taskDipendente) {
 				GridPane newGrid = new GridPane();
@@ -54,7 +54,7 @@ private Long matricola;
 				// Bottone Stop
 				Button stop = new Button("Stop");
 				stop.setId("stop" + listtask[0]);
-				
+
 				stop.setOnAction(e -> stopTask(convertToLong(listtask[0])));
 				newGrid.add(stop, 1, 1);
 
@@ -74,39 +74,35 @@ private Long matricola;
 				newGrid.getStyleClass().add("taskgrid");
 				newGrid.setId("" + listtask[0]);
 			}
-		    
-		    }
-	else {
-		    System.out.println("Nessun task trovato per la matricola: " + matricola);
-		}
 
-		
+		} else {
+			System.out.println("Nessun task trovato per la matricola: " + matricola);
+		}
 
 	}
 
 	// Event Listener on Button.onAction
 
 	public void startTask(Long taskIndex) {
-		 Button button = (Button) mainContainer.lookup("#start" + taskIndex);
-		 if (button != null) {
-	            button.setDisable(true); 
-	        } else {
-	            System.out.println("Button not found with id: " + taskIndex);
-	        }
+		Button button = (Button) mainContainer.lookup("#start" + taskIndex);
+		if (button != null) {
+			button.setDisable(true);
+		} else {
+			System.out.println("Button not found with id: " + taskIndex);
+		}
 		GridPane gridPane = (GridPane) mainContainer.lookup("#" + taskIndex);
 		if (gridPane != null) {
 			Label taskLabel = (Label) gridPane.lookup("#taskLabel" + taskIndex);
 			if (taskLabel != null) {
 				String taskText = taskLabel.getText();
 				System.out.println("inizia: " + taskText);
-				
+
 				service.iniziaAttività(taskIndex);
-				
-				
-				
+
 			}
 		}
 	}
+
 	@FXML
 	public void sospendiTask(Long taskIndex) throws IOException {
 		try {
@@ -120,7 +116,8 @@ private Long matricola;
 					System.out.println("sospendi: " + taskText);
 
 					// Carica il file FXML
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("/dipendente/MotivazioneSospensione.fxml"));
+					FXMLLoader loader = new FXMLLoader(
+							getClass().getResource("/dipendente/MotivazioneSospensione.fxml"));
 					Parent root = loader.load();
 
 					// Ottieni il controller e passa il parametro
@@ -151,7 +148,7 @@ private Long matricola;
 			if (taskLabel != null) {
 				String taskText = taskLabel.getText();
 				System.out.println("stoppa: " + taskText);
-				
+
 				service.stopAttività(taskIndex);
 
 			}
@@ -164,15 +161,15 @@ private Long matricola;
 
 		stage.setScene(new Scene(root));
 	}
-	
+
 	private Long convertToLong(Object obj) {
-	    if (obj instanceof Integer) {
-	        return ((Integer) obj).longValue();  // Converti Integer a Long
-	    } else if (obj instanceof Long) {
-	        return (Long) obj;  // Restituisci direttamente il Long
-	    } else {
-	        throw new IllegalArgumentException("Expected Integer or Long, but got: " + obj.getClass());
-	    }
+		if (obj instanceof Integer) {
+			return ((Integer) obj).longValue(); // Converti Integer a Long
+		} else if (obj instanceof Long) {
+			return (Long) obj; // Restituisci direttamente il Long
+		} else {
+			throw new IllegalArgumentException("Expected Integer or Long, but got: " + obj.getClass());
+		}
 	}
 
 }

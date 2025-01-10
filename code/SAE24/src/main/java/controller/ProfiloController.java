@@ -11,8 +11,8 @@ import javafx.scene.control.Label;
 
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import model.Dipendente;
-import model.ManagerService;
+import model.entity.Dipendente;
+import model.service.ManagerService;
 
 public class ProfiloController {
 	@FXML

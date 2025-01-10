@@ -14,9 +14,9 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import model.Dipendente;
-import model.ManagerService;
-import model.Reparto;
+import model.entity.Dipendente;
+import model.entity.Reparto;
+import model.service.ManagerService;
 
 public class Main extends Application {
 

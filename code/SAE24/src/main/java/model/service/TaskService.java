@@ -1,4 +1,4 @@
-package model;
+package model.service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+
+import model.entity.Task;
 
 public class TaskService {
 	private EntityManager entityManager;
@@ -21,15 +23,11 @@ public class TaskService {
 
 	}
 
-	public String creaTask(Task t) {
-
-		this.entityManager.getTransaction().begin();
-
+	public void salvaTask(Task t) {
+		entityManager.clear();
+		entityManager.getTransaction().begin();
 		entityManager.persist(t);
 		entityManager.getTransaction().commit();
-
-		return "ok";
-
 	}
 
 	public List<Object[]> findTaskByMatricola(Long id) {

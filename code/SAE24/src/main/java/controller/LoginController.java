@@ -5,9 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import model.Dipendente;
-import model.Manager;
-import model.LoginService;
+import model.entity.Dipendente;
+import model.entity.Manager;
+import model.service.LoginService;
 
 import java.io.IOException;
 

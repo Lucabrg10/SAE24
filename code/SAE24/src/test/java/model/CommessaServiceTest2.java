@@ -4,6 +4,12 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import model.entity.Commessa;
+import model.entity.CommessaInstance;
+import model.entity.Dipendente;
+import model.entity.Reparto;
+import model.service.CommessaService;
+
 public class CommessaServiceTest2 {
 
 	@Test
@@ -17,7 +23,7 @@ public class CommessaServiceTest2 {
 		figlio2.setCommessaPadre(padre);
 		padre.addCommessaFiglia(figlio2);
 		padre.addCommessaFiglia(figlio1);
-		CommessaInstance cm = new CommessaInstance(padre, (long) 2);
+		CommessaInstance cm = new CommessaInstance(padre,1);
 		int numTask = service.assegnaTasksSistema(padre, cm);
 		assertEquals(2, numTask);
 		
