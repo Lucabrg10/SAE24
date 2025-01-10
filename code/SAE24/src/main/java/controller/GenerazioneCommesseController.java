@@ -37,6 +37,7 @@ public class GenerazioneCommesseController {
 	String nome;
 	@FXML
 	private TextField durataTF;
+	String durata;
 	@FXML
 	private TextArea descrizioneTA;
 	String descrizione;
@@ -54,26 +55,23 @@ public class GenerazioneCommesseController {
 
 	@FXML
 	public void initialize() {
-		
-		 TextFormatter<Integer> numberFilter = new TextFormatter<>(new javafx.util.converter.IntegerStringConverter(), 0, c -> {
-	            if (c.getControlNewText().matches("\\d*")) {  
-	                return c;
-	            } else {
-	                return null; 
-	            }
-	        });
 
-	        // Imposta il TextFormatter nel TextField
-	        durataTF.setTextFormatter(numberFilter);
+		TextFormatter<Integer> numberFilter = new TextFormatter<>(new javafx.util.converter.IntegerStringConverter(), 0,
+				c -> {
+					if (c.getControlNewText().matches("\\d*")) {
+						return c;
+					} else {
+						return null;
+					}
+				});
+
+		durataTF.setTextFormatter(numberFilter);
+
+		rigeneraCommesse();
 		
-		ManagerService serviceManager = new ManagerService("");
-		commesse = FXCollections.observableArrayList(serviceManager.getAllCommesse());
 		comboReparto.getItems().addAll(FXCollections.observableArrayList(Reparto.values()));
-		comboPadre.getItems().addAll(commesse);
-
-		comboPadre.setOnAction(event -> {
-			padre = comboPadre.getSelectionModel().getSelectedItem();
-		});
+		
+		
 		comboReparto.setOnAction(event -> {
 			repartoSelezionato = comboReparto.getSelectionModel().getSelectedItem();
 		});
@@ -81,14 +79,24 @@ public class GenerazioneCommesseController {
 		aggiungiButton.setOnAction(event -> {
 			nome = nomeCommessaTF.getText();
 			descrizione = descrizioneTA.getText();
+			durata = durataTF.getText();
 
 			if (nome.isEmpty() || descrizione.isEmpty() || repartoSelezionato == null) {
 				labelErr.setText("Errore: tutti i campi devono essere compilati.");
 				return;
 			}
-			service.addCommessa(nome, descrizione, "0", repartoSelezionato, padre);
-			commesse = FXCollections.observableArrayList(serviceManager.getAllCommesse());
+			service.addCommessa(nome, descrizione,durata, repartoSelezionato, padre);
 			labelErr.setText("Commessa aggiunta");
+			rigeneraCommesse();
+		});
+	}
+	
+	public void rigeneraCommesse() {
+		ManagerService serviceManager = new ManagerService("");
+		commesse = FXCollections.observableArrayList(serviceManager.getAllCommesse());
+		comboPadre.getItems().addAll(commesse);
+		comboPadre.setOnAction(event -> {
+			padre = comboPadre.getSelectionModel().getSelectedItem();
 		});
 	}
 

@@ -11,13 +11,7 @@ public class Commessa {
     private Long id;
     private String nome;
     private String descrizione;
-    public String getDescrizione() {
-		return descrizione;
-	}
-
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
-	}
+   
 	@Enumerated(EnumType.STRING)
 	private Reparto reparto;
     private String tempoStimato;
@@ -98,7 +92,13 @@ public class Commessa {
     public void removeCommessaFiglia(Commessa commessaFiglia) {
         commesseFiglie.remove(commessaFiglia);
     }
+    public String getDescrizione() {
+		return descrizione;
+	}
 
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
     @Override
     public String toString() {
         return nome;

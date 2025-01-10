@@ -142,7 +142,6 @@ public class CommessaService {
 	
 	public void completaTask(TaskDipendente t) {
 		
-		t.setStatus("COMPLETATA");
 		Commessa commessaPadre = t.getTask().getCommessa().getCommessaPadre();
 		if(commessaPadre!=null) {
 			if(statusFigli(commessaPadre, t.getTask().getCommessaInstance().getId())) {
@@ -176,19 +175,16 @@ public class CommessaService {
 	}
 
 	public List<TaskDipendente> tasksAssegnate(Task t) {
-        try {
+       
             String query = "SELECT td FROM TaskDipendente td WHERE td.task = :task";
             return entityManager.createQuery(query, TaskDipendente.class)
                      .setParameter("task", t)
                      .getResultList();
-        } finally {
-        	entityManager.close();
-        }
-    }
+	}
 		
 	private Task getTask(Commessa commessa, Long iteratore) {
 	    try {
-	        String jpql = "SELECT t FROM Task t WHERE t.comessa = :commessa AND t.iteratore = :iteratore";
+	        String jpql = "SELECT t FROM Task t WHERE t.comessa = :commessa AND t.commessaInstance = :iteratore";
 	        TypedQuery<Task> query = entityManager.createQuery(jpql, Task.class);
 	        query.setParameter("commessa", commessa);
 	        query.setParameter("iteratore", iteratore);
