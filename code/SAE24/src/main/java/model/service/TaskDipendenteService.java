@@ -119,8 +119,8 @@ public class TaskDipendenteService {
 				//em.merge(taskEntity);
 
 				transaction.commit();
-				CommessaService commessa=new CommessaService("");
-				commessa.completaTask(taskEntity);
+				CommessaService serviceCommessa=new CommessaService("");
+				serviceCommessa.completaTask(taskEntity);
 
 				System.out.println("Attività terminata correttamente per la task ID: " + task);
 			} else {
