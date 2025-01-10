@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -13,6 +14,8 @@ import javafx.event.ActionEvent;
 import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import model.entity.Commessa;
 import model.entity.CommessaInstance;
 import model.entity.Dipendente;
@@ -22,7 +25,9 @@ import model.service.CommessaService;
 import model.service.ManagerService;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -45,7 +50,7 @@ public class VisualizzaCommesseController {
 	@FXML
 	private TableColumn<Commessa, String> durataCol;
 	@FXML
-	private TableColumn<Commessa, Void>  eliminaCol;
+	private TableColumn<Commessa, Void> eliminaCol;
 	@FXML
 	private TableColumn<Commessa, String> padreIdCol;
 	private ObservableList<Commessa> commesse;
@@ -53,7 +58,7 @@ public class VisualizzaCommesseController {
 	public void initialize() {
 
 		ManagerService service = new ManagerService("");
-		commesse = FXCollections.observableArrayList(service.getAllCommesse());
+		commesse = FXCollections.observableArrayList(service.getAllCommessePrincipali());
 
 		idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 		nomeCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -61,60 +66,91 @@ public class VisualizzaCommesseController {
 		repartoCol.setCellValueFactory(new PropertyValueFactory<>("reparto"));
 		padreIdCol.setCellValueFactory(new PropertyValueFactory<>("commessaPadre"));
 		eliminaCol.setCellFactory(param -> new TableCell<Commessa, Void>() {
-	        private final Button eliminaColButton = new Button("Elimina");
+			private final Button eliminaColButton = new Button("Elimina");
 
-	        {
-	        	eliminaColButton.setOnAction(event -> {
-	                Commessa commessa = getTableView().getItems().get(getIndex());
-	                // Rimuovi dalla lista visibile
-	                CommessaService service = new CommessaService("");
-	                if(service.deleteCommessa(commessa.getId())) {
-	                	commesse.remove(commessa);
-	                }
-	                	
-	            });
-	        }
+			{
+				eliminaColButton.setOnAction(event -> {
+					Commessa commessa = getTableView().getItems().get(getIndex());
+					// Rimuovi dalla lista visibile
+					CommessaService service = new CommessaService("");
+					if (service.deleteCommessa(commessa.getId())) {
+						commesse.remove(commessa);
+					}
 
-	        @Override
-	        public void updateItem(Void item, boolean empty) {
-	            super.updateItem(item, empty);
-	            if (empty) {
-	                setGraphic(null);
-	            } else {
-	                setGraphic(eliminaColButton);
-	            }
-	        }
-	    });
-		
+				});
+			}
+
+			@Override
+			public void updateItem(Void item, boolean empty) {
+				super.updateItem(item, empty);
+				if (empty) {
+					setGraphic(null);
+				} else {
+					setGraphic(eliminaColButton);
+				}
+			}
+		});
+
 		tableViewCommesse.setItems(commesse);
 	}
 
 	@FXML
 	public void assegnaCommessa(ActionEvent event) {
-		 Commessa selectedItem = tableViewCommesse.getSelectionModel().getSelectedItem();
-         if (selectedItem != null) {
-            //devi implemntare Instance come static per contare quante instanze
-        	 CommessaService service = new CommessaService("");
-        	 CommessaInstanceService serviceInstance = new CommessaInstanceService("");
-        	 CommessaInstance cm = serviceInstance.creaNewCommessaInstance(selectedItem);
-        	
-        	 serviceInstance.salvaCommessaInstance(cm);
-        	 service.assegnaTasksSistema(selectedItem,cm);
-        	 
-        	 
-        	 
-         }
+		Commessa selectedItem = tableViewCommesse.getSelectionModel().getSelectedItem();
+		if (selectedItem != null) {
+			// devi implemntare Instance come static per contare quante instanze
+			CommessaService service = new CommessaService("");
+			CommessaInstanceService serviceInstance = new CommessaInstanceService("");
+			CommessaInstance cm = serviceInstance.creaNewCommessaInstance(selectedItem);
+
+			serviceInstance.salvaCommessaInstance(cm);
+			service.assegnaTasksSistema(selectedItem, cm);
+
+		}
 	}
-	
+
+	private void showSottoCommesse(Commessa selectedItem) {
+		if (selectedItem != null) {
+
+			try {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/manager/SottoCommesseView.fxml"));
+				Scene scene = new Scene(loader.load());
+
+				SottoCommesseViewController controller = loader.getController();
+				controller.show(selectedItem);
+				Stage stage = new Stage();
+				stage.setTitle("Sotto-Commesse");
+				stage.initModality(Modality.APPLICATION_MODAL); // Imposta come pop-up modale
+				stage.setScene(scene);
+				stage.showAndWait();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@FXML
+	public void vediSottoCommesse(ActionEvent event) {
+		Commessa selectedItem = tableViewCommesse.getSelectionModel().getSelectedItem();
+		showSottoCommesse(selectedItem);
+	}
+
+	@FXML
+	public void handleRowDoubleClick(MouseEvent mouseEvent) {
+		if (mouseEvent.getClickCount() == 2) {
+			Commessa selectedItem = tableViewCommesse.getSelectionModel().getSelectedItem();
+			showSottoCommesse(selectedItem);
+		}
+	}
+
 	@FXML
 	public void modificaCommessa(ActionEvent event) {
-		 Commessa selectedItem = tableViewCommesse.getSelectionModel().getSelectedItem();
-         if (selectedItem != null) {
-             System.out.println("Modifica: " + selectedItem);
-         }
+		Commessa selectedItem = tableViewCommesse.getSelectionModel().getSelectedItem();
+		if (selectedItem != null) {
+			System.out.println("Modifica: " + selectedItem);
+		}
 	}
-	
-	
+
 	@FXML
 	public void switchToInserimento(ActionEvent event) throws IOException {
 

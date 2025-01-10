@@ -11,11 +11,11 @@ import model.entity.Dipendente;
 import model.entity.Manager;
 import model.entity.Reparto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ManagerService extends DipendenteService {
 
-	
 	public ManagerService(String utilizzo) {
 		super(utilizzo);
 	}
@@ -26,15 +26,16 @@ public class ManagerService extends DipendenteService {
 	 * @param name Nome del dipendente.
 	 */
 
-	public String addDipendente(String nome, String cognome, String matricola, Reparto reparto) throws IllegalStateException{
+	public String addDipendente(String nome, String cognome, String matricola, Reparto reparto)
+			throws IllegalStateException {
 
-		Dipendente dipendente=null;
-		if(reparto.toString().equals("MANAGER")) {
+		Dipendente dipendente = null;
+		if (reparto.toString().equals("MANAGER")) {
 			dipendente = new Manager();
-		}else {
+		} else {
 			dipendente = new Dipendente();
 		}
-		 
+
 		dipendente.setNome(nome);
 		dipendente.setCognome(cognome);
 		dipendente.setMatricola(matricola);
@@ -45,14 +46,14 @@ public class ManagerService extends DipendenteService {
 		try {
 			entityManager.persist(dipendente);
 			entityManager.getTransaction().commit();
-        } catch (PersistenceException e) {
-        	if (entityManager.getTransaction().isActive()) {
-        		entityManager.getTransaction().rollback();  // Fai il rollback in caso di errore
-            }
-        	
-           return("Errore: la matricola non è univoca o si è verificato un altro errore.");
-            
-        }
+		} catch (PersistenceException e) {
+			if (entityManager.getTransaction().isActive()) {
+				entityManager.getTransaction().rollback(); // Fai il rollback in caso di errore
+			}
+
+			return ("Errore: la matricola non è univoca o si è verificato un altro errore.");
+
+		}
 		return null;
 	}
 
@@ -65,42 +66,62 @@ public class ManagerService extends DipendenteService {
 		TypedQuery<Dipendente> query = entityManager.createQuery("SELECT e FROM Dipendente e", Dipendente.class);
 		return query.getResultList();
 	}
+
 	public List<Commessa> getAllCommesse() {
 		TypedQuery<Commessa> query = entityManager.createQuery("SELECT e FROM Commessa e", Commessa.class);
 		return query.getResultList();
 	}
+
 	public List<Commessa> getAllCommessePrincipali() {
-		TypedQuery<Commessa> query = entityManager.createQuery("SELECT e FROM Commessa e WHERE e.commessaPadre IS NULL", Commessa.class);
+		TypedQuery<Commessa> query = entityManager.createQuery("SELECT e FROM Commessa e WHERE e.commessaPadre IS NULL",
+				Commessa.class);
 		return query.getResultList();
 	}
-	 public void deleteDipendente(Long long1) {
-	        // Inizia una transazione
-	      
-	        try {
-	        	entityManager.getTransaction().begin();
 
-	            // Trova il Dipendente in base all'ID
-	            Dipendente dipendente = entityManager.find(Dipendente.class, long1);
-	            if (dipendente != null) {
-	                // Rimuovi il dipendente dal database
-	            	entityManager.remove(dipendente);
-	                System.out.println("Dipendente con ID " + long1 + " eliminato.");
-	            } else {
-	                System.out.println("Dipendente non trovato.");
-	            }
+	public void deleteDipendente(Long long1) {
+		// Inizia una transazione
 
-	            // Completare la transazione
-	            entityManager.getTransaction().commit();
-	        } catch (Exception e) {
-	            // Se c'è un errore, fare il rollback
-	            if (entityManager.getTransaction().isActive()) {
-	            	entityManager.getTransaction().rollback();
-	            }
-	            e.printStackTrace();
-	        } finally {
-	        	entityManager.close();  // Chiudere l'EntityManager
-	        }
-	    }
-	
+		try {
+			entityManager.getTransaction().begin();
 
+			// Trova il Dipendente in base all'ID
+			Dipendente dipendente = entityManager.find(Dipendente.class, long1);
+			if (dipendente != null) {
+				// Rimuovi il dipendente dal database
+				entityManager.remove(dipendente);
+				System.out.println("Dipendente con ID " + long1 + " eliminato.");
+			} else {
+				System.out.println("Dipendente non trovato.");
+			}
+
+			// Completare la transazione
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			// Se c'è un errore, fare il rollback
+			if (entityManager.getTransaction().isActive()) {
+				entityManager.getTransaction().rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			entityManager.close(); // Chiudere l'EntityManager
+		}
+	}
+
+	public List<Commessa> getListOfSubCommesse(Commessa selectedItem) {
+		List<Commessa> result = new ArrayList<>();
+		fetchSubCommesseRecursive(selectedItem, result);
+		return result;
+	}
+
+	private void fetchSubCommesseRecursive(Commessa parent, List<Commessa> result) {
+		String jpql = "SELECT c FROM Commessa c WHERE c.commessaPadre = :parent";
+		TypedQuery<Commessa> query = entityManager.createQuery(jpql, Commessa.class);
+		query.setParameter("parent", parent);
+
+		List<Commessa> subCommesse = query.getResultList();
+		for (Commessa subCommessa : subCommesse) {
+			result.add(subCommessa); // Aggiunge la sottocommessa alla lista
+			fetchSubCommesseRecursive(subCommessa, result); // Chiama il metodo ricorsivamente
+		}
+	}
 }
