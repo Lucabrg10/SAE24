@@ -107,4 +107,10 @@
 	-fx-font-family: "Calibri Light";
 	-fx-font-size: 16;
 }
+.labelInfo{
+	-fx-font-size: 12;
+	-fx-text-fill: black;
+	-fx-font-style: italic;
+	-fx-font-family: "Calibri Light";
+}
 

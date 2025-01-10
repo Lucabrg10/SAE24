@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="645.0" prefWidth="1153.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SottoCommesseViewController">
+   <children>
+      <VBox fx:id="mainContainer" layoutX="30.0" layoutY="84.0" prefHeight="551.0" prefWidth="1084.0">
+         <children>
+            <TableView fx:id="tableViewCommesse" prefHeight="491.0" prefWidth="1066.0">
+               <columns>
+                  <TableColumn fx:id="idCol" prefWidth="100.00002366304398" text="ID" />
+                  <TableColumn fx:id="nomeCol" prefWidth="205.6000213623047" text="NOME" />
+                  <TableColumn fx:id="descrizioneCol" prefWidth="276.7999267578125" text="DESCRIZIONE" />
+                  <TableColumn fx:id="repartoCol" prefWidth="167.199951171875" text="REPARTO" />
+                  <TableColumn fx:id="durataCol" prefWidth="109.5999755859375" text="DURATA" />
+                  <TableColumn fx:id="padreIdCol" prefWidth="129.5999755859375" text="Commessa padre" />
+                  <TableColumn fx:id="eliminaCol" prefWidth="162.4000244140625" />
+               </columns>
+            </TableView>
+         </children>
+      </VBox>
+      <Label fx:id="commessaPrincipaleLabel" layoutX="40.0" layoutY="35.0">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
