@@ -3,11 +3,15 @@
     -fx-text-fill: black;
     -fx-font-family: "Calibri Light";
 }
+
+/* Etichetta di errore */
 .labelErr {
     -fx-font-size: 12px;
     -fx-text-fill: red;
     -fx-font-family: "Calibri Light";
 }
+
+/* Etichetta del titolo */
 #titleLabel {
     -fx-font-size: 30px;
     -fx-text-fill: black;
@@ -24,6 +28,8 @@
     -fx-background-color: #f8f9fa;
     -fx-background-radius: 8px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 4, 0.5, 0, 2);
+    -fx-vgap: 15px; /* Distanza verticale tra gli elementi */
+    -fx-hgap: 15px; /* Distanza orizzontale tra gli elementi */
 }
 
 /* Etichetta del task */
@@ -34,7 +40,7 @@
     -fx-padding: 0 0 10px 0;
 }
 
-/* Stile generale per i bottoni */
+/* Stile generale per i bottoni all'interno della taskgrid */
 .taskgrid button {
     -fx-font-size: 14px;
     -fx-font-weight: bold;
@@ -73,9 +79,29 @@
 #sospendi:hover {
     -fx-background-color: #e0a800; /* Giallo più scuro */
 }
+.start-button {
+    -fx-border-color: #28a745; /* Verde */
+    -fx-padding: 5px 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-font-size: 14px;
+}
 
-/* Stile specifico per distanziamento nei bottoni */
-.taskgrid {
-    -fx-vgap: 15px; /* Distanza verticale tra elementi */
-    -fx-hgap: 15px; /* Distanza orizzontale tra elementi */
+/* Stile per i bottoni Stop */
+.stop-button {
+    -fx-border-color: #dc3545; /* Rosso */
+   
+    -fx-padding: 5px 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-font-size: 14px;
+}
+
+/* Stile per i bottoni Sospendi */
+.sospendi-button {
+    -fx-border-color: #ffc107; /* Giallo */
+    -fx-padding: 5px 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-font-size: 14px;
 }
