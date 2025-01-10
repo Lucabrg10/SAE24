@@ -113,7 +113,7 @@ public class CommessaService {
 			}
 			e.printStackTrace();
 		} finally {
-			entityManager.close();
+		//	entityManager.close();
 		}
 		return false;
 	}
@@ -142,20 +142,25 @@ public class CommessaService {
 	
 	public void completaTask(TaskDipendente t) {
 		
-		t.setStatus("COMPLETATA");
+		TaskDipendenteService servicedipendente=new TaskDipendenteService("");
+		TaskService service= new TaskService("");
+		
+		//t.setStatus("COMPLETATA");
 		Commessa commessaPadre = t.getTask().getCommessa().getCommessaPadre();
 		if(commessaPadre!=null) {
-			if(statusFigli(commessaPadre, t.getTask().getCommessaInstance().getId())) {
+			if(statusFigli(commessaPadre, t.getTask().getCommessaInstance())) {
 				Task newTask = new Task(commessaPadre,t.getTask().getCommessaInstance());
+				service.salvaTask(newTask);
 				Dipendente d = scegliDipendente(commessaPadre.getReparto());
 				TaskDipendente td = new TaskDipendente(newTask, d);
+				servicedipendente.salvaTaskDipendente(td);
 			}
 			
 		}
 		
 	}
 	
-	public boolean statusFigli(Commessa padre, Long idInstance) {
+	public boolean statusFigli(Commessa padre, CommessaInstance idInstance) {
 		
 		for (Commessa c : padre.getCommesseFiglie()) {
 			if(c.getCommesseFiglie().isEmpty()) {
@@ -182,13 +187,13 @@ public class CommessaService {
                      .setParameter("task", t)
                      .getResultList();
         } finally {
-        	entityManager.close();
+        	//entityManager.close();
         }
     }
 		
-	private Task getTask(Commessa commessa, Long iteratore) {
+	private Task getTask(Commessa commessa, CommessaInstance iteratore) {
 	    try {
-	        String jpql = "SELECT t FROM Task t WHERE t.comessa = :commessa AND t.iteratore = :iteratore";
+	        String jpql = "SELECT t FROM Task t WHERE t.commessa = :commessa AND t.commessaInstance = :iteratore";
 	        TypedQuery<Task> query = entityManager.createQuery(jpql, Task.class);
 	        query.setParameter("commessa", commessa);
 	        query.setParameter("iteratore", iteratore);
@@ -202,11 +207,14 @@ public class CommessaService {
     
         Dipendente dipendente = null;
         try {
+        	entityManager.clear();
+        	
             TypedQuery<Dipendente> query = entityManager.createQuery(
                 "SELECT d FROM Dipendente d WHERE d.reparto = :reparto ORDER BY d.id ASC", Dipendente.class);
             query.setParameter("reparto", reparto);
 
             dipendente = query.setMaxResults(1).getSingleResult();
+      
         } catch (Exception e) {
             System.err.println("Errore durante la selezione del dipendente: " + e.getMessage());
         }
