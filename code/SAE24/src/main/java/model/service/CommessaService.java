@@ -188,9 +188,7 @@ public class CommessaService {
                      .setParameter("task", t)
                      .getResultList();
 
-        } finally {
-        	//entityManager.close();
-        }
+       
     }
 		
 	private Task getTask(Commessa commessa, CommessaInstance iteratore) {
