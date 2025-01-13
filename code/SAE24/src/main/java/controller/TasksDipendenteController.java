@@ -25,6 +25,8 @@ import java.awt.Color;
 import java.io.IOException;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
 public class TasksDipendenteController {
@@ -36,7 +38,7 @@ public class TasksDipendenteController {
 	private Dipendente dipendente;
 
 	TaskDipendenteService service = new TaskDipendenteService("");
-	List<TaskDipendente> taskDipendente;
+	ObservableList<TaskDipendente> taskDipendente;
 
 	public void show() {
 	    taskDipendente = service.findTasksDipendente(dipendente);
@@ -91,7 +93,8 @@ public class TasksDipendenteController {
 	    }
 	}
 
-	public void startTask(Long taskIndex) {
+	public void startTask(TaskDipendente task) {
+		long taskIndex = task.getId();
 		Button button = (Button) mainContainer.lookup("#start" + taskIndex);
 		if (button != null) {
 			button.setDisable(true);
@@ -112,7 +115,8 @@ public class TasksDipendenteController {
 	}
 
 	@FXML
-	public void sospendiTask(Long taskIndex) throws IOException {
+	public void sospendiTask(TaskDipendente task) throws IOException {
+		long taskIndex = task.getId();
 		try {
 			GridPane gridPane = (GridPane) mainContainer.lookup("#" + taskIndex);
 
@@ -145,8 +149,8 @@ public class TasksDipendenteController {
 
 	// Event Listener on Button.onAction
 	@FXML
-	public void stopTask(Long taskIndex) {
-
+	public void stopTask(TaskDipendente task) {
+		long taskIndex = task.getId();
 		GridPane gridPane = (GridPane) mainContainer.lookup("#" + taskIndex);
 
 		if (gridPane != null) {
@@ -156,17 +160,19 @@ public class TasksDipendenteController {
 			if (taskLabel != null) {
 				String taskText = taskLabel.getText();
 				System.out.println("stoppa: " + taskText);
-
+				
 				service.stopAttività(taskIndex);
+				show();
 
 			}
 		}
 	}
 
+	
+
 	public void terminaTurno(ActionEvent event) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("/dipendente/TerminaTurno.fxml"));
 		Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-
 		stage.setScene(new Scene(root));
 	}
 

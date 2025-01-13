@@ -57,6 +57,12 @@ public class TaskDipendente {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public void setInizio(LocalDateTime inizio) {
+		this.inizio = inizio;
+	}
+	public void setFine(LocalDateTime fine) {
+		this.fine = fine;
+	}
 
     public Long getId() {
 		return id;

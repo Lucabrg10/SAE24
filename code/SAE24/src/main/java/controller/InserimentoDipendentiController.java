@@ -58,7 +58,6 @@ public class InserimentoDipendentiController {
 	
 	
 	private Reparto repartoSelezionato;
-	private ArrayList<Object> valori = new ArrayList<>();
 
 	public void SwitchToGestione() throws IOException {
 		System.out.println("sono entrato in modalità gestione personale");

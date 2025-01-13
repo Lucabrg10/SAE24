@@ -40,10 +40,11 @@ public class TaskDipendenteService {
 	        if (dipendente == null || dipendente.getId() == null) {
 	            throw new IllegalArgumentException("Il dipendente o il suo ID non può essere null.");
 	        }
-
-	        String jpql = "SELECT td FROM TaskDipendente td WHERE td.dipendente.id = :dipendenteId";
+	        String statoc="COMPLETATA";
+	        String jpql = "SELECT td FROM TaskDipendente td WHERE td.dipendente.id = :dipendenteId and td.status <> :statoc ";
 	        TypedQuery<TaskDipendente> query = em.createQuery(jpql, TaskDipendente.class);
 	        query.setParameter("dipendenteId", dipendente.getId());
+	        query.setParameter("statoc", statoc);
 
 	        return query.getResultList();
 	    }
@@ -66,6 +67,10 @@ public class TaskDipendenteService {
 			TaskDipendente taskEntity = em.find(TaskDipendente.class, task);
 
 			if (taskEntity != null) {
+		
+				taskEntity.setInizio(orarioInizio);
+				taskEntity.setStatus("IN_LAVORAZIONE");
+
 				// Merge delle modifiche
 				em.merge(taskEntity);
 
@@ -93,14 +98,13 @@ public class TaskDipendenteService {
 		EntityTransaction transaction = em.getTransaction();
 
 		try {
-			// Avvio della transazione
+		
 			transaction.begin();
 
-			// Otteniamo l'orario di inizio e la data attuale
-			LocalDateTime orarioFine = LocalDateTime.now(); // Orario di inizio attuale
-			// LocalDate data = LocalDate.now(); // Data attuale
+		
+			LocalDateTime orarioFine = LocalDateTime.now(); 
+			
 
-			// Stampiamo i parametri per il debug
 			System.out.println("task ID: " + task);
 			System.out.println("Orario fine: " + orarioFine);
 
@@ -108,16 +112,15 @@ public class TaskDipendenteService {
 			TaskDipendente taskEntity = em.find(TaskDipendente.class, task);
 
 			if (taskEntity != null) {
-				// Impostiamo i nuovi valori
-			//	taskEntity.setOrarioFine(orarioFine);
+			
+				taskEntity.setFine(orarioFine);
 				// taskEntity.setData(data);
-		//		taskEntity.setStato("Terminata");
-//
-				// Merge delle modifiche
-				em.merge(taskEntity);
+				taskEntity.setStatus("COMPLETATA");
+				//em.merge(taskEntity);
 
-				// Commit della transazione
 				transaction.commit();
+				CommessaService serviceCommessa=new CommessaService("");
+				serviceCommessa.completaTask(taskEntity);
 
 				System.out.println("Attività terminata correttamente per la task ID: " + task);
 			} else {
@@ -125,7 +128,8 @@ public class TaskDipendenteService {
 			}
 
 		} catch (RuntimeException e) {
-			// Se c'è un errore, facciamo il rollback
+			
+			
 			if (transaction.isActive()) {
 				transaction.rollback();
 			}
