@@ -13,7 +13,7 @@
          <font>
             <Font size="26.0" />
          </font></Button>
-      <VBox fx:id="mainContainer" layoutX="17.0" layoutY="38.0" prefHeight="615.0" prefWidth="1162.0">
+      <VBox fx:id="mainContainer" layoutX="17.0" layoutY="38.0" prefHeight="554.0" prefWidth="1162.0">
          <children>
             <TableView fx:id="tableView" prefHeight="625.0" prefWidth="1162.0">
               <columns>

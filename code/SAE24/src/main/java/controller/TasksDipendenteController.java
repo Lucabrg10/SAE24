@@ -18,9 +18,7 @@ import javafx.stage.Stage;
 import model.entity.Dipendente;
 import model.entity.TaskDipendente;
 import model.service.TaskDipendenteService;
-import model.service.TaskService;
 
-import java.awt.Color;
 import java.io.IOException;
 import java.util.List;
 

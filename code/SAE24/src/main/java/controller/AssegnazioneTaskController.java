@@ -36,7 +36,7 @@ public class AssegnazioneTaskController {
 	
 	public void initialize() {
 	TaskDipendenteService service = new TaskDipendenteService("");
-	tasksDipendenti=FXCollections.observableArrayList(service.retrieveListOfTasksDipendente());
+	tasksDipendenti=FXCollections.observableArrayList(service.getListOfTasksDipendente());
 		
 	System.out.println(tasksDipendenti);
 	

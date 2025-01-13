@@ -3,19 +3,21 @@ package model.service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+import model.entity.Commessa;
 import model.entity.Dipendente;
 import model.entity.Task;
 import model.entity.TaskDipendente;
 
 public class TaskDipendenteService {
 
-	protected EntityManager em ;
+	protected EntityManager em;
 
 	public TaskDipendenteService(String utilizzo) {
 		if (utilizzo.equals("test")) {
@@ -24,31 +26,41 @@ public class TaskDipendenteService {
 			this.em = Persistence.createEntityManagerFactory("dip").createEntityManager();
 		}
 	}
-	
+
 	public void salvaTaskDipendente(TaskDipendente c) {
 		em.getTransaction().begin();
 		em.persist(c);
 		em.getTransaction().commit();
 	}
-	
-	public List<TaskDipendente> retrieveListOfTasksDipendente(){
+
+	public List<TaskDipendente> getListOfTasksDipendente() {
 		em.clear();
-		  return em.createQuery("SELECT t FROM TaskDipendente t", TaskDipendente.class).getResultList();
+		return em.createQuery("SELECT t FROM TaskDipendente t", TaskDipendente.class).getResultList();
+	}
+	
+	public List<TaskDipendente> getListOfTasksDipendenteFromCommessa(Commessa commessa){
+		
+		List<TaskDipendente> allTasksDipendente = getListOfTasksDipendente(); 
+
+        return allTasksDipendente.stream()
+            .filter(taskDipendente -> taskDipendente.getTask().getCommessa().equals(commessa))
+            .filter(taskDipendente -> "COMPLETATA".equals(taskDipendente.getStatus()))
+            .collect(Collectors.toList());
 	}
 
-	 public List<TaskDipendente> findTasksDipendente(Dipendente dipendente) {
-	        if (dipendente == null || dipendente.getId() == null) {
-	            throw new IllegalArgumentException("Il dipendente o il suo ID non può essere null.");
-	        }
-	        String statoc="COMPLETATA";
-	        String jpql = "SELECT td FROM TaskDipendente td WHERE td.dipendente.id = :dipendenteId and td.status <> :statoc ";
-	        TypedQuery<TaskDipendente> query = em.createQuery(jpql, TaskDipendente.class);
-	        query.setParameter("dipendenteId", dipendente.getId());
-	        query.setParameter("statoc", statoc);
+	public List<TaskDipendente> findTasksDipendente(Dipendente dipendente) {
+		if (dipendente == null || dipendente.getId() == null) {
+			throw new IllegalArgumentException("Il dipendente o il suo ID non può essere null.");
+		}
+		String statoc = "COMPLETATA";
+		String jpql = "SELECT td FROM TaskDipendente td WHERE td.dipendente.id = :dipendenteId and td.status <> :statoc ";
+		TypedQuery<TaskDipendente> query = em.createQuery(jpql, TaskDipendente.class);
+		query.setParameter("dipendenteId", dipendente.getId());
+		query.setParameter("statoc", statoc);
 
-	        return query.getResultList();
-	    }
-	
+		return query.getResultList();
+	}
+
 	public void iniziaAttività(Long task) {
 		// Inizializzazione dell'EntityManager e della transazione
 		EntityTransaction transaction = em.getTransaction();
@@ -67,7 +79,7 @@ public class TaskDipendenteService {
 			TaskDipendente taskEntity = em.find(TaskDipendente.class, task);
 
 			if (taskEntity != null) {
-		
+
 				taskEntity.setInizio(orarioInizio);
 				taskEntity.setStatus("IN_LAVORAZIONE");
 
@@ -98,28 +110,16 @@ public class TaskDipendenteService {
 		EntityTransaction transaction = em.getTransaction();
 
 		try {
-		
 			transaction.begin();
-
-		
-			LocalDateTime orarioFine = LocalDateTime.now(); 
-			
-
+			LocalDateTime orarioFine = LocalDateTime.now();
 			System.out.println("task ID: " + task);
 			System.out.println("Orario fine: " + orarioFine);
-
-			// Otteniamo il Task dalla base di dati
 			TaskDipendente taskEntity = em.find(TaskDipendente.class, task);
-
 			if (taskEntity != null) {
-			
 				taskEntity.setFine(orarioFine);
-				// taskEntity.setData(data);
 				taskEntity.setStatus("COMPLETATA");
-				//em.merge(taskEntity);
-
 				transaction.commit();
-				CommessaService serviceCommessa=new CommessaService("");
+				CommessaService serviceCommessa = new CommessaService("");
 				serviceCommessa.completaTask(taskEntity);
 
 				System.out.println("Attività terminata correttamente per la task ID: " + task);
@@ -128,13 +128,10 @@ public class TaskDipendenteService {
 			}
 
 		} catch (RuntimeException e) {
-			
-			
+
 			if (transaction.isActive()) {
 				transaction.rollback();
 			}
-			// Stampa dell'errore
-			System.out.println("Errore durante l'inizio dell'attività: " + e.getMessage());
 			e.printStackTrace();
 		}
 	}

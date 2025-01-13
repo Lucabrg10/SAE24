@@ -41,8 +41,7 @@ public class CommessaService {
 		commessa.setNome(nome);
 		commessa.setReparto(reparto);
 		commessa.setDescrizione(desc);
-		commessa.setTempoStimato(durata);
-		commessa.setTempoCalcolato("0");
+		commessa.setTempoStimato(Long.valueOf(durata));
 		commessa.setCommessaPadre(padre);
 
 		this.entityManager.getTransaction().begin();

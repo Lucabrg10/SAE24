@@ -32,7 +32,6 @@ import model.entity.Dipendente;
 import model.entity.Reparto;
 import model.service.ManagerService;
 
-import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

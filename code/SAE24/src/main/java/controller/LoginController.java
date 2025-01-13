@@ -8,9 +8,7 @@ import javafx.stage.Window;
 import model.entity.Dipendente;
 import model.entity.Manager;
 import model.service.LoginService;
-
 import java.io.IOException;
-
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,6 +16,8 @@ import javafx.scene.control.Label;
 
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 public class LoginController {
 	
@@ -30,9 +30,7 @@ public class LoginController {
 	@FXML
 	private Label titleLabel;
 
-	// Event Listener on Button.onAction
 	@FXML
-
 	public void handleLogin(ActionEvent event) throws IOException {
 		String username = usernameField.getText();
 		String password = passwordField.getText();
@@ -68,6 +66,16 @@ public class LoginController {
 
 			errorLabel.setText("Credenziali non valide.");
 		}
+	}
+	@FXML
+	public void handleKeyPressed(KeyEvent event) {
+		 if (event.getCode().toString().equals("ENTER")) {
+             try {
+				handleLogin(null);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+         }
 	}
 }
 
