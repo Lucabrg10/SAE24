@@ -1,106 +1,115 @@
 package model.entity;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Commessa {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nome;
-    private String descrizione;
-   
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String nome;
+	private String descrizione;
+
 	@Enumerated(EnumType.STRING)
 	private Reparto reparto;
-    private String tempoStimato;
-    private String tempoCalcolato;
+	private Long tempoStimato;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "commessa_padre_id")
-    private Commessa commessaPadre;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "commessa_padre_id")
+	private Commessa commessaPadre;
 
-    @OneToMany(mappedBy = "commessaPadre", cascade =CascadeType.ALL)
-    private List<Commessa> commesseFiglie = new ArrayList<>();
+	@OneToMany(mappedBy = "commessaPadre", cascade = CascadeType.ALL)
+	private List<Commessa> commesseFiglie = new ArrayList<>();
 
-    public Commessa() {}
+	public Commessa() {
+	}
 
-    public Commessa(String nome, Reparto reparto, String tempoStimato, String tempoCalcolato) {
-        this.nome = nome;
-        this.reparto = reparto;
-        this.tempoStimato = tempoStimato;
-        this.tempoCalcolato = tempoCalcolato;
-    }
+	public Commessa(String nome, Reparto reparto, Long tempoStimato) {
+		this.nome = nome;
+		this.reparto = reparto;
+		this.tempoStimato = tempoStimato;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public Reparto getReparto() {
-        return reparto;
-    }
+	public Reparto getReparto() {
+		return reparto;
+	}
 
-    public void setReparto(Reparto reparto) {
-        this.reparto = reparto;
-    }
+	public void setReparto(Reparto reparto) {
+		this.reparto = reparto;
+	}
 
-    public String getTempoStimato() {
-        return tempoStimato;
-    }
+	public Long getTempoStimato() {
+		return tempoStimato;
+	}
 
-    public void setTempoStimato(String tempoStimato) {
-        this.tempoStimato = tempoStimato;
-    }
+	public void setTempoStimato(Long tempoStimato) {
+		this.tempoStimato = tempoStimato;
+	}
 
-    public String getTempoCalcolato() {
-        return tempoCalcolato;
-    }
+	public Commessa getCommessaPadre() {
+		return commessaPadre;
+	}
 
-    public void setTempoCalcolato(String tempoCalcolato) {
-        this.tempoCalcolato = tempoCalcolato;
-    }
+	public void setCommessaPadre(Commessa commessaPadre) {
+		this.commessaPadre = commessaPadre;
+	}
 
-    public Commessa getCommessaPadre() {
-        return commessaPadre;
-    }
+	public List<Commessa> getCommesseFiglie() {
+		return commesseFiglie;
+	}
 
-    public void setCommessaPadre(Commessa commessaPadre) {
-        this.commessaPadre = commessaPadre;
-    }
+	public void addCommessaFiglia(Commessa commessaFiglia) {
+		commesseFiglie.add(commessaFiglia);
+	}
 
-    public List<Commessa> getCommesseFiglie() {
-        return commesseFiglie;
-    }
+	public void removeCommessaFiglia(Commessa commessaFiglia) {
+		commesseFiglie.remove(commessaFiglia);
+	}
 
-    public void addCommessaFiglia(Commessa commessaFiglia) {
-        commesseFiglie.add(commessaFiglia);
-    }
-
-    public void removeCommessaFiglia(Commessa commessaFiglia) {
-        commesseFiglie.remove(commessaFiglia);
-    }
-    public String getDescrizione() {
+	public String getDescrizione() {
 		return descrizione;
 	}
 
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
-    @Override
-    public String toString() {
-        return nome;
+
+	@Override
+	public String toString() {
+		return nome;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null || getClass() != obj.getClass())
+			return false; 
+		Commessa commessa = (Commessa) obj;
+		return Objects.equals(id, commessa.id); // Confronto basato su ID
+	}
+	@Override
+    public int hashCode() {
+        return Objects.hash(id); // Calcolo dell'hash basato su ID
     }
 }

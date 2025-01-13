@@ -1,5 +1,6 @@
 package model.entity;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -67,6 +68,11 @@ public class TaskDipendente {
     public Long getId() {
 		return id;
 	}
-
+    public long getDurataInMinuti() {
+        if (inizio != null && fine != null) {
+            return Duration.between(inizio, fine).toMinutes();
+        }
+        return 0; 
+    }
 	
 }

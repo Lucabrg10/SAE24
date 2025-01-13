@@ -17,17 +17,16 @@
 				<Font size="26.0" />
 			</font>
 		</Button>
-		<VBox fx:id="mainContainer" layoutX="20.0" layoutY="71.0" prefHeight="554.0" prefWidth="1162.0">
+		<VBox fx:id="mainContainer" layoutX="20.0" layoutY="71.0" prefHeight="554.0" prefWidth="1162.0" AnchorPane.bottomAnchor="154.39999999999998" AnchorPane.leftAnchor="20.399999999999864" AnchorPane.rightAnchor="15.599999999999909" AnchorPane.topAnchor="71.0">
 			<children>
 				<TableView fx:id="tableViewCommesse" onMouseClicked="#handleRowDoubleClick" prefHeight="704.0" prefWidth="1082.0">
 					<columns>
 						<TableColumn fx:id="idCol" prefWidth="100.00002366304398" text="ID" />
-						<TableColumn fx:id="nomeCol" prefWidth="264.2666549682617" text="NOME" />
-						<TableColumn fx:id="descrizioneCol" prefWidth="252.79995727539062" text="DESCRIZIONE" />
-						<TableColumn fx:id="repartoCol" prefWidth="152.800048828125" text="REPARTO" />
-						<TableColumn fx:id="durataCol" prefWidth="110.4000244140625" text="DURATA" />
-						<TableColumn fx:id="padreIdCol" prefWidth="190.39996337890625" text="Commessa padre" />
-						<TableColumn fx:id="eliminaCol" prefWidth="168.0" />
+						<TableColumn fx:id="nomeCol" prefWidth="291.19996643066406" text="NOME" />
+						<TableColumn fx:id="descrizioneCol" prefWidth="327.2000427246094" text="DESCRIZIONE" />
+						<TableColumn fx:id="repartoCol" prefWidth="145.5999755859375" text="REPARTO" />
+						<TableColumn fx:id="durataCol" prefWidth="164.0" text="DURATA(min)" />
+						<TableColumn fx:id="eliminaCol" prefWidth="117.5999755859375" />
 					</columns>
 					<contextMenu>
 						<ContextMenu>

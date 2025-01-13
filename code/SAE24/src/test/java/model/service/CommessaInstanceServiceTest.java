@@ -16,7 +16,7 @@ public class CommessaInstanceServiceTest {
 	public void testCreaNewCommessaInstance() {
 	CommessaService service = new CommessaService("test");
 	service.addCommessa("PRova", null, null, null, null);
-	Commessa c = new Commessa("PRova",null,null,null);
+	Commessa c = new Commessa("PRova",null,null);
 	CommessaInstance cminstance = cm.creaNewCommessaInstance(c);	
 	assertNotNull(cminstance);
 		
