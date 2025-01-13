@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="443.0" prefWidth="717.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AndamentoCommesseController">
    <children>
-      <VBox layoutX="16.0" layoutY="47.0" prefHeight="554.0" prefWidth="1162.0">
+      <VBox layoutX="16.0" layoutY="47.0" prefHeight="554.0" prefWidth="686.0" AnchorPane.bottomAnchor="-158.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="47.0">
          <children>
             <TableView fx:id="tableViewAndamento" onMouseClicked="#showAndamentoCommessa" prefHeight="704.0" prefWidth="1082.0">
               <columns>

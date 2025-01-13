@@ -10,6 +10,8 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import model.entity.Commessa;
 import model.entity.Dipendente;
 import model.entity.Task;
@@ -18,19 +20,27 @@ import model.entity.TaskDipendente;
 public class TaskDipendenteService {
 
 	protected EntityManager em;
+	 private ObservableList<TaskDipendente> taskDipendenti;
 
 	public TaskDipendenteService(String utilizzo) {
 		if (utilizzo.equals("test")) {
 			this.em = Persistence.createEntityManagerFactory("dip-test").createEntityManager();
+			taskDipendenti= FXCollections.observableArrayList( getListOfTasksDipendente());
 		} else {
 			this.em = Persistence.createEntityManagerFactory("dip").createEntityManager();
+			taskDipendenti=  FXCollections.observableArrayList( getListOfTasksDipendente());
 		}
 	}
-
+	
+	public ObservableList<TaskDipendente> getTaskDipendenti() {
+        return taskDipendenti;
+    }
 	public void salvaTaskDipendente(TaskDipendente c) {
 		em.getTransaction().begin();
 		em.persist(c);
 		em.getTransaction().commit();
+		taskDipendenti.add(c);
+		System.out.println("AGgiunto");
 	}
 
 	public List<TaskDipendente> getListOfTasksDipendente() {
@@ -40,9 +50,7 @@ public class TaskDipendenteService {
 	
 	public List<TaskDipendente> getListOfTasksDipendenteFromCommessa(Commessa commessa){
 		
-		List<TaskDipendente> allTasksDipendente = getListOfTasksDipendente(); 
-
-        return allTasksDipendente.stream()
+        return taskDipendenti.stream()
             .filter(taskDipendente -> taskDipendente.getTask().getCommessa().equals(commessa))
             .filter(taskDipendente -> "COMPLETATA".equals(taskDipendente.getStatus()))
             .collect(Collectors.toList());

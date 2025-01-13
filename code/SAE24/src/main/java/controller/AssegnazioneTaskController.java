@@ -13,6 +13,7 @@ import model.entity.Task;
 import model.entity.TaskDipendente;
 import model.service.TaskDipendenteService;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.beans.property.SimpleStringProperty;
@@ -61,6 +62,24 @@ public class AssegnazioneTaskController {
 	nomeTask.setCellValueFactory(new PropertyValueFactory<>("task"));
 	dipendente.setCellValueFactory(new PropertyValueFactory<>("dipendente"));
 	statoTask.setCellValueFactory(new PropertyValueFactory<>("status"));
+	
+	tableViewTasksDipendente.setRowFactory(tv -> {
+        TableRow<TaskDipendente> row = new TableRow<>();
+        row.itemProperty().addListener((ObservableValue<? extends TaskDipendente> observable, TaskDipendente oldItem, TaskDipendente newItem) -> {
+            if (newItem != null) {
+                // Se la task è completata, coloriamo la riga di verde, altrimenti di rosso
+                if (newItem.getStatus().equals("COMPLETATA")) {
+                    row.setStyle("-fx-background-color: lightgreen;");
+                } else if(newItem.getStatus().equals("IN_LAVORAZIONE")) {
+                    row.setStyle("-fx-background-color: gold;");
+                }else {
+                	 row.setStyle("-fx-background-color: lightcoral;");
+                }
+            }
+        });
+        return row;
+    });
+	
 	
 	tableViewTasksDipendente.setItems(tasksDipendenti);
 	}

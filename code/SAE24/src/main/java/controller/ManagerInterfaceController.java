@@ -19,7 +19,7 @@ public class ManagerInterfaceController {
 	private AnchorPane contentPane; // Pannello centrale per i contenuti
 
 	private Manager manager;
-	
+
 	public void show() throws IOException {
 		visualizzaProfilo(null);
 	}
@@ -60,12 +60,16 @@ public class ManagerInterfaceController {
 	public void setManager(Manager manager) {
 		this.manager = manager;
 	}
-	
+
 	public void setContent(String path) throws IOException {
+
 		Parent root = FXMLLoader.load(getClass().getResource(path));
-		contentPane.getChildren().clear(); 
-		contentPane.getChildren().add(root); 
+		contentPane.getChildren().clear();
+		contentPane.getChildren().add(root);
+		AnchorPane.setTopAnchor(root, 0.0);
+		AnchorPane.setLeftAnchor(root, 0.0);
+		AnchorPane.setRightAnchor(root, 0.0);
+		AnchorPane.setBottomAnchor(root, 0.0);
 	}
 
 }
-

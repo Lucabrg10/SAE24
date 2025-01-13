@@ -17,7 +17,7 @@
 				<Font size="26.0" />
 			</font>
 		</Button>
-		<VBox fx:id="mainContainer" layoutX="20.0" layoutY="71.0" prefHeight="554.0" prefWidth="1162.0">
+		<VBox fx:id="mainContainer" layoutX="20.0" layoutY="71.0" prefHeight="554.0" prefWidth="1162.0" AnchorPane.bottomAnchor="154.39999999999998" AnchorPane.leftAnchor="20.399999999999864" AnchorPane.rightAnchor="15.599999999999909" AnchorPane.topAnchor="71.0">
 			<children>
 				<TableView fx:id="tableViewCommesse" onMouseClicked="#handleRowDoubleClick" prefHeight="704.0" prefWidth="1082.0">
 					<columns>

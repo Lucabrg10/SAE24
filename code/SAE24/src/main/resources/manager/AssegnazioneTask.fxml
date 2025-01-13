@@ -7,9 +7,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1198.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AssegnazioneTaskController">
    <children>
-      <VBox fx:id="vBox" layoutX="21.0" layoutY="38.0" prefHeight="554.0" prefWidth="1162.0">
+      <VBox fx:id="vBox" layoutX="21.0" layoutY="39.2" prefHeight="554.0" prefWidth="1158.0" AnchorPane.bottomAnchor="187.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="39.0">
          <children>
-            <TableView fx:id="tableViewTasksDipendente" prefHeight="647.0" prefWidth="1147.0">
+            <TableView fx:id="tableViewTasksDipendente" prefHeight="555.0" prefWidth="1155.0">
               <columns>
                 <TableColumn fx:id="instanza" prefWidth="75.0" text="Instanza" />
                 <TableColumn fx:id="commessaPrincipale" prefWidth="257.59999084472656" text="Commessa principale" />

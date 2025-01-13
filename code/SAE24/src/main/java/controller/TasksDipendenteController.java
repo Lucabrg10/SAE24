@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
@@ -36,13 +37,11 @@ public class TasksDipendenteController {
 
 	TaskDipendenteService service = new TaskDipendenteService("");
 	ObservableList<TaskDipendente> taskDipendente;
-
+	
 	public void show() {
 		mainContainer.getChildren().clear();
-		taskDipendente = FXCollections.observableArrayList(service.findTasksDipendente(dipendente));
-
-		System.out.println(taskDipendente);
 		
+		taskDipendente = FXCollections.observableArrayList(service.findTasksDipendente(dipendente));
 		if (taskDipendente != null && !taskDipendente.isEmpty()) {
 			for (TaskDipendente taskD : taskDipendente) {
 				GridPane newGrid = new GridPane();
@@ -153,15 +152,13 @@ public class TasksDipendenteController {
 			if (taskLabel != null) {
 				String taskText = taskLabel.getText();
 				System.out.println("stoppa: " + taskText);
-				
+
 				service.stopAttività(taskIndex);
 				show();
 
 			}
 		}
 	}
-
-	
 
 	public void terminaTurno(ActionEvent event) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("/dipendente/TerminaTurno.fxml"));
