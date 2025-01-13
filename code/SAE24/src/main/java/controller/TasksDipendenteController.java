@@ -2,6 +2,7 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -40,52 +41,56 @@ public class TasksDipendenteController {
 	ObservableList<TaskDipendente> taskDipendente;
 
 	public void show() {
-		mainContainer.getChildren().clear();
-		taskDipendente = FXCollections.observableArrayList(service.findTasksDipendente(dipendente));
+	    taskDipendente = service.findTasksDipendente(dipendente);
 
-		System.out.println(taskDipendente);
-		
-		if (taskDipendente != null && !taskDipendente.isEmpty()) {
-			for (TaskDipendente taskD : taskDipendente) {
-				GridPane newGrid = new GridPane();
+	    System.out.println(taskDipendente);
 
-				Label task = new Label("task " + (taskD.getTask().getCommessa().getNome()));
-				task.setId("taskLabel" + taskD.getId());
-				newGrid.add(task, 0, 0);
+	    if (taskDipendente != null && !taskDipendente.isEmpty()) {
+	        for (TaskDipendente taskD : taskDipendente) {
+	            GridPane newGrid = new GridPane();
+	            newGrid.getStyleClass().add("taskgrid");
+	          //  newGrid.setHgap(1000); // Spaziatura orizzontale
+	           // newGrid.setVgap(10); // Spaziatura verticale
+	           // newGrid.setPadding(new Insets(10)); // Padding interno
 
-				// Bottone Start
-				Button start = new Button("Start");
-				start.setId("start" + taskD.getId());
-				start.setOnAction(e -> startTask(taskD));
-				newGrid.add(start, 0, 1);
+	            // Etichetta del task
+	            Label task = new Label("Task: " + taskD.getTask().getCommessa().getNome());
+	            task.getStyleClass().add("taskLabel");
+	            newGrid.add(task, 0, 0, 3, 1); // Larga 3 colonne
 
-				// Bottone Stop
-				Button stop = new Button("Stop");
-				stop.setId("stop" + taskD.getId());
+	            // Bottone Start
+	            Button start = new Button("Start");
+	            start.setId("start" + taskD.getId());
+	            start.setOnAction(e -> startTask(convertToLong(taskD.getId())));
+	            newGrid.add(start, 0, 1);
+	            start.getStyleClass().add("start-button");
 
-				stop.setOnAction(e -> stopTask(taskD));
-				newGrid.add(stop, 1, 1);
+	            // Bottone Stop
+	            Button stop = new Button("Stop");
+	            stop.setId("stop" + taskD.getId());
+	            stop.setOnAction(e -> stopTask(convertToLong(taskD.getId())));
+	            newGrid.add(stop, 1, 1);
+	            stop.getStyleClass().add("stop-button");
 
-				// Bottone Sospendi
-				Button sospendi = new Button("Sospendi");
-				sospendi.setId("sospendi" + taskD.getId());
-				sospendi.setOnAction(e -> {
-					try {
-						sospendiTask(taskD);
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-				});
-				newGrid.add(sospendi, 2, 1);
+	            // Bottone Sospendi
+	            Button sospendi = new Button("Sospendi");
+	            sospendi.setId("sospendi" + taskD.getId());
+	            sospendi.setOnAction(e -> {
+	                try {
+	                    sospendiTask(convertToLong(taskD.getId()));
+	                } catch (IOException e1) {
+	                    e1.printStackTrace();
+	                }
+	            });
+	            newGrid.add(sospendi, 2, 1);
+	            sospendi.getStyleClass().add("sospendi-button");
 
-				mainContainer.getChildren().add(newGrid);
-				newGrid.getStyleClass().add("taskgrid");
-				newGrid.setId("" + taskD.getId());
-			}
-
-		} else {
-			System.out.println("Nessun task trovato per la matricola: " + dipendente.getMatricola());
-		}
+	            // Aggiungi il contenitore al layout principale
+	            mainContainer.getChildren().add(newGrid);
+	        }
+	    } else {
+	        System.out.println("Nessun task trovato per la matricola: " + dipendente.getMatricola());
+	    }
 	}
 
 	public void startTask(TaskDipendente task) {
