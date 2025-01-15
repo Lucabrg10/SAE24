@@ -2,6 +2,7 @@ package model.entity;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -58,13 +59,19 @@ public class TaskDipendente {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public void setInizio(LocalDateTime inizio) {
-		this.inizio = inizio;
-	}
 	public void setFine(LocalDateTime fine) {
 		this.fine = fine;
 	}
-
+	public LocalDateTime getInizio()
+	{
+		return inizio;
+		
+	}
+	public LocalDateTime getFine()
+	{
+		return fine;
+		
+	}
     public Long getId() {
 		return id;
 	}
@@ -74,5 +81,8 @@ public class TaskDipendente {
         }
         return 0; 
     }
+	public void setInizio(LocalDateTime inizio) {
+		this.inizio=inizio;
+	}
 	
 }

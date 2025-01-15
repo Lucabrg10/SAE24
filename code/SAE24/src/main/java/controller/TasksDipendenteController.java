@@ -43,9 +43,11 @@ public class TasksDipendenteController {
 		mainContainer.getChildren().clear();
 		
 		taskDipendente = FXCollections.observableArrayList(service.findTasksDipendente(dipendente));
+		//dipendente = taskDipendente.get(0).getDipendente();
 		if (taskDipendente != null && !taskDipendente.isEmpty()) {
 			for (TaskDipendente taskD : taskDipendente) {
 				GridPane newGrid = new GridPane();
+				taskD.getDipendente();
 
 				Label task = new Label("task " + (taskD.getTask().getCommessa().getNome()));
 				task.setId("taskLabel" + taskD.getId());
@@ -159,8 +161,15 @@ public class TasksDipendenteController {
 	}
 
 	public void terminaTurno(ActionEvent event) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("/dipendente/TerminaTurno.fxml"));
+		Parent root = null;
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/dipendente/TerminaTurno.fxml"));
+		root = loader.load();
+		TerminaTurnoController controller = loader.getController();	
+		System.out.println("dipendente"+dipendente.getMatricola());
+		controller.setDipendente(dipendente);
+		controller.show();
 		Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+		
 		stage.setScene(new Scene(root));
 	}
 
