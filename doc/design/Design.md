@@ -60,27 +60,23 @@ Diagramma ER (Entity-Relationship):
 
 ## 2. Vista Componenti e Connettori
 
-La seguente vista mostra i componenti principali e i connettori utilizzati per la comunicazione.
+La seguente vista mostra i componenti principali e i connettori utilizzati per la comunicazione.  
 
-Componenti Principali:
+### Componenti Principali:
 
 UI JavaFX:
-
 Presenta dati agli utenti e riceve input tramite file FXML.
 
 Controller:
-
 Gestisce l'interazione tra la UI e il backend.
 
 Service:
-
 Contiene la logica applicativa principale e la persistenza dei dati.
 
 Database Integrato:
-
 Persistenza dei dati attraverso EclipseLink.
 
-Connettori:
+### Connettori:
 
 FXML Loader: Carica i file FXML per creare l'interfaccia utente.
 
@@ -88,29 +84,37 @@ EclipseLink (JPA): Gestisce la comunicazione tra il servizio e il database.
 
 Stile architetturale: Model-View-Controller (MVC)
 
-Diagramma (componenti e connettori):
 
-
-3. Libreria Esterna con Maven
+## 3. Libreria Esterna con Maven
 
 Per il progetto, sono state integrate diverse librerie con Maven:
 
 Libreria Utilizzata: EclipseLink
-
 Scopo: Gestione della persistenza dei dati nel database.
-
 Configurazione Maven:
-
 <dependency>
     <groupId>org.eclipse.persistence</groupId>
     <artifactId>javax.persistence</artifactId>
     <version>2.2.1</version>
 </dependency>
 
-Utilizzo:
+Libreria Utilizzata: JUnit
+Scopo: Test di unità e integrazione.
+Configurazione Maven:
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.13.2</version> 
+    <scope>test</scope>
+</dependency>
 
-Configurazione delle entità (es. Dipendente e Task).
+Libreria Utilizzata: JavaFx
+Scopo: Implentare la GUI.
+Configurazione Maven:
+<dependency>
+    <groupId>org.openjfx</groupId>
+	<artifactId>javafx-controls</artifactId>
+    <version>23.0.1</version> 
+</dependency>
 
-Gestione delle query per analizzare i task assegnati e completati.
-
-
+# Design

@@ -14,8 +14,8 @@ import model.service.TaskDipendenteService;
 public class AndamentoCommessaController {
 	@FXML
 	private LineChart<String, Number> graficoAndamentoCommesse;
-	private List<TaskDipendente>taskDipendenti;
-	
+	private List<TaskDipendente> taskDipendenti;
+
 	public void show(Commessa commessa) {
 
 		TaskDipendenteService service = new TaskDipendenteService("");
@@ -23,7 +23,6 @@ public class AndamentoCommessaController {
 		XYChart.Series<String, Number> estimatedSeries = new XYChart.Series<>();
 		estimatedSeries.setName("Durata Stimata");
 
-		// Serie per la durata effettiva
 		XYChart.Series<String, Number> actualSeries = new XYChart.Series<>();
 		actualSeries.setName("Durata Effettiva");
 
@@ -34,14 +33,15 @@ public class AndamentoCommessaController {
 			estimatedSeries.getData().add(new XYChart.Data<>(String.valueOf(esecuzione), commessa.getTempoStimato()));
 
 			// Durata effettiva
-			actualSeries.getData().add(new XYChart.Data<>(String.valueOf(esecuzione), (taskDipendente.getDurataInMinuti())));
+			actualSeries.getData()
+					.add(new XYChart.Data<>(String.valueOf(esecuzione), (taskDipendente.getDurataInMinuti())));
 
 			esecuzione++;
 		}
 
 		// Pulisci il grafico e aggiungi le serie
 		graficoAndamentoCommesse.getData().clear();
-		graficoAndamentoCommesse.setTitle("Andamento commessa: "+commessa.getNome());
+		graficoAndamentoCommesse.setTitle("Andamento commessa: " + commessa.getNome());
 		graficoAndamentoCommesse.getData().addAll(estimatedSeries, actualSeries);
 	}
 
