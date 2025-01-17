@@ -3,6 +3,7 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -33,11 +34,10 @@ public class TerminaTurnoController {
     private final TerminaTurnoService service;
 
     public TerminaTurnoController() {
-        this.service = new TerminaTurnoService("dip"); // Sostituisci con il nome della tua unità di persistenza
+        this.service = new TerminaTurnoService("dip"); 
     }
 
     public void show() {
-        // Recupera i task dal servizio
         List<TaskDipendente> tasks = service.findTasksInRange(dipendente);
 
         // Verifica se ci sono risultati
@@ -46,67 +46,88 @@ public class TerminaTurnoController {
             mainContainer.getChildren().add(noTasksLabel);
             return;
         }
+   
+        GridPane mainGrid = new GridPane();
+        mainGrid.getStyleClass().add("mainGrid");
+        mainGrid.setHgap(10); 
+        mainGrid.setVgap(10); 
+        mainGrid.setPadding(new Insets(10)); 
 
-        // Cicla sui task e aggiungi le informazioni nella griglia
+        Label taskHeader = new Label("Task");
+        taskHeader.getStyleClass().add("headerLabel");
+        Label startHeader = new Label("Inizio");
+        startHeader.getStyleClass().add("headerLabel");
+        Label stopHeader = new Label("Fine");
+        stopHeader.getStyleClass().add("headerLabel");
+        Label statusHeader = new Label("Stato");
+        statusHeader.getStyleClass().add("headerLabel");
+
+      
+        mainGrid.add(taskHeader, 0, 0);
+        mainGrid.add(startHeader, 1, 0);
+        mainGrid.add(stopHeader, 2, 0);
+        mainGrid.add(statusHeader, 3, 0);
+
+        
+        int rowIndex = 1; 
         for (TaskDipendente task : tasks) {
-            GridPane newGrid = new GridPane();
-
-            // Etichetta per il nome del task
-            Label taskLabel = new Label("Task: " + task.getTask().getCommessa().getNome());
+           
+            Label taskLabel = new Label(task.getTask().getCommessa().getNome());
             taskLabel.setId("taskLabel" + task.getId());
-            newGrid.add(taskLabel, 0, 0);
+            mainGrid.add(taskLabel, 0, rowIndex);
 
-            // TextField per l'orario di inizio
+       
             TextField startTextField = new TextField(task.getInizio().toString());
             startTextField.setId("start" + task.getId());
-            newGrid.add(startTextField, 1, 0);
+            mainGrid.add(startTextField, 1, rowIndex);
 
-            // TextField per l'orario di fine
+         
             TextField stopTextField = new TextField(task.getFine().toString());
             stopTextField.setId("stop" + task.getId());
-            newGrid.add(stopTextField, 2, 0);
+            mainGrid.add(stopTextField, 2, rowIndex);
 
-            // Etichetta per lo stato
-            Label statusLabel = new Label("Stato: " + task.getStatus());
+         
+            Label statusLabel = new Label(task.getStatus());
             statusLabel.setId("status" + task.getId());
-            newGrid.add(statusLabel, 3, 0);
+            mainGrid.add(statusLabel, 3, rowIndex);
 
-            // Aggiungi la nuova griglia al contenitore principale
-            mainContainer.getChildren().add(newGrid);
-            newGrid.getStyleClass().add("taskgrid");
-            newGrid.setId("grid" + task.getId());
+       
+            rowIndex++;
         }
+
+      
+        mainContainer.getChildren().add(mainGrid);
     }
+
 
     @FXML
     public void terminaGiornata() throws IOException {
     	
         List<TaskDipendente> tasks = service.findTasksInRange(dipendente);
 
-        // Cicla sui task e raccoglie i dati dai TextField
+     
         for (TaskDipendente task : tasks) {
-            // Trova il TextField corrispondente al task (associato tramite ID)
+          
             TextField startTextField = (TextField) mainContainer.lookup("#start" + task.getId());
             TextField stopTextField = (TextField) mainContainer.lookup("#stop" + task.getId());
 
             if (startTextField != null && stopTextField != null) {
-                // Ottieni i nuovi orari dai TextField
+            
                 String inizioStr = startTextField.getText();
                 String fineStr = stopTextField.getText();
 
-                // Converte i valori di inizio e fine in oggetti LocalTime
+              
                 try {
                 	LocalDateTime inizio = LocalDateTime.parse(inizioStr);
                 	LocalDateTime fine = LocalDateTime.parse(fineStr);
 
-                    // Aggiorna il task con i nuovi valori
+                   
                     task.setInizio(inizio);
                     task.setFine(fine);
 
-                    // Chiamata al servizio per aggiornare il task nel database
+                  
                     service.aggiornaTaskDipendente(task);
                 } catch (DateTimeParseException e) {
-                    // Gestisci l'errore se i valori inseriti non sono nel formato corretto
                     System.out.println("Errore nella conversione dell'orario.");
                 }
             }

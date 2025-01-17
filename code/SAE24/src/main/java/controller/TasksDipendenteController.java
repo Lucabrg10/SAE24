@@ -43,7 +43,6 @@ public class TasksDipendenteController {
 		mainContainer.getChildren().clear();
 		
 		taskDipendente = FXCollections.observableArrayList(service.findTasksDipendente(dipendente));
-		//dipendente = taskDipendente.get(0).getDipendente();
 		if (taskDipendente != null && !taskDipendente.isEmpty()) {
 			for (TaskDipendente taskD : taskDipendente) {
 				GridPane newGrid = new GridPane();
@@ -64,6 +63,7 @@ public class TasksDipendenteController {
 				stop.setId("stop" + taskD.getId());
 
 				stop.setOnAction(e -> stopTask(taskD));
+				stop.setDisable(true);
 				newGrid.add(stop, 1, 1);
 
 				// Bottone Sospendi
@@ -76,6 +76,7 @@ public class TasksDipendenteController {
 						e1.printStackTrace();
 					}
 				});
+				sospendi.setDisable(true);
 				newGrid.add(sospendi, 2, 1);
 
 				mainContainer.getChildren().add(newGrid);
@@ -87,9 +88,18 @@ public class TasksDipendenteController {
 
 	public void startTask(TaskDipendente task) {
 		long taskIndex = task.getId();
-		Button button = (Button) mainContainer.lookup("#start" + taskIndex);
-		if (button != null) {
-			button.setDisable(true);
+		
+		Button buttonstop = (Button) mainContainer.lookup("#stop" + taskIndex);
+	//	Button buttonsospendi = (Button) mainContainer.lookup("#sospendi" + taskIndex);
+		if (buttonstop != null) {
+			for (TaskDipendente taskD : taskDipendente)
+			{
+				Button button = (Button) mainContainer.lookup("#start" + taskD.getId());
+				button.setDisable(true);
+			}
+			
+			buttonstop.setDisable(false);
+			//buttonsospendi.setDisable(false);
 		} else {
 			System.out.println("Button not found with id: " + taskIndex);
 		}
@@ -101,7 +111,6 @@ public class TasksDipendenteController {
 				System.out.println("inizia: " + taskText);
 
 				service.iniziaAttività(taskIndex);
-
 			}
 		}
 	}
@@ -119,16 +128,15 @@ public class TasksDipendenteController {
 					String taskText = taskLabel.getText();
 					System.out.println("sospendi: " + taskText);
 
-					// Carica il file FXML
 					FXMLLoader loader = new FXMLLoader(
 							getClass().getResource("/dipendente/MotivazioneSospensione.fxml"));
 					Parent root = loader.load();
 
-					// Ottieni il controller e passa il parametro
+				
 					MotivazioneSospensioneController controller = loader.getController();
 					controller.setTaskText(taskText);
 
-					// Cambia scena
+				
 					Stage stage = (Stage) mainContainer.getScene().getWindow();
 					stage.setScene(new Scene(root));
 				}
@@ -139,7 +147,6 @@ public class TasksDipendenteController {
 
 	}
 
-	// Event Listener on Button.onAction
 	@FXML
 	public void stopTask(TaskDipendente task) {
 		long taskIndex = task.getId();
