@@ -3,29 +3,17 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.entity.Dipendente;
-import model.entity.Manager;
 import model.entity.TaskDipendente;
 import model.service.TaskDipendenteService;
-import model.service.TaskService;
-
-import java.awt.Color;
 import java.io.IOException;
-import java.util.List;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -102,8 +90,6 @@ public class TasksDipendenteController {
 				newGrid.setId("" + taskD.getId());
 			}
 
-		} else {
-			System.out.println("Nessun task trovato per la matricola: " + dipendente.getMatricola());
 		}
 		
 		 if (id_in_lav != -1) 
@@ -129,6 +115,10 @@ public class TasksDipendenteController {
 
 	public void startTask(TaskDipendente task) {
 		long taskIndex = task.getId();
+		Button button = (Button) mainContainer.lookup("#start" + taskIndex);
+		if (button != null) {
+			button.setDisable(true);
+		} 
 		
 		Button buttonstop = (Button) mainContainer.lookup("#stop" + taskIndex);
 	//	Button buttonsospendi = (Button) mainContainer.lookup("#sospendi" + taskIndex);
@@ -148,9 +138,6 @@ public class TasksDipendenteController {
 		if (gridPane != null) {
 			Label taskLabel = (Label) gridPane.lookup("#taskLabel" + taskIndex);
 			if (taskLabel != null) {
-				String taskText = taskLabel.getText();
-				System.out.println("inizia: " + taskText);
-
 				service.iniziaAttività(taskIndex);
 			}
 		}
@@ -172,6 +159,7 @@ public class TasksDipendenteController {
 
 				if (taskLabel != null) {
 					String taskText = taskLabel.getText();
+
 					System.out.println("sospendi: " + taskText);
 
 					FXMLLoader loader = new FXMLLoader(
@@ -182,7 +170,6 @@ public class TasksDipendenteController {
 					MotivazioneSospensioneController controller = loader.getController();
 					controller.setTaskText(taskText);
 
-				
 					Stage stage = (Stage) mainContainer.getScene().getWindow();
 					stage.setScene(new Scene(root));
 				}
@@ -197,15 +184,9 @@ public class TasksDipendenteController {
 	public void stopTask(TaskDipendente task) {
 		long taskIndex = task.getId();
 		GridPane gridPane = (GridPane) mainContainer.lookup("#" + taskIndex);
-
 		if (gridPane != null) {
-
 			Label taskLabel = (Label) gridPane.lookup("#taskLabel" + taskIndex);
-
 			if (taskLabel != null) {
-				String taskText = taskLabel.getText();
-				System.out.println("stoppa: " + taskText);
-
 				service.stopAttività(taskIndex);
 				show();
 
