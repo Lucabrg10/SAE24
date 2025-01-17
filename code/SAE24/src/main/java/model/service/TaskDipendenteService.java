@@ -35,6 +35,7 @@ public class TaskDipendenteService {
 	public ObservableList<TaskDipendente> getTaskDipendenti() {
         return taskDipendenti;
     }
+	
 	public void salvaTaskDipendente(TaskDipendente c) {
 		em.getTransaction().begin();
 		em.persist(c);

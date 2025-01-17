@@ -48,10 +48,14 @@ public class TasksDipendenteController {
 		if (taskDipendente != null && !taskDipendente.isEmpty()) {
 			for (TaskDipendente taskD : taskDipendente) {
 				GridPane newGrid = new GridPane();
+        
+				taskD.getDipendente();//verifica
+        
 				newGrid.getStyleClass().add("taskgrid");
-				newGrid.setHgap(1000); // Spaziatura orizzontale
-				newGrid.setVgap(10); // Spaziatura verticale
-				newGrid.setPadding(new Insets(10)); // Padding interno
+				newGrid.setHgap(1000); 
+				newGrid.setVgap(10); 
+				newGrid.setPadding(new Insets(10)); 
+
 
 				Label task = new Label("task " + (taskD.getTask().getCommessa().getNome()));
 				task.getStyleClass().add("taskLabel");
@@ -70,6 +74,7 @@ public class TasksDipendenteController {
 				stop.setId("stop" + taskD.getId());
 
 				stop.setOnAction(e -> stopTask(taskD));
+				stop.setDisable(true);
 				newGrid.add(stop, 1, 1);
 				stop.getStyleClass().add("stop-button");
 
@@ -83,6 +88,7 @@ public class TasksDipendenteController {
 						e1.printStackTrace();
 					}
 				});
+				sospendi.setDisable(true);
 				newGrid.add(sospendi, 2, 1);
 				sospendi.getStyleClass().add("sospendi-button");
 
@@ -98,9 +104,18 @@ public class TasksDipendenteController {
 
 	public void startTask(TaskDipendente task) {
 		long taskIndex = task.getId();
-		Button button = (Button) mainContainer.lookup("#start" + taskIndex);
-		if (button != null) {
-			button.setDisable(true);
+		
+		Button buttonstop = (Button) mainContainer.lookup("#stop" + taskIndex);
+	//	Button buttonsospendi = (Button) mainContainer.lookup("#sospendi" + taskIndex);
+		if (buttonstop != null) {
+			for (TaskDipendente taskD : taskDipendente)
+			{
+				Button button = (Button) mainContainer.lookup("#start" + taskD.getId());
+				button.setDisable(true);
+			}
+			
+			buttonstop.setDisable(false);
+			//buttonsospendi.setDisable(false);
 		} else {
 			System.out.println("Button not found with id: " + taskIndex);
 		}
@@ -112,7 +127,6 @@ public class TasksDipendenteController {
 				System.out.println("inizia: " + taskText);
 
 				service.iniziaAttività(taskIndex);
-
 			}
 		}
 	}
@@ -135,16 +149,15 @@ public class TasksDipendenteController {
 					String taskText = taskLabel.getText();
 					System.out.println("sospendi: " + taskText);
 
-					// Carica il file FXML
 					FXMLLoader loader = new FXMLLoader(
 							getClass().getResource("/dipendente/MotivazioneSospensione.fxml"));
 					Parent root = loader.load();
 
-					// Ottieni il controller e passa il parametro
+				
 					MotivazioneSospensioneController controller = loader.getController();
 					controller.setTaskText(taskText);
 
-					// Cambia scena
+				
 					Stage stage = (Stage) mainContainer.getScene().getWindow();
 					stage.setScene(new Scene(root));
 				}
@@ -155,7 +168,6 @@ public class TasksDipendenteController {
 
 	}
 
-	// Event Listener on Button.onAction
 	@FXML
 	public void stopTask(TaskDipendente task) {
 		long taskIndex = task.getId();
@@ -178,14 +190,16 @@ public class TasksDipendenteController {
 
 	public void terminaTurno(ActionEvent event) throws IOException {
 
-		/*
-		 * Parent root = null; FXMLLoader loader = new
-		 * FXMLLoader(getClass().getResource("/dipendente/TerminaTurno.fxml")); root =
-		 * loader.load(); TerminaTurnocontroller controller = loader.getController();
-		 * controller.setManager((Manager) user); controller.show(); Stage stage =
-		 * (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-		 * stage.setScene(new Scene(root));
-		 */
+		Parent root = null;
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/dipendente/TerminaTurno.fxml"));
+		root = loader.load();
+		TerminaTurnoController controller = loader.getController();	
+		System.out.println("dipendente"+dipendente.getMatricola());
+		controller.setDipendente(dipendente);
+		controller.show();
+		Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+		
+		stage.setScene(new Scene(root));
 
 	}
 
