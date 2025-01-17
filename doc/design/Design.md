@@ -30,33 +30,25 @@ La vista logica descrive i principali moduli e la loro interazione. Il sistema s
 
 Diagramma UML:
 
-![Vista Logica](../uml/ComponentDiagram.PNG)
+![Vista Logica](../uml/DiagrammaComponenti.PNG)
 
 ### 1.2 Vista dei Dati
 
 La vista dei dati descrive la struttura del database e le relazioni principali tra le entità.
 
 Entità Principali:
-
     Dipendente:
-    Attributi: id, nome, cognome, reparto.
 ------------------
-    Manager:    
-    Attributi:
+    Manager
 ------------------  
-    Commessa:
-    Attributi:
+    Commessa
 ------------------
-    CommessaInstance:
-    Attributi:
+    CommessaInstance
 ------------------
-    Task:
-    Attributi:
+    Task
 ------------------
-    TaskDipendente:
-    Attributi: id, status, dipendente_id, task_id.
+    TaskDipendente
 ------------------
-Diagramma ER (Entity-Relationship):
 
 ## 2. Vista Componenti e Connettori
 
@@ -80,6 +72,8 @@ Persistenza dei dati attraverso EclipseLink.
 
 FXML Loader: Carica i file FXML per creare l'interfaccia utente.
 
+Chiamate di procedure: Chiamare i metodi di altre classi.
+
 EclipseLink (JPA): Gestisce la comunicazione tra il servizio e il database.
 
 Stile architetturale: Model-View-Controller (MVC)
@@ -99,22 +93,42 @@ Configurazione Maven:
 </dependency>
 
 Libreria Utilizzata: JUnit
+
 Scopo: Test di unità e integrazione.
+
 Configurazione Maven:
+```xml
 <dependency>
     <groupId>junit</groupId>
     <artifactId>junit</artifactId>
     <version>4.13.2</version> 
     <scope>test</scope>
 </dependency>
-
+```
 Libreria Utilizzata: JavaFx
+
 Scopo: Implentare la GUI.
+
 Configurazione Maven:
+```xml
 <dependency>
     <groupId>org.openjfx</groupId>
 	<artifactId>javafx-controls</artifactId>
     <version>23.0.1</version> 
 </dependency>
-
+```
 # Design
+
+## 1. Diagramma delle classi
+
+## 2. Composizione (STAN4J)
+![Diagramma delle dipendenze](../uml/DiagrammaDipendenze.PNG)
+## 3. Design pattern
+
+1) Abstraction - Occurrence Pattern
+    Utilizzato per instanziare Commessa: nel programma è necessario avere una Commessa unica che però può essere assegnata più volta così abbiamo realizzato la classe CommessaInstance che contiene una Commessa e il suo numero di istanza.
+
+
+
+2) General Hierarchy Pattern
+    Utilizzato per gestire le Commesse figlie e padri, ovvero una Commessa può essere padre di tante Commesse ma a sua volta anche figlia di una Commessa
