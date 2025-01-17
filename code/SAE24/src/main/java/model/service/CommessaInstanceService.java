@@ -42,14 +42,11 @@ public class CommessaInstanceService {
 			System.out.println("Nessuna CommessaInstance trovata per questa commessa.");
 		}
 
-		// Step 3: Crea una nuova CommessaInstance e incrementa il valore di 'instance'
-		
 		CommessaInstance newCommessaInstance;
 		if (lastCommessaInstance != null) {
 			newCommessaInstance = new CommessaInstance(commessa,lastCommessaInstance.getInstance() + 1);
 		} else {
-			// Se è la prima CommessaInstance, inizializza l'instance a 1
-			newCommessaInstance = new CommessaInstance(commessa,(long)1);
+			newCommessaInstance = new CommessaInstance(commessa,1);
 		}
 
 		return newCommessaInstance;
