@@ -17,14 +17,16 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.entity.Dipendente;
+import model.entity.Manager;
 import model.entity.TaskDipendente;
 import model.service.TaskDipendenteService;
+import model.service.TaskService;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.util.List;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
@@ -38,17 +40,25 @@ public class TasksDipendenteController {
 
 	TaskDipendenteService service = new TaskDipendenteService("");
 	ObservableList<TaskDipendente> taskDipendente;
-	
+
 	public void show() {
 		mainContainer.getChildren().clear();
-		
+
 		taskDipendente = FXCollections.observableArrayList(service.findTasksDipendente(dipendente));
 		if (taskDipendente != null && !taskDipendente.isEmpty()) {
 			for (TaskDipendente taskD : taskDipendente) {
 				GridPane newGrid = new GridPane();
-				taskD.getDipendente();
+        
+				taskD.getDipendente();//verifica
+        
+				newGrid.getStyleClass().add("taskgrid");
+				newGrid.setHgap(1000); 
+				newGrid.setVgap(10); 
+				newGrid.setPadding(new Insets(10)); 
+
 
 				Label task = new Label("task " + (taskD.getTask().getCommessa().getNome()));
+				task.getStyleClass().add("taskLabel");
 				task.setId("taskLabel" + taskD.getId());
 				newGrid.add(task, 0, 0);
 
@@ -56,6 +66,7 @@ public class TasksDipendenteController {
 				Button start = new Button("Start");
 				start.setId("start" + taskD.getId());
 				start.setOnAction(e -> startTask(taskD));
+				start.getStyleClass().add("start-button");
 				newGrid.add(start, 0, 1);
 
 				// Bottone Stop
@@ -65,6 +76,7 @@ public class TasksDipendenteController {
 				stop.setOnAction(e -> stopTask(taskD));
 				stop.setDisable(true);
 				newGrid.add(stop, 1, 1);
+				stop.getStyleClass().add("stop-button");
 
 				// Bottone Sospendi
 				Button sospendi = new Button("Sospendi");
@@ -78,13 +90,17 @@ public class TasksDipendenteController {
 				});
 				sospendi.setDisable(true);
 				newGrid.add(sospendi, 2, 1);
+				sospendi.getStyleClass().add("sospendi-button");
 
 				mainContainer.getChildren().add(newGrid);
 				newGrid.getStyleClass().add("taskgrid");
 				newGrid.setId("" + taskD.getId());
 			}
-    }
-  }
+
+		} else {
+			System.out.println("Nessun task trovato per la matricola: " + dipendente.getMatricola());
+		}
+	}
 
 	public void startTask(TaskDipendente task) {
 		long taskIndex = task.getId();
@@ -113,6 +129,11 @@ public class TasksDipendenteController {
 				service.iniziaAttività(taskIndex);
 			}
 		}
+	}
+
+	@FXML
+	public void refresh(ActionEvent event) throws IOException {
+		show();
 	}
 
 	@FXML
@@ -168,6 +189,7 @@ public class TasksDipendenteController {
 	}
 
 	public void terminaTurno(ActionEvent event) throws IOException {
+
 		Parent root = null;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/dipendente/TerminaTurno.fxml"));
 		root = loader.load();
@@ -178,6 +200,7 @@ public class TasksDipendenteController {
 		Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 		
 		stage.setScene(new Scene(root));
+
 	}
 
 	private Long convertToLong(Object obj) {

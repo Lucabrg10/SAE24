@@ -19,6 +19,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
@@ -27,7 +28,9 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.entity.Commessa;
 import model.entity.Dipendente;
 import model.entity.Reparto;
 import model.service.ManagerService;
@@ -112,5 +115,32 @@ public class GestionePersonaleController {
 		contentPane2.getChildren().clear(); // Rimuovi il contenuto precedente
 		contentPane2.getChildren().add(root1); // Aggiungi il nuovo contenuto
 	}
+	
+	@FXML
+	public void showPerformance(MouseEvent mouseEvent) {
+		if (mouseEvent.getClickCount() == 2) {
+			Dipendente selectedItem = tableView.getSelectionModel().getSelectedItem();
+			
+			if (selectedItem != null) {
+
+				try {
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/manager/PerformanceDipendenti.fxml"));
+					Scene scene = new Scene(loader.load());
+
+					PerformanceDipendentiController controller = loader.getController();
+					controller.show(selectedItem);
+					Stage stage = new Stage();
+					stage.setTitle("Performance dipendenti");
+					stage.initModality(Modality.APPLICATION_MODAL); // Imposta come pop-up modale
+					stage.setScene(scene);
+					stage.showAndWait();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+		}
+	}
+	
 
 }

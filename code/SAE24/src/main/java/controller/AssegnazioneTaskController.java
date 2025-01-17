@@ -3,6 +3,7 @@ package controller;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.scene.layout.VBox;
@@ -16,7 +17,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.io.IOException;
+import java.util.stream.Collectors;
+
 import javafx.beans.property.SimpleStringProperty;
+
 public class AssegnazioneTaskController {
 	@FXML
 	private VBox vBox;
@@ -32,56 +38,108 @@ public class AssegnazioneTaskController {
 	private TableColumn<TaskDipendente, String> dipendente;
 	@FXML
 	private TableColumn<TaskDipendente, String> statoTask;
-	
-	private  ObservableList<TaskDipendente> tasksDipendenti ;
-	
+
+	private ObservableList<TaskDipendente> tasksDipendenti;
+
 	public void initialize() {
-	TaskDipendenteService service = new TaskDipendenteService("");
-	tasksDipendenti=FXCollections.observableArrayList(service.getListOfTasksDipendente());
-		
-	System.out.println(tasksDipendenti);
-	
-	instanza.setCellValueFactory(cellData -> {
-	    TaskDipendente taskDipendente = cellData.getValue();
-	    if (taskDipendente.getTask() != null && taskDipendente.getTask().getCommessaInstance() != null) {
-	        return new SimpleStringProperty(String.valueOf(taskDipendente.getTask().getCommessaInstance().getInstance()));
-	    } else {
-	    	return new SimpleStringProperty("N/A");
-	    }
-	});
+		TaskDipendenteService service = new TaskDipendenteService("");
+		tasksDipendenti = FXCollections.observableArrayList(service.getListOfTasksDipendente());
 
-	commessaPrincipale.setCellValueFactory(cellData -> {
-	    TaskDipendente taskDipendente = cellData.getValue();
-	    if (taskDipendente.getTask() != null && taskDipendente.getTask().getCommessaInstance() != null) {
-	        return new SimpleStringProperty(taskDipendente.getTask().getCommessaInstance().getCommessa().getNome());
-	    } else {
-	    	return new SimpleStringProperty("N/A");
-	    }
-	});
+		instanza.setCellValueFactory(cellData -> {
+			TaskDipendente taskDipendente = cellData.getValue();
+			if (taskDipendente.getTask() != null && taskDipendente.getTask().getCommessaInstance() != null) {
+				return new SimpleStringProperty(
+						String.valueOf(taskDipendente.getTask().getCommessaInstance().getInstance()));
+			} else {
+				return new SimpleStringProperty("N/A");
+			}
+		});
 
-	nomeTask.setCellValueFactory(new PropertyValueFactory<>("task"));
-	dipendente.setCellValueFactory(new PropertyValueFactory<>("dipendente"));
-	statoTask.setCellValueFactory(new PropertyValueFactory<>("status"));
+		commessaPrincipale.setCellValueFactory(cellData -> {
+			TaskDipendente taskDipendente = cellData.getValue();
+			if (taskDipendente.getTask() != null && taskDipendente.getTask().getCommessaInstance() != null) {
+				return new SimpleStringProperty(taskDipendente.getTask().getCommessaInstance().getCommessa().getNome());
+			} else {
+				return new SimpleStringProperty("N/A");
+			}
+		});
+
+		nomeTask.setCellValueFactory(new PropertyValueFactory<>("task"));
+		dipendente.setCellValueFactory(new PropertyValueFactory<>("dipendente"));
+		statoTask.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+		tableViewTasksDipendente.setRowFactory(tv -> {
+			TableRow<TaskDipendente> row = new TableRow<>();
+			row.itemProperty().addListener((ObservableValue<? extends TaskDipendente> observable,
+					TaskDipendente oldItem, TaskDipendente newItem) -> {
+				if (newItem != null) {
+					// Se la task è completata, coloriamo la riga di verde, altrimenti di rosso
+					if (newItem.getStatus().equals("COMPLETATA")) {
+						row.setStyle("-fx-background-color: lightgreen;");
+					} else if (newItem.getStatus().equals("IN_LAVORAZIONE")) {
+						row.setStyle("-fx-background-color: gold;");
+					} else {
+						row.setStyle("-fx-background-color: lightcoral;");
+					}
+				}
+			});
+			return row;
+		});
+		tableViewTasksDipendente.setItems(tasksDipendenti);
 	
-	tableViewTasksDipendente.setRowFactory(tv -> {
-        TableRow<TaskDipendente> row = new TableRow<>();
-        row.itemProperty().addListener((ObservableValue<? extends TaskDipendente> observable, TaskDipendente oldItem, TaskDipendente newItem) -> {
-            if (newItem != null) {
-                // Se la task è completata, coloriamo la riga di verde, altrimenti di rosso
-                if (newItem.getStatus().equals("COMPLETATA")) {
-                    row.setStyle("-fx-background-color: lightgreen;");
-                } else if(newItem.getStatus().equals("IN_LAVORAZIONE")) {
-                    row.setStyle("-fx-background-color: gold;");
-                }else {
-                	 row.setStyle("-fx-background-color: lightcoral;");
-                }
-            }
-        });
-        return row;
-    });
+	}
+
+	public void show(String filter) {
+		TaskDipendenteService service = new TaskDipendenteService("");
+		tasksDipendenti = FXCollections.observableArrayList(service.getListOfTasksDipendente());
+
+		tableViewTasksDipendente.setRowFactory(tv -> {
+			TableRow<TaskDipendente> row = new TableRow<>();
+			row.itemProperty().addListener((ObservableValue<? extends TaskDipendente> observable,
+					TaskDipendente oldItem, TaskDipendente newItem) -> {
+				if (newItem != null) {
+					// Se la task è completata, coloriamo la riga di verde, altrimenti di rosso
+					if (newItem.getStatus().equals("COMPLETATA")) {
+						row.setStyle("-fx-background-color: lightgreen;");
+					} else if (newItem.getStatus().equals("IN_LAVORAZIONE")) {
+						row.setStyle("-fx-background-color: gold;");
+					} else if (newItem.getStatus().equals("ASSEGNATA")){
+						row.setStyle("-fx-background-color: lightcoral;");
+					}else {
+						row.setStyle("-fx-background-color: white;");
+					}
+				}else {
+					row.setStyle("-fx-background-color: white;");
+				}
+			});
+			return row;
+		});
+		if (filter != null) {
+			tableViewTasksDipendente.setItems(FXCollections.observableArrayList(tasksDipendenti.stream()
+					.filter(task -> filter.equals(task.getStatus())).collect(Collectors.toList())));
+		}else {
+			tableViewTasksDipendente.setItems(tasksDipendenti);
+		}
+	}
 	
-	
-	tableViewTasksDipendente.setItems(tasksDipendenti);
+	@FXML
+	public void refresh(ActionEvent event) throws IOException {
+		show(null);
+	}
+
+	@FXML
+	public void showCompletate(ActionEvent event) throws IOException {
+		show("COMPLETATA");
+	}
+
+	@FXML
+	public void showAssegnate(ActionEvent event) throws IOException {
+		show("ASSEGNATA");
+	}
+
+	@FXML
+	public void showInLavorazione(ActionEvent event) throws IOException {
+		show("IN_LAVORAZIONE");
 	}
 
 }

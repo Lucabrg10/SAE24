@@ -3,6 +3,13 @@
 	-fx-text-fill: black;
 	-fx-font-family: "Calibri Light";
 }
+.labelFilter{
+	-fx-font-size: 18;
+	-fx-text-fill: black;
+	-fx-font-family: "System";
+	-fx-font-style: italic; /* Corsivo */
+    -fx-font-weight: bold;  /* Grassetto */
+}
 .labelErr{
 	-fx-font-size: 12;
 	-fx-text-fill: red;

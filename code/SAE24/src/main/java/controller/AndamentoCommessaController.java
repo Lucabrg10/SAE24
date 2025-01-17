@@ -34,7 +34,7 @@ public class AndamentoCommessaController {
 			estimatedSeries.getData().add(new XYChart.Data<>(String.valueOf(esecuzione), commessa.getTempoStimato()));
 
 			// Durata effettiva
-			actualSeries.getData().add(new XYChart.Data<>(String.valueOf(esecuzione), (taskDipendente.getDurataInMinuti()+20)));
+			actualSeries.getData().add(new XYChart.Data<>(String.valueOf(esecuzione), (taskDipendente.getDurataInMinuti())));
 
 			esecuzione++;
 		}

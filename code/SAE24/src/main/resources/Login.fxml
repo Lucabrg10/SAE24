@@ -20,8 +20,8 @@
          <Font name="System Bold" size="18.0" />
       </font></Label>
 
-	<Label text="Username:" GridPane.rowIndex="1" />
-	<TextField fx:id="usernameField" promptText="Enter your username" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+	<Label text="Matricola:" GridPane.rowIndex="1" />
+	<TextField fx:id="usernameField" promptText="Enter your matricola" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
 	<Label text="Password:" GridPane.rowIndex="2" />
 	<PasswordField fx:id="passwordField" promptText="Enter your password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
