@@ -15,7 +15,7 @@
          </font></Button>
       <VBox fx:id="mainContainer" layoutX="17.0" layoutY="39.2" prefHeight="554.0" prefWidth="1167.0" AnchorPane.bottomAnchor="187.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="39.0">
          <children>
-            <TableView fx:id="tableView" prefHeight="554.0" prefWidth="1482.0">
+            <TableView fx:id="tableView" onMouseClicked="#showPerformance" prefHeight="625.0" prefWidth="1162.0">
               <columns>
                 <TableColumn fx:id="idCol" prefWidth="100.00002366304398" text="ID" />
                 <TableColumn fx:id="nomeCol" prefWidth="264.2666549682617" text="NOME" />
