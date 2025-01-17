@@ -124,7 +124,7 @@ Configurazione Maven:
 # Design
 
 ## 1. Diagramma delle classi
-
+![Diagramma delle classi](../uml/DiagrammaDelleClassi.PNG)
 ## 2. Composizione (STAN4J)
 ![Diagramma delle dipendenze](../uml/DiagrammaDipendenze.png)
 ## 3. Design pattern
