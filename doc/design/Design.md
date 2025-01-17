@@ -126,7 +126,7 @@ Configurazione Maven:
 ## 1. Diagramma delle classi
 
 ## 2. Composizione (STAN4J)
-![Diagramma delle dipendenze](../uml/DiagrammaDipendenze.PNG)
+![Diagramma delle dipendenze](../uml/DiagrammaDipendenze.png)
 ## 3. Design pattern
 
 1) Abstraction - Occurrence Pattern
