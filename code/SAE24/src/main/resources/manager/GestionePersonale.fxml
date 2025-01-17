@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,9 +14,9 @@
          <font>
             <Font size="26.0" />
          </font></Button>
-      <VBox fx:id="mainContainer" layoutX="17.0" layoutY="39.2" prefHeight="554.0" prefWidth="1167.0" AnchorPane.bottomAnchor="187.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="39.0">
+      <VBox fx:id="mainContainer" layoutX="17.0" layoutY="70.4" prefHeight="523.0" prefWidth="1167.0" AnchorPane.bottomAnchor="187.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="70.0">
          <children>
-            <TableView fx:id="tableView" onMouseClicked="#showPerformance" prefHeight="625.0" prefWidth="1162.0">
+            <TableView fx:id="tableView" onMouseClicked="#showPerformance" prefHeight="625.0" prefWidth="1167.0">
               <columns>
                 <TableColumn fx:id="idCol" prefWidth="100.00002366304398" text="ID" />
                 <TableColumn fx:id="nomeCol" prefWidth="264.2666549682617" text="NOME" />
@@ -30,5 +31,6 @@
             </TableView>
          </children>
       </VBox>
+      <Label layoutX="25.0" layoutY="36.0" styleClass="labelInfo" stylesheets="@application.css" text="-Per vedere le performance dei dipendenti (NO MANAGER) -&gt; doppio click sul dipendente!" />
    </children>
 </AnchorPane>

@@ -2,6 +2,7 @@ package model.service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,6 +14,7 @@ import javax.persistence.TypedQuery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.entity.Commessa;
+import model.entity.CommessaInstance;
 import model.entity.Dipendente;
 import model.entity.Task;
 import model.entity.TaskDipendente;
@@ -57,6 +59,22 @@ public class TaskDipendenteService {
             .collect(Collectors.toList());
 	}
 
+	
+	public List<TaskDipendente> findTasksDipendenteCompletata(Dipendente dipendente) {
+		if (dipendente == null || dipendente.getId() == null) {
+			throw new IllegalArgumentException("Il dipendente o il suo ID non può essere null.");
+		}
+		String statoc = "COMPLETATA";
+		String jpql = "SELECT td FROM TaskDipendente td WHERE td.dipendente.id = :dipendenteId and td.status = :statoc ";
+		TypedQuery<TaskDipendente> query = em.createQuery(jpql, TaskDipendente.class);
+		query.setParameter("dipendenteId", dipendente.getId());
+		query.setParameter("statoc", statoc);
+
+		return query.getResultList();
+	}
+
+	
+	
 	public List<TaskDipendente> findTasksDipendente(Dipendente dipendente) {
 		if (dipendente == null || dipendente.getId() == null) {
 			throw new IllegalArgumentException("Il dipendente o il suo ID non può essere null.");
@@ -115,14 +133,10 @@ public class TaskDipendenteService {
 	}
 
 	public void stopAttività(Long task) {
-		// Inizializzazione dell'EntityManager e della transazione
 		EntityTransaction transaction = em.getTransaction();
-
 		try {
 			transaction.begin();
 			LocalDateTime orarioFine = LocalDateTime.now();
-			System.out.println("task ID: " + task);
-			System.out.println("Orario fine: " + orarioFine);
 			TaskDipendente taskEntity = em.find(TaskDipendente.class, task);
 			if (taskEntity != null) {
 				taskEntity.setFine(orarioFine);
@@ -130,10 +144,7 @@ public class TaskDipendenteService {
 				transaction.commit();
 				CommessaService serviceCommessa = new CommessaService("");
 				serviceCommessa.completaTask(taskEntity);
-
-				System.out.println("Attività terminata correttamente per la task ID: " + task);
 			} else {
-				System.out.println("Task non trovato per l'ID: " + task);
 			}
 
 		} catch (RuntimeException e) {
@@ -144,4 +155,5 @@ public class TaskDipendenteService {
 			e.printStackTrace();
 		}
 	}
+
 }

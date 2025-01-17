@@ -104,8 +104,6 @@ public class TerminaTurnoController {
     public void terminaGiornata() throws IOException {
     	
         List<TaskDipendente> tasks = service.findTasksInRange(dipendente);
-
-     
         for (TaskDipendente task : tasks) {
           
             TextField startTextField = (TextField) mainContainer.lookup("#start" + task.getId());
@@ -128,7 +126,7 @@ public class TerminaTurnoController {
                   
                     service.aggiornaTaskDipendente(task);
                 } catch (DateTimeParseException e) {
-                    System.out.println("Errore nella conversione dell'orario.");
+                	e.getMessage();
                 }
             }
             
@@ -136,8 +134,6 @@ public class TerminaTurnoController {
     	
     	
         }
-    	
-    	
         String fxmlPath = "/Login.fxml";
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
         Scene newScene = new Scene(loader.load());
@@ -153,7 +149,6 @@ public class TerminaTurnoController {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/dipendente/MainViewDipendente.fxml"));
 		root = loader.load();
 		MainViewDipendenteController controller = loader.getController();	
-		System.out.println("dipendente"+dipendente.getMatricola());
 		controller.setDipendente(dipendente);
 		controller.show();
 		Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();

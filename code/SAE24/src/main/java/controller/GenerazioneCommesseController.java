@@ -110,11 +110,8 @@ public class GenerazioneCommesseController {
 
 	@FXML
 	public void switchToGenerazioneCommesse(ActionEvent event) throws IOException {
-		System.out.println("sono entrato in modalità visualizza commesse");
 
-		// Carica il file FXML di inserimentoTask.fxml
 		Parent root = FXMLLoader.load(getClass().getResource("/manager/VisualizzaCommesse.fxml"));
-
 		contentPaneGenerazioneCommesse.getChildren().clear(); // Rimuovi il contenuto precedente
 		contentPaneGenerazioneCommesse.getChildren().add(root); // Aggiungi il nuovo contenuto
 

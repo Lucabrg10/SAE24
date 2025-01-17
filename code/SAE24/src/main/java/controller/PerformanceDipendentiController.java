@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.fxml.FXML;
 
-import javafx.scene.chart.LineChart;
-
+import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
-
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import model.entity.Commessa;
@@ -17,7 +15,7 @@ import model.service.TaskDipendenteService;
 
 public class PerformanceDipendentiController {
 	@FXML
-	private LineChart lineChart;
+	private BarChart<String, Number> barChart;
 	@FXML
 	private CategoryAxis xAxis;
 	@FXML
@@ -31,30 +29,26 @@ public class PerformanceDipendentiController {
 	public void show(Dipendente dipendente) {
 	    this.getDatasDipendente(dipendente);
 
-	    int counter = 1;
-	    ArrayList<String> uniqueCategories = new ArrayList<>();
-	    for (String nome : nomiCommesseDipendente) {
-	        String uniqueName = nome;
-	        while (uniqueCategories.contains(uniqueName)) {
-	            uniqueName = nome + " (" + counter + ")";
-	            counter++;
-	        }
-	        uniqueCategories.add(uniqueName);
-	    }
+	    // Cancella i dati precedenti
 	    xAxis.getCategories().clear();
-	    xAxis.getCategories().addAll(uniqueCategories);
-	    XYChart.Series<String, Number> series = new XYChart.Series<>();
+	    barChart.getData().clear();
+
+	    // Categorie uniche per l'asse X
+	    xAxis.getCategories().addAll(nomiCommesseDipendente);
+
+	    // Serie per i dati
+	    XYChart.Series<String, Number> seriesStimati = new XYChart.Series<>();
 	    XYChart.Series<String, Number> seriesEffettivi = new XYChart.Series<>();
-	    seriesEffettivi.setName("PerformanceDipendente");
-	    series.setName("Tempi stimati");
-	    for (int i = 0; i < uniqueCategories.size(); i++) {
-	        series.getData().add(new XYChart.Data<>(uniqueCategories.get(i), tempoStimatoCommessa.get(i)));
-	        seriesEffettivi.getData().add(new XYChart.Data<>(uniqueCategories.get(i), tempoCalcolatoCommessa.get(i)));
+	    
+	    seriesStimati.setName("Minuti previsti per commessa");
+	    seriesEffettivi.setName("Minuti effettivi per commessa");
+
+	    for (int i = 0; i < nomiCommesseDipendente.size(); i++) {
+	        seriesStimati.getData().add(new XYChart.Data<>(nomiCommesseDipendente.get(i), tempoStimatoCommessa.get(i)));
+	        seriesEffettivi.getData().add(new XYChart.Data<>(nomiCommesseDipendente.get(i), tempoCalcolatoCommessa.get(i)));
 	    }
 
-	    lineChart.getData().clear();
-	    lineChart.getData().add(seriesEffettivi);
-	    lineChart.getData().add(series);
+	    barChart.getData().addAll(seriesEffettivi, seriesStimati);
 	}
 
 	
@@ -65,12 +59,12 @@ public class PerformanceDipendentiController {
 		this.tempoStimatoCommessa.clear();
 		
 		TaskDipendenteService tds = new TaskDipendenteService("");
-		tasksDipendente = tds.findTasksDipendente(dip);
+		tasksDipendente = tds.findTasksDipendenteCompletata(dip);
 		for (TaskDipendente task : tasksDipendente) {
 			Commessa c = task.getTask().getCommessa();
 			
 					String nomeCommessa = c.getNome();
-					this.nomiCommesseDipendente.add(nomeCommessa);
+					this.nomiCommesseDipendente.add(nomeCommessa+"("+ task.getTask().getCommessaInstance().getInstance()+")");
 					
 					Long tempoStimato = (c.getTempoStimato());
 					this.tempoStimatoCommessa.add(tempoStimato);
