@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="645.0" prefWidth="1153.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SottoCommesseViewController">
    <children>
-      <VBox fx:id="mainContainer" layoutX="30.0" layoutY="84.0" prefHeight="551.0" prefWidth="1084.0">
+      <VBox fx:id="mainContainer" layoutX="30.0" layoutY="84.0" prefHeight="551.0" prefWidth="1084.0" AnchorPane.bottomAnchor="9.799999999999955" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="38.59999999999991" AnchorPane.topAnchor="84.0">
          <children>
             <TableView fx:id="tableViewCommesse" prefHeight="491.0" prefWidth="1066.0">
                <columns>

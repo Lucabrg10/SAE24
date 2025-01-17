@@ -2,6 +2,7 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,6 +17,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.entity.Dipendente;
+import model.entity.Manager;
 import model.entity.TaskDipendente;
 import model.service.TaskDipendenteService;
 import model.service.TaskService;
@@ -24,6 +26,8 @@ import java.awt.Color;
 import java.io.IOException;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
 public class TasksDipendenteController {
@@ -35,45 +39,52 @@ public class TasksDipendenteController {
 	private Dipendente dipendente;
 
 	TaskDipendenteService service = new TaskDipendenteService("");
-	List<TaskDipendente> taskDipendente;
+	ObservableList<TaskDipendente> taskDipendente;
 
 	public void show() {
-		taskDipendente = service.findTasksDipendente(dipendente);
+		mainContainer.getChildren().clear();
 
-		System.out.println(taskDipendente);
-		
+		taskDipendente = FXCollections.observableArrayList(service.findTasksDipendente(dipendente));
 		if (taskDipendente != null && !taskDipendente.isEmpty()) {
 			for (TaskDipendente taskD : taskDipendente) {
 				GridPane newGrid = new GridPane();
+				newGrid.getStyleClass().add("taskgrid");
+				newGrid.setHgap(1000); // Spaziatura orizzontale
+				newGrid.setVgap(10); // Spaziatura verticale
+				newGrid.setPadding(new Insets(10)); // Padding interno
 
 				Label task = new Label("task " + (taskD.getTask().getCommessa().getNome()));
+				task.getStyleClass().add("taskLabel");
 				task.setId("taskLabel" + taskD.getId());
 				newGrid.add(task, 0, 0);
 
 				// Bottone Start
 				Button start = new Button("Start");
 				start.setId("start" + taskD.getId());
-				start.setOnAction(e -> startTask(convertToLong(taskD.getId())));
+				start.setOnAction(e -> startTask(taskD));
+				start.getStyleClass().add("start-button");
 				newGrid.add(start, 0, 1);
 
 				// Bottone Stop
 				Button stop = new Button("Stop");
 				stop.setId("stop" + taskD.getId());
 
-				stop.setOnAction(e -> stopTask(convertToLong(taskD.getId())));
+				stop.setOnAction(e -> stopTask(taskD));
 				newGrid.add(stop, 1, 1);
+				stop.getStyleClass().add("stop-button");
 
 				// Bottone Sospendi
 				Button sospendi = new Button("Sospendi");
 				sospendi.setId("sospendi" + taskD.getId());
 				sospendi.setOnAction(e -> {
 					try {
-						sospendiTask(convertToLong(taskD.getId()));
+						sospendiTask(taskD);
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
 				});
 				newGrid.add(sospendi, 2, 1);
+				sospendi.getStyleClass().add("sospendi-button");
 
 				mainContainer.getChildren().add(newGrid);
 				newGrid.getStyleClass().add("taskgrid");
@@ -85,7 +96,8 @@ public class TasksDipendenteController {
 		}
 	}
 
-	public void startTask(Long taskIndex) {
+	public void startTask(TaskDipendente task) {
+		long taskIndex = task.getId();
 		Button button = (Button) mainContainer.lookup("#start" + taskIndex);
 		if (button != null) {
 			button.setDisable(true);
@@ -106,7 +118,13 @@ public class TasksDipendenteController {
 	}
 
 	@FXML
-	public void sospendiTask(Long taskIndex) throws IOException {
+	public void refresh(ActionEvent event) throws IOException {
+		show();
+	}
+
+	@FXML
+	public void sospendiTask(TaskDipendente task) throws IOException {
+		long taskIndex = task.getId();
 		try {
 			GridPane gridPane = (GridPane) mainContainer.lookup("#" + taskIndex);
 
@@ -139,8 +157,8 @@ public class TasksDipendenteController {
 
 	// Event Listener on Button.onAction
 	@FXML
-	public void stopTask(Long taskIndex) {
-
+	public void stopTask(TaskDipendente task) {
+		long taskIndex = task.getId();
 		GridPane gridPane = (GridPane) mainContainer.lookup("#" + taskIndex);
 
 		if (gridPane != null) {
@@ -152,16 +170,23 @@ public class TasksDipendenteController {
 				System.out.println("stoppa: " + taskText);
 
 				service.stopAttività(taskIndex);
+				show();
 
 			}
 		}
 	}
 
 	public void terminaTurno(ActionEvent event) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("/dipendente/TerminaTurno.fxml"));
-		Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 
-		stage.setScene(new Scene(root));
+		/*
+		 * Parent root = null; FXMLLoader loader = new
+		 * FXMLLoader(getClass().getResource("/dipendente/TerminaTurno.fxml")); root =
+		 * loader.load(); TerminaTurnocontroller controller = loader.getController();
+		 * controller.setManager((Manager) user); controller.show(); Stage stage =
+		 * (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+		 * stage.setScene(new Scene(root));
+		 */
+
 	}
 
 	private Long convertToLong(Object obj) {

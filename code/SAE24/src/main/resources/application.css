@@ -1,112 +1,107 @@
-.label{
-	-fx-font-size: 20;
-	-fx-text-fill: black;
-	-fx-font-family: "Calibri Light";
-}
-.labelErr{
-	-fx-font-size: 12;
-	-fx-text-fill: red;
-	-fx-font-family: "Calibri Light";
-}
-#titleLabel{
-	-fx-font-size: 30;
-	-fx-text-fill: black;
-	-fx-font-family: "Calibri Light";
-	-fx-font-weight: bold;
-	
-}
-/* Stile bottone di conferma */
-.buttonConferma {
-
-    -fx-background-color: #3A466A;  /* Colore di sfondo verde */
-    -fx-text-fill: white;            /* Colore del testo bianco */
-    -fx-font-size: 16px;             /* Dimensione del font */
-    -fx-border-radius: 3px;         /* Angoli arrotondati */
-  	-fx-pref-height: 47px;
-	-fx-pref-width: 151px;
-    -fx-border-color: #243054;      /* Colore del bordo verde scuro */
- 
-
+.label {
+    -fx-font-size: 20px;
+    -fx-text-fill: black;
+    -fx-font-family: "Calibri Light";
 }
 
-.buttonConferma:hover {
-
-  /*  -fx-background-color: #45a049;  /* Colore di sfondo più scuro quando hover */
-    -fx-border-color: white;      /* Colore del bordo più scuro quando hover */
-
+/* Etichetta di errore */
+.labelErr {
+    -fx-font-size: 12px;
+    -fx-text-fill: red;
+    -fx-font-family: "Calibri Light";
 }
 
-.buttonConferma:pressed {
-
-    -fx-background-color: #243054;  /* Colore di sfondo ancora più scuro quando premuto */
- /*   -fx-border-color: #2c6b2f;      /* Colore del bordo ancora più scuro quando premuto */
-    
-}
-.buttonMain1{
-	/*-fx-border-color: transparent;  /* Nessun bordo inizialmente */
-	-fx-pref-height: 75px;
-	-fx-background-color: #3A466A;
-	-fx-font-family: "Calibri Light";
-	-fx-font-size: 16;
-	-fx-text-fill: white;
+/* Etichetta del titolo */
+#titleLabel {
+    -fx-font-size: 30px;
+    -fx-text-fill: black;
+    -fx-font-family: "Calibri Light";
+    -fx-font-weight: bold;
 }
 
-.buttonMain2{
-	/*-fx-border-color: transparent;  /* Nessun bordo inizialmente */
-	-fx-pref-height: 75px;
-	-fx-background-color: #243054;
-	-fx-font-family: "Calibri Light";
-	-fx-font-size: 16;
-	-fx-text-fill: white;
-}
-.buttonMain2:focused{
-	-fx-border-color: yellow;
-}
-
-.buttonMain1:focused{
-	-fx-border-color: yellow; 
+/* Contenitore principale del task */
+.taskgrid {
+    -fx-padding: 15px;
+    -fx-border-width: 2px;
+    -fx-border-color: #dcdcdc;
+    -fx-border-radius: 8px;
+    -fx-background-color: #f8f9fa;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 4, 0.5, 0, 2);
+    -fx-vgap: 15px; /* Distanza verticale tra gli elementi */
+    -fx-hgap: 15px; /* Distanza orizzontale tra gli elementi */
 }
 
-.buttonMain2:hover {
-    -fx-border-color: white;
-}
-.buttonMain1:hover {
-    -fx-border-color: white;
-}
-
-.buttonAggiungi {
-	-fx-font-family: "Calibri Light";
-	-fx-font-size: 28;
-	-fx-pref-height: 64px;
-	-fx-pref-width: 64px;
-	-fx-text-fill: black;
-	-fx-background-color: white;
-	-fx-border-color: #3A466A;
-}
-.buttonAggiungi:hover {
-    -fx-background-color: #E8E8E8;
+/* Etichetta del task */
+.taskLabel {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-padding: 0 0 10px 0;
 }
 
-.backPane {
-	-fx-background-color: #EAEEF4;
-	-fx-pref-height: 780px;
-	-fx-pref-width: 1198px;
-	
+/* Stile generale per i bottoni all'interno della taskgrid */
+.taskgrid button {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 15px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 2, 0.2, 0, 1);
+    -fx-margin: 0; /* Rimuove spazi inutili */
 }
 
-.passwordField {
-	-fx-pref-height: 36px;
-	-fx-pref-width: 194px;
+/* Bottone Start */
+#start {
+    -fx-background-color: #28a745; /* Verde */
+    -fx-text-fill: white;
 }
-.textField {
-		-fx-pref-height: 25px;
-		-fx-pref-width: 250px;
-		-fx-background-color: white;
-		-fx-border-color: #3A466A;
+#start:hover {
+    -fx-background-color: #218838; /* Verde più scuro */
 }
 
-.textArea {
-	-fx-font-family: "Calibri Light";
-	-fx-font-size: 16;
+/* Bottone Stop */
+#stop {
+    -fx-background-color: #dc3545; /* Rosso */
+    -fx-text-fill: white;
+}
+#stop:hover {
+    -fx-background-color: #c82333; /* Rosso più scuro */
 }
 
+/* Bottone Sospendi */
+#sospendi {
+    -fx-background-color: #ffc107; /* Giallo */
+    -fx-text-fill: black;
+}
+#sospendi:hover {
+    -fx-background-color: #e0a800; /* Giallo più scuro */
+}
+.start-button {
+    -fx-border-color: #28a745; /* Verde */
+    -fx-padding: 5px 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-font-size: 14px;
+}
+
+/* Stile per i bottoni Stop */
+.stop-button {
+    -fx-border-color: #dc3545; /* Rosso */
+   
+    -fx-padding: 5px 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-font-size: 14px;
+}
+
+/* Stile per i bottoni Sospendi */
+.sospendi-button {
+    -fx-border-color: #ffc107; /* Giallo */
+    -fx-padding: 5px 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-font-size: 14px;
+}

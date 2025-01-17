@@ -64,7 +64,7 @@ public class VisualizzaCommesseController {
 		nomeCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
 		descrizioneCol.setCellValueFactory(new PropertyValueFactory<>("descrizione"));
 		repartoCol.setCellValueFactory(new PropertyValueFactory<>("reparto"));
-		padreIdCol.setCellValueFactory(new PropertyValueFactory<>("commessaPadre"));
+		durataCol.setCellValueFactory(new PropertyValueFactory<>("tempoStimato"));
 		eliminaCol.setCellFactory(param -> new TableCell<Commessa, Void>() {
 			private final Button eliminaColButton = new Button("Elimina");
 
