@@ -19,6 +19,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
@@ -27,7 +28,9 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.entity.Commessa;
 import model.entity.Dipendente;
 import model.entity.Reparto;
 import model.service.ManagerService;
@@ -64,53 +67,64 @@ public class GestionePersonaleController {
 	@FXML
 	private TableColumn<Dipendente, Void> deleteColumn;
 
-	private  ObservableList<Dipendente> dipendenti ;
-
+	private ObservableList<Dipendente> dipendenti;
 
 	public void initialize() {
 
 		ManagerService service = new ManagerService("");
 		dipendenti = FXCollections.observableArrayList(service.getAllDipendenti());
-		
+
 		idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 		matricolaCol.setCellValueFactory(new PropertyValueFactory<>("matricola"));
 		nomeCol.setCellValueFactory(new PropertyValueFactory<>("nome"));
 		cognomeCol.setCellValueFactory(new PropertyValueFactory<>("cognome"));
 		repartoCol.setCellValueFactory(new PropertyValueFactory<>("reparto"));
-		deleteColumn.setCellFactory(param -> new TableCell<Dipendente, Void>() {
-		        private final Button deleteButton = new Button("Elimina");
+		/*
+		 * deleteColumn.setCellFactory(param -> new TableCell<Dipendente, Void>() {
+		 * private final Button deleteButton = new Button("Elimina"); {
+		 * deleteButton.setOnAction(event -> { Dipendente dipendente =
+		 * getTableView().getItems().get(getIndex()); dipendenti.remove(dipendente);
+		 * ManagerService service = new ManagerService("");
+		 * service.deleteDipendente(dipendente.getId()); }); }
+		 * 
+		 * @Override public void updateItem(Void item, boolean empty) {
+		 * super.updateItem(item, empty); if (empty) { setGraphic(null); } else {
+		 * setGraphic(deleteButton); } } });
+		 */
 
-		        {
-		            deleteButton.setOnAction(event -> {
-		                Dipendente dipendente = getTableView().getItems().get(getIndex());
-		                dipendenti.remove(dipendente); // Rimuovi dalla lista visibile
-		                ManagerService service = new ManagerService("");
-		                service.deleteDipendente(dipendente.getId()); // Elimina dal database
-		            });
-		        }
-
-		        @Override
-		        public void updateItem(Void item, boolean empty) {
-		            super.updateItem(item, empty);
-		            if (empty) {
-		                setGraphic(null);
-		            } else {
-		                setGraphic(deleteButton);
-		            }
-		        }
-		    });
-		
-		
 		tableView.setItems(dipendenti);
 		tableView.setEditable(true);
 	}
-
 
 	@FXML
 	public void SwitchToInserimento(ActionEvent event) throws IOException {
 		Parent root1 = FXMLLoader.load(getClass().getResource("/manager/InserimentoDipendenti.fxml"));
 		contentPane2.getChildren().clear(); // Rimuovi il contenuto precedente
 		contentPane2.getChildren().add(root1); // Aggiungi il nuovo contenuto
+	}
+
+	@FXML
+	public void showPerformance(MouseEvent mouseEvent) {
+		if (mouseEvent.getClickCount() == 2) {
+			Dipendente selectedItem = tableView.getSelectionModel().getSelectedItem();
+
+			if (selectedItem != null && selectedItem.getReparto()!=Reparto.MANAGER) {
+				try {
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/manager/PerformanceDipendenti.fxml"));
+					Scene scene = new Scene(loader.load());
+					PerformanceDipendentiController controller = loader.getController();
+					controller.show(selectedItem);
+					Stage stage = new Stage();
+					stage.setTitle("Performance dipendenti");
+					stage.initModality(Modality.APPLICATION_MODAL); // Imposta come pop-up modale
+					stage.setScene(scene);
+					stage.showAndWait();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+		}
 	}
 
 }

@@ -30,16 +30,25 @@ public class TasksDipendenteController {
 	ObservableList<TaskDipendente> taskDipendente;
 
 	public void show() {
+		long id_in_lav=-1;
 		mainContainer.getChildren().clear();
 
 		taskDipendente = FXCollections.observableArrayList(service.findTasksDipendente(dipendente));
 		if (taskDipendente != null && !taskDipendente.isEmpty()) {
-			for (TaskDipendente taskD : taskDipendente) {
+			for (TaskDipendente taskD : taskDipendente)
+			{
 				GridPane newGrid = new GridPane();
+        
+				
 				newGrid.getStyleClass().add("taskgrid");
-				newGrid.setHgap(1000); // Spaziatura orizzontale
-				newGrid.setVgap(10); // Spaziatura verticale
-				newGrid.setPadding(new Insets(10)); // Padding interno
+				newGrid.setHgap(1000); 
+				newGrid.setVgap(10); 
+				newGrid.setPadding(new Insets(10)); 
+				if(taskD.getStatus().equals("IN_LAVORAZIONE"))
+				{
+					id_in_lav=taskD.getId();
+					
+				}
 
 				Label task = new Label("task " + (taskD.getTask().getCommessa().getNome()));
 				task.getStyleClass().add("taskLabel");
@@ -58,6 +67,7 @@ public class TasksDipendenteController {
 				stop.setId("stop" + taskD.getId());
 
 				stop.setOnAction(e -> stopTask(taskD));
+				stop.setDisable(true);
 				newGrid.add(stop, 1, 1);
 				stop.getStyleClass().add("stop-button");
 
@@ -71,6 +81,7 @@ public class TasksDipendenteController {
 						e1.printStackTrace();
 					}
 				});
+				sospendi.setDisable(true);
 				newGrid.add(sospendi, 2, 1);
 				sospendi.getStyleClass().add("sospendi-button");
 
@@ -80,6 +91,26 @@ public class TasksDipendenteController {
 			}
 
 		}
+		
+		 if (id_in_lav != -1) 
+		{
+			disabilitaStart(id_in_lav);
+		}
+	}
+
+	private void disabilitaStart(Long id) {
+		for (TaskDipendente taskD : taskDipendente)
+		{	
+		if(taskD.getId().equals(id))
+		{
+			Button button = (Button) mainContainer.lookup("#stop" + taskD.getId());
+			button.setDisable(false);
+			
+		}
+		Button button = (Button) mainContainer.lookup("#start" + taskD.getId());
+		button.setDisable(true);
+		}
+		
 	}
 
 	public void startTask(TaskDipendente task) {
@@ -88,6 +119,21 @@ public class TasksDipendenteController {
 		if (button != null) {
 			button.setDisable(true);
 		} 
+		
+		Button buttonstop = (Button) mainContainer.lookup("#stop" + taskIndex);
+	//	Button buttonsospendi = (Button) mainContainer.lookup("#sospendi" + taskIndex);
+		if (buttonstop != null) {
+			for (TaskDipendente taskD : taskDipendente)
+			{
+				Button button = (Button) mainContainer.lookup("#start" + taskD.getId());
+				button.setDisable(true);
+			}
+			
+			buttonstop.setDisable(false);
+			//buttonsospendi.setDisable(false);
+		} else {
+			System.out.println("Button not found with id: " + taskIndex);
+		}
 		GridPane gridPane = (GridPane) mainContainer.lookup("#" + taskIndex);
 		if (gridPane != null) {
 			Label taskLabel = (Label) gridPane.lookup("#taskLabel" + taskIndex);
@@ -113,11 +159,17 @@ public class TasksDipendenteController {
 
 				if (taskLabel != null) {
 					String taskText = taskLabel.getText();
+
+					System.out.println("sospendi: " + taskText);
+
 					FXMLLoader loader = new FXMLLoader(
 							getClass().getResource("/dipendente/MotivazioneSospensione.fxml"));
 					Parent root = loader.load();
+
+				
 					MotivazioneSospensioneController controller = loader.getController();
 					controller.setTaskText(taskText);
+
 					Stage stage = (Stage) mainContainer.getScene().getWindow();
 					stage.setScene(new Scene(root));
 				}
@@ -128,7 +180,6 @@ public class TasksDipendenteController {
 
 	}
 
-	// Event Listener on Button.onAction
 	@FXML
 	public void stopTask(TaskDipendente task) {
 		long taskIndex = task.getId();
@@ -145,14 +196,16 @@ public class TasksDipendenteController {
 
 	public void terminaTurno(ActionEvent event) throws IOException {
 
-		/*
-		 * Parent root = null; FXMLLoader loader = new
-		 * FXMLLoader(getClass().getResource("/dipendente/TerminaTurno.fxml")); root =
-		 * loader.load(); TerminaTurnocontroller controller = loader.getController();
-		 * controller.setManager((Manager) user); controller.show(); Stage stage =
-		 * (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-		 * stage.setScene(new Scene(root));
-		 */
+		Parent root = null;
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/dipendente/TerminaTurno.fxml"));
+		root = loader.load();
+		TerminaTurnoController controller = loader.getController();	
+		System.out.println("dipendente"+dipendente.getMatricola());
+		controller.setDipendente(dipendente);
+		controller.show();
+		Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+		
+		stage.setScene(new Scene(root));
 
 	}
 

@@ -65,7 +65,7 @@ public class VisualizzaCommesseController {
 		descrizioneCol.setCellValueFactory(new PropertyValueFactory<>("descrizione"));
 		repartoCol.setCellValueFactory(new PropertyValueFactory<>("reparto"));
 		durataCol.setCellValueFactory(new PropertyValueFactory<>("tempoStimato"));
-		eliminaCol.setCellFactory(param -> new TableCell<Commessa, Void>() {
+	/*	eliminaCol.setCellFactory(param -> new TableCell<Commessa, Void>() {
 			private final Button eliminaColButton = new Button("Elimina");
 
 			{
@@ -89,7 +89,7 @@ public class VisualizzaCommesseController {
 					setGraphic(eliminaColButton);
 				}
 			}
-		});
+		});*/
 
 		tableViewCommesse.setItems(commesse);
 	}

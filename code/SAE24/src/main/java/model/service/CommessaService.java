@@ -74,18 +74,12 @@ public class CommessaService {
 
 	public Commessa getCommessa(String nomeCommessa) {
 		try {
-			// Creazione della query JPQL per recuperare la Commessa in base al nome
 			String jpql = "SELECT c FROM Commessa c WHERE c.nome = :nome";
 			TypedQuery<Commessa> query = entityManager.createQuery(jpql, Commessa.class);
 			query.setParameter("nome", nomeCommessa);
-
-			// Esecuzione della query e restituzione del risultato
-			Commessa commessa = query.getSingleResult();
-			return commessa;
+			return query.getSingleResult();
 
 		} catch (Exception e) {
-			// Gestione dell'errore se non viene trovata nessuna commessa o se si verifica
-			// un altro errore
 			e.printStackTrace();
 			return null;
 		}
@@ -101,9 +95,7 @@ public class CommessaService {
 					commessa.getCommessaPadre().removeCommessaFiglia(commessa);
 				}
 				entityManager.remove(commessa);
-				System.out.println("Commessa con ID " + id + " eliminata. " + commessa.getCommesseFiglie());
 			} else {
-				System.out.println("Commessa non eliminata." + commessa.getCommesseFiglie());
 				return false;
 			}
 			entityManager.getTransaction().commit();
@@ -113,9 +105,7 @@ public class CommessaService {
 				entityManager.getTransaction().rollback();
 			}
 			e.printStackTrace();
-		} finally {
-			// entityManager.close();
-		}
+		} 
 		return false;
 	}
 
@@ -123,20 +113,29 @@ public class CommessaService {
 		int cont = 0;// serve solo per il test
 		TaskDipendenteService serviceTaskDip = new TaskDipendenteService("");
 		TaskService serviceTask = new TaskService("");
-		for (Commessa commessa : c.getCommesseFiglie()) {
-			if (commessa.getCommesseFiglie().isEmpty()) {
-				System.out.println("entro");
-				Task t = new Task(commessa, instance);
-				serviceTask.salvaTask(t);
-				Dipendente dipendente = scegliDipendente(commessa.getReparto());
-				TaskDipendente td = new TaskDipendente(t, dipendente);
-				serviceTaskDip.salvaTaskDipendente(td);
-				cont++;
-			} else {
-				assegnaTasksSistema(commessa, instance);
-			}
+		if (c.getCommesseFiglie().isEmpty()) {
+			Task t = new Task(c, instance);
+			serviceTask.salvaTask(t);
+			Dipendente dipendente = scegliDipendente(c.getReparto());
+			TaskDipendente td = new TaskDipendente(t, dipendente);
+			serviceTaskDip.salvaTaskDipendente(td);
+			cont++;
+		} else {
+			for (Commessa commessa : c.getCommesseFiglie()) {
+				if (commessa.getCommesseFiglie().isEmpty()) {
+					Task t = new Task(commessa, instance);
+					serviceTask.salvaTask(t);
+					Dipendente dipendente = scegliDipendente(commessa.getReparto());
+					TaskDipendente td = new TaskDipendente(t, dipendente);
+					serviceTaskDip.salvaTaskDipendente(td);
+					cont++;
+				} else {
+					assegnaTasksSistema(commessa, instance);
+				}
 
+			}
 		}
+
 		return cont;
 	}
 
@@ -144,21 +143,14 @@ public class CommessaService {
 
 		TaskDipendenteService servicedipendente = new TaskDipendenteService("");
 		TaskService service = new TaskService("");
-
-		// t.setStatus("COMPLETATA");
-
 		Commessa commessaPadre = t.getTask().getCommessa().getCommessaPadre();
-		if (commessaPadre != null) {
-			if (statusFigli(commessaPadre, t.getTask().getCommessaInstance())) {
-				Task newTask = new Task(commessaPadre, t.getTask().getCommessaInstance());
-				service.salvaTask(newTask);
-				Dipendente d = scegliDipendente(commessaPadre.getReparto());
-				TaskDipendente td = new TaskDipendente(newTask, d);
-				servicedipendente.salvaTaskDipendente(td);
-			}
-
+		if (commessaPadre != null && statusFigli(commessaPadre, t.getTask().getCommessaInstance())) {
+			Task newTask = new Task(commessaPadre, t.getTask().getCommessaInstance());
+			service.salvaTask(newTask);
+			Dipendente d = scegliDipendente(commessaPadre.getReparto());
+			TaskDipendente td = new TaskDipendente(newTask, d);
+			servicedipendente.salvaTaskDipendente(td);
 		}
-
 	}
 
 	public boolean statusFigli(Commessa padre, CommessaInstance idInstance) {
@@ -213,9 +205,8 @@ public class CommessaService {
 					Dipendente.class);
 			query.setParameter("reparto", reparto);
 			dipendente = query.setMaxResults(1).getSingleResult();
-			System.out.println(dipendente);
 		} catch (Exception e) {
-			System.err.println("Errore durante la selezione del dipendente: " + e.getMessage());
+			e.getMessage();
 		}
 
 		return dipendente;

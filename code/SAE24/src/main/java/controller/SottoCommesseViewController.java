@@ -57,7 +57,7 @@ public class SottoCommesseViewController {
 		repartoCol.setCellValueFactory(new PropertyValueFactory<>("reparto"));
 		padreIdCol.setCellValueFactory(new PropertyValueFactory<>("commessaPadre"));
 		durataCol.setCellValueFactory(new PropertyValueFactory<>("tempoStimato"));
-		eliminaCol.setCellFactory(param -> new TableCell<Commessa, Void>() {
+	/*	eliminaCol.setCellFactory(param -> new TableCell<Commessa, Void>() {
 			private final Button eliminaColButton = new Button("Elimina");
 
 			{
@@ -81,7 +81,7 @@ public class SottoCommesseViewController {
 					setGraphic(eliminaColButton);
 				}
 			}
-		});
+		});*/
 		tableViewCommesse.setItems(sottoCommesse);
 	}
 
