@@ -42,20 +42,25 @@ public class TasksDipendenteController {
 	ObservableList<TaskDipendente> taskDipendente;
 
 	public void show() {
+		long id_in_lav=-1;
 		mainContainer.getChildren().clear();
 
 		taskDipendente = FXCollections.observableArrayList(service.findTasksDipendente(dipendente));
 		if (taskDipendente != null && !taskDipendente.isEmpty()) {
-			for (TaskDipendente taskD : taskDipendente) {
+			for (TaskDipendente taskD : taskDipendente)
+			{
 				GridPane newGrid = new GridPane();
         
-				taskD.getDipendente();//verifica
-        
+				
 				newGrid.getStyleClass().add("taskgrid");
 				newGrid.setHgap(1000); 
 				newGrid.setVgap(10); 
 				newGrid.setPadding(new Insets(10)); 
-
+				if(taskD.getStatus().equals("IN_LAVORAZIONE"))
+				{
+					id_in_lav=taskD.getId();
+					
+				}
 
 				Label task = new Label("task " + (taskD.getTask().getCommessa().getNome()));
 				task.getStyleClass().add("taskLabel");
@@ -100,6 +105,26 @@ public class TasksDipendenteController {
 		} else {
 			System.out.println("Nessun task trovato per la matricola: " + dipendente.getMatricola());
 		}
+		
+		 if (id_in_lav != -1) 
+		{
+			disabilitaStart(id_in_lav);
+		}
+	}
+
+	private void disabilitaStart(Long id) {
+		for (TaskDipendente taskD : taskDipendente)
+		{	
+		if(taskD.getId().equals(id))
+		{
+			Button button = (Button) mainContainer.lookup("#stop" + taskD.getId());
+			button.setDisable(false);
+			
+		}
+		Button button = (Button) mainContainer.lookup("#start" + taskD.getId());
+		button.setDisable(true);
+		}
+		
 	}
 
 	public void startTask(TaskDipendente task) {
