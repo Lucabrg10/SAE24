@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane styleClass="backPane" stylesheets="@application.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PerformanceDipendentiController">
+    <children>
+        <LineChart fx:id="lineChart" layoutX="219.0" layoutY="153.0" prefHeight="473.0" prefWidth="743.0">
+            <xAxis>
+                <CategoryAxis fx:id="xAxis" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="yAxis" />
+            </yAxis>
+        </LineChart>
+    </children>
+</AnchorPane>
