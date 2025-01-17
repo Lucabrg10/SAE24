@@ -37,6 +37,7 @@ Diagramma UML:
 La vista dei dati descrive la struttura del database e le relazioni principali tra le entità.
 
 Entità Principali:
+
     Dipendente:
 ------------------
     Manager
@@ -64,6 +65,9 @@ Gestisce l'interazione tra la UI e il backend.
 
 Service:
 Contiene la logica applicativa principale e la persistenza dei dati.
+
+Entity:
+Contiene le entità da salvare sul database.
 
 Database Integrato:
 Persistenza dei dati attraverso EclipseLink.
