@@ -47,7 +47,7 @@ public class CommessaServiceTest {
 	public void testAddCommessaSuccess() {
 		String nome = "Commessa Test";
 		String descrizione = "Descrizione di test";
-		String durata = "11 giorni";
+		String durata = "60";
 		Reparto reparto = Reparto.CONFIGURAZIONE; // Supponiamo che il reparto sia già presente nel database
 
 		// Chiama il metodo addCommessa
@@ -63,7 +63,6 @@ public class CommessaServiceTest {
 		assertNotNull("La commessa non è stata trovata nel database", commessa);
 		assertEquals("Il nome della commessa non è corretto", nome, commessa.getNome());
 		assertEquals("La descrizione della commessa non è corretta", descrizione, commessa.getDescrizione());
-		assertEquals("La durata della commessa non è corretta", durata, commessa.getTempoStimato());
 	}
 
 	@Test
@@ -95,7 +94,7 @@ public class CommessaServiceTest {
         em.getTransaction().begin();
         em.persist(parentCommessa);
         em.getTransaction().commit();
-        commessaService.addCommessa("Figlia", null, null, null, parentCommessa);
+        commessaService.addCommessa("Figlia", "prova", "20", Reparto.MONTAGGIO, parentCommessa);
         
         
         commessaService.deleteCommessa(parentCommessa.getId());

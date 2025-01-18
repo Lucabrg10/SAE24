@@ -84,14 +84,6 @@ public class TerminaTurnoService {
 
             // Esegui l'aggiornamento
             int rowsUpdated = query.executeUpdate();
-
-            if (rowsUpdated > 0) {
-                System.out.println("Task aggiornato con successo.");
-            } else {
-                System.out.println("Nessun task trovato con l'ID fornito.");
-            }
-
-            // Commetti la transazione
             transaction.commit();
         } catch (RuntimeException e) {
             if (transaction.isActive()) {

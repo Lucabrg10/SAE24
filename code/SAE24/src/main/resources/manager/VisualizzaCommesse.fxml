@@ -33,7 +33,6 @@
 							<items>
 								<MenuItem mnemonicParsing="false" onAction="#vediSottoCommesse" text="Vedi sotto-commesse" />
 								<MenuItem mnemonicParsing="false" onAction="#assegnaCommessa" text="Assegna commessa" />
-								<MenuItem mnemonicParsing="false" onAction="#modificaCommessa" text="Modifica" />
 							</items>
 						</ContextMenu>
 					</contextMenu>

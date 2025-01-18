@@ -1,16 +1,8 @@
 package model.service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
-
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
-
 import model.entity.Task;
-import model.entity.TaskDipendente;
 
 public class TaskService {
 	private EntityManager entityManager;

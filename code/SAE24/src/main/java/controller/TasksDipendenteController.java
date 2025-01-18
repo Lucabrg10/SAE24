@@ -30,24 +30,21 @@ public class TasksDipendenteController {
 	ObservableList<TaskDipendente> taskDipendente;
 
 	public void show() {
-		long id_in_lav=-1;
+		long idInLav = -1;
 		mainContainer.getChildren().clear();
 
 		taskDipendente = FXCollections.observableArrayList(service.findTasksDipendente(dipendente));
 		if (taskDipendente != null && !taskDipendente.isEmpty()) {
-			for (TaskDipendente taskD : taskDipendente)
-			{
+			for (TaskDipendente taskD : taskDipendente) {
 				GridPane newGrid = new GridPane();
-        
-				
+
 				newGrid.getStyleClass().add("taskgrid");
-				newGrid.setHgap(1000); 
-				newGrid.setVgap(10); 
-				newGrid.setPadding(new Insets(10)); 
-				if(taskD.getStatus().equals("IN_LAVORAZIONE"))
-				{
-					id_in_lav=taskD.getId();
-					
+				newGrid.setHgap(1000);
+				newGrid.setVgap(10);
+				newGrid.setPadding(new Insets(10));
+				if (taskD.getStatus().equals("IN_LAVORAZIONE")) {
+					idInLav = taskD.getId();
+
 				}
 
 				Label task = new Label("task " + (taskD.getTask().getCommessa().getNome()));
@@ -91,26 +88,23 @@ public class TasksDipendenteController {
 			}
 
 		}
-		
-		 if (id_in_lav != -1) 
-		{
-			disabilitaStart(id_in_lav);
+
+		if (idInLav != -1) {
+			disabilitaStart(idInLav);
 		}
 	}
 
 	private void disabilitaStart(Long id) {
-		for (TaskDipendente taskD : taskDipendente)
-		{	
-		if(taskD.getId().equals(id))
-		{
-			Button button = (Button) mainContainer.lookup("#stop" + taskD.getId());
-			button.setDisable(false);
-			
+		for (TaskDipendente taskD : taskDipendente) {
+			if (taskD.getId().equals(id)) {
+				Button button = (Button) mainContainer.lookup("#stop" + taskD.getId());
+				button.setDisable(false);
+
+			}
+			Button button = (Button) mainContainer.lookup("#start" + taskD.getId());
+			button.setDisable(true);
 		}
-		Button button = (Button) mainContainer.lookup("#start" + taskD.getId());
-		button.setDisable(true);
-		}
-		
+
 	}
 
 	public void startTask(TaskDipendente task) {
@@ -118,21 +112,18 @@ public class TasksDipendenteController {
 		Button button = (Button) mainContainer.lookup("#start" + taskIndex);
 		if (button != null) {
 			button.setDisable(true);
-		} 
-		
+		}
+
 		Button buttonstop = (Button) mainContainer.lookup("#stop" + taskIndex);
-	//	Button buttonsospendi = (Button) mainContainer.lookup("#sospendi" + taskIndex);
+		// Button buttonsospendi = (Button) mainContainer.lookup("#sospendi" +
+		// taskIndex);
 		if (buttonstop != null) {
-			for (TaskDipendente taskD : taskDipendente)
-			{
-				Button button = (Button) mainContainer.lookup("#start" + taskD.getId());
-				button.setDisable(true);
+			for (TaskDipendente taskD : taskDipendente) {
+				Button button1 = (Button) mainContainer.lookup("#start" + taskD.getId());
+				button1.setDisable(true);
 			}
-			
 			buttonstop.setDisable(false);
-			//buttonsospendi.setDisable(false);
-		} else {
-			System.out.println("Button not found with id: " + taskIndex);
+			// buttonsospendi.setDisable(false);
 		}
 		GridPane gridPane = (GridPane) mainContainer.lookup("#" + taskIndex);
 		if (gridPane != null) {
@@ -159,17 +150,11 @@ public class TasksDipendenteController {
 
 				if (taskLabel != null) {
 					String taskText = taskLabel.getText();
-
-					System.out.println("sospendi: " + taskText);
-
 					FXMLLoader loader = new FXMLLoader(
 							getClass().getResource("/dipendente/MotivazioneSospensione.fxml"));
 					Parent root = loader.load();
-
-				
 					MotivazioneSospensioneController controller = loader.getController();
 					controller.setTaskText(taskText);
-
 					Stage stage = (Stage) mainContainer.getScene().getWindow();
 					stage.setScene(new Scene(root));
 				}
@@ -199,24 +184,13 @@ public class TasksDipendenteController {
 		Parent root = null;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/dipendente/TerminaTurno.fxml"));
 		root = loader.load();
-		TerminaTurnoController controller = loader.getController();	
-		System.out.println("dipendente"+dipendente.getMatricola());
+		TerminaTurnoController controller = loader.getController();
 		controller.setDipendente(dipendente);
 		controller.show();
 		Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-		
+
 		stage.setScene(new Scene(root));
 
-	}
-
-	private Long convertToLong(Object obj) {
-		if (obj instanceof Integer) {
-			return ((Integer) obj).longValue(); // Converti Integer a Long
-		} else if (obj instanceof Long) {
-			return (Long) obj; // Restituisci direttamente il Long
-		} else {
-			throw new IllegalArgumentException("Expected Integer or Long, but got: " + obj.getClass());
-		}
 	}
 
 	public Dipendente getDipendente() {

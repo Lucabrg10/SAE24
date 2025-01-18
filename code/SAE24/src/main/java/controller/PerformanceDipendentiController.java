@@ -68,7 +68,6 @@ public class PerformanceDipendentiController {
 					
 					Long tempoStimato = (c.getTempoStimato());
 					this.tempoStimatoCommessa.add(tempoStimato);
-					System.out.println(this.tempoStimatoCommessa);
 					Long tempoCalcolato = (task.getDurataInMinuti());
 					this.tempoCalcolatoCommessa.add(tempoCalcolato);
 		}

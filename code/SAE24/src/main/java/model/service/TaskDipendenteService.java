@@ -1,8 +1,6 @@
 package model.service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,52 +12,46 @@ import javax.persistence.TypedQuery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.entity.Commessa;
-import model.entity.CommessaInstance;
 import model.entity.Dipendente;
-import model.entity.Task;
 import model.entity.TaskDipendente;
 
 public class TaskDipendenteService {
 
 	protected EntityManager em;
-	 private ObservableList<TaskDipendente> taskDipendenti;
+	private ObservableList<TaskDipendente> taskDipendenti;
 
 	public TaskDipendenteService(String utilizzo) {
 		if (utilizzo.equals("test")) {
 			this.em = Persistence.createEntityManagerFactory("dip-test").createEntityManager();
-			taskDipendenti= FXCollections.observableArrayList( getListOfTasksDipendente());
+			taskDipendenti = FXCollections.observableArrayList(getListOfTasksDipendente());
 		} else {
 			this.em = Persistence.createEntityManagerFactory("dip").createEntityManager();
-			taskDipendenti=  FXCollections.observableArrayList( getListOfTasksDipendente());
+			taskDipendenti = FXCollections.observableArrayList(getListOfTasksDipendente());
 		}
 	}
-	
+
 	public ObservableList<TaskDipendente> getTaskDipendenti() {
-        return taskDipendenti;
-    }
-	
+		return taskDipendenti;
+	}
+
 	public void salvaTaskDipendente(TaskDipendente c) {
 		em.getTransaction().begin();
 		em.persist(c);
 		em.getTransaction().commit();
 		taskDipendenti.add(c);
-		System.out.println("AGgiunto");
 	}
 
 	public List<TaskDipendente> getListOfTasksDipendente() {
-		em.clear();
-		return em.createQuery("SELECT t FROM TaskDipendente t", TaskDipendente.class).getResultList();
-	}
-	
-	public List<TaskDipendente> getListOfTasksDipendenteFromCommessa(Commessa commessa){
-		
-        return taskDipendenti.stream()
-            .filter(taskDipendente -> taskDipendente.getTask().getCommessa().equals(commessa))
-            .filter(taskDipendente -> "COMPLETATA".equals(taskDipendente.getStatus()))
-            .collect(Collectors.toList());
+		return em.createQuery("SELECT t FROM TaskDipendente t", TaskDipendente.class)
+				.setHint("javax.persistence.cache.storeMode", "REFRESH").getResultList();
 	}
 
-	
+	public List<TaskDipendente> getListOfTasksDipendenteFromCommessa(Commessa commessa) {
+
+		return taskDipendenti.stream().filter(taskDipendente -> taskDipendente.getTask().getCommessa().equals(commessa))
+				.filter(taskDipendente -> "COMPLETATA".equals(taskDipendente.getStatus())).collect(Collectors.toList());
+	}
+
 	public List<TaskDipendente> findTasksDipendenteCompletata(Dipendente dipendente) {
 		if (dipendente == null || dipendente.getId() == null) {
 			throw new IllegalArgumentException("Il dipendente o il suo ID non può essere null.");
@@ -73,8 +65,6 @@ public class TaskDipendenteService {
 		return query.getResultList();
 	}
 
-	
-	
 	public List<TaskDipendente> findTasksDipendente(Dipendente dipendente) {
 		if (dipendente == null || dipendente.getId() == null) {
 			throw new IllegalArgumentException("Il dipendente o il suo ID non può essere null.");
@@ -99,9 +89,6 @@ public class TaskDipendenteService {
 			// Otteniamo l'orario di inizio e la data attuale
 			LocalDateTime orarioInizio = LocalDateTime.now(); // Orario di inizio attuale
 
-			System.out.println("ID: " + task);
-			System.out.println("Inizio: " + orarioInizio);
-
 			// Otteniamo il Task dalla base di dati
 			TaskDipendente taskEntity = em.find(TaskDipendente.class, task);
 
@@ -115,11 +102,7 @@ public class TaskDipendenteService {
 
 				// Commit della transazione
 				transaction.commit();
-
-				System.out.println("Attività iniziata correttamente per la task ID: " + task);
-			} else {
-				System.out.println("Task non trovato per l'ID: " + task);
-			}
+			} 
 
 		} catch (RuntimeException e) {
 			// Se c'è un errore, facciamo il rollback
@@ -127,7 +110,6 @@ public class TaskDipendenteService {
 				transaction.rollback();
 			}
 			// Stampa dell'errore
-			System.out.println("Errore durante l'inizio dell'attività: " + e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -144,8 +126,7 @@ public class TaskDipendenteService {
 				transaction.commit();
 				CommessaService serviceCommessa = new CommessaService("");
 				serviceCommessa.completaTask(taskEntity);
-			} else {
-			}
+			} 
 
 		} catch (RuntimeException e) {
 

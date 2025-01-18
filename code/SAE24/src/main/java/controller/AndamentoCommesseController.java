@@ -11,13 +11,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.entity.Commessa;
 import model.entity.Reparto;
-import model.service.CommessaService;
 import model.service.ManagerService;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 
 public class AndamentoCommesseController {

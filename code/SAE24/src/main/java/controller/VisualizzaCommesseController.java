@@ -4,9 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,7 +15,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.entity.Commessa;
 import model.entity.CommessaInstance;
-import model.entity.Dipendente;
 import model.entity.Reparto;
 import model.service.CommessaInstanceService;
 import model.service.CommessaService;
@@ -28,8 +24,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 
 public class VisualizzaCommesseController {
@@ -143,18 +137,10 @@ public class VisualizzaCommesseController {
 		}
 	}
 
-	@FXML
-	public void modificaCommessa(ActionEvent event) {
-		Commessa selectedItem = tableViewCommesse.getSelectionModel().getSelectedItem();
-		if (selectedItem != null) {
-			System.out.println("Modifica: " + selectedItem);
-		}
-	}
+	
 
 	@FXML
 	public void switchToInserimento(ActionEvent event) throws IOException {
-
-		System.out.println("sono entrato in modalità generazione commessa");
 
 		// Carica il file FXML di inserimentoTask.fxml
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/manager/GenerazioneCommesse.fxml"));

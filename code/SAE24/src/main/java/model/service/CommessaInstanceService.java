@@ -6,7 +6,6 @@ import javax.persistence.TypedQuery;
 
 import model.entity.Commessa;
 import model.entity.CommessaInstance;
-import model.entity.TaskDipendente;
 
 public class CommessaInstanceService {
 	protected EntityManager em;
@@ -39,7 +38,6 @@ public class CommessaInstanceService {
 			lastCommessaInstance = query.getSingleResult();
 		} catch (Exception e) {
 			// Se non ci sono risultati (prima CommessaInstance per quella Commessa)
-			System.out.println("Nessuna CommessaInstance trovata per questa commessa.");
 		}
 
 		CommessaInstance newCommessaInstance;

@@ -22,7 +22,7 @@ public class MotivazioneSospensioneController {
 	private TextArea testoMotivazione;
 	
 	
-private String taskText;
+	private String taskText;
 	
 	public void initialize() {
 		ObservableList<String> motivazioni = selezioneMotivazione.getItems();
@@ -38,8 +38,6 @@ private String taskText;
 	{
 		String selezione = (String) selezioneMotivazione.getValue();
 		String testo = testoMotivazione.getText();
-		
-		System.out.println("selezione" +selezione);
 		String fxmlPath;
 		if(selezione.equals("Fine turno"))
 		{
@@ -64,7 +62,6 @@ private String taskText;
 	    Stage stage = (Stage) selezioneMotivazione.getScene().getWindow();
 	    stage.setScene(newScene);
 	    stage.show();
-		System.out.println("testo" +testo);
 
 	}
 	public void annulla() throws IOException

@@ -11,9 +11,6 @@ public class LoginService {
 
     private EntityManager entityManager = Persistence.createEntityManagerFactory("dip").createEntityManager();
 
-    public LoginService() {
-        
-    }
 
     public Object authenticate(String matricola, String password) {
         // Verifica prima se è un dipendente

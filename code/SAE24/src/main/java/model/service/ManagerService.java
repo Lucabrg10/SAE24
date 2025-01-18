@@ -1,8 +1,5 @@
 package model.service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
@@ -19,12 +16,6 @@ public class ManagerService extends DipendenteService {
 	public ManagerService(String utilizzo) {
 		super(utilizzo);
 	}
-
-	/**
-	 * Aggiungi un nuovo dipendente/manager.
-	 *
-	 * @param name Nome del dipendente.
-	 */
 
 	public String addDipendente(String nome, String cognome, String matricola, Reparto reparto)
 			throws IllegalStateException {
@@ -87,17 +78,10 @@ public class ManagerService extends DipendenteService {
 			// Trova il Dipendente in base all'ID
 			Dipendente dipendente = entityManager.find(Dipendente.class, long1);
 			if (dipendente != null) {
-				// Rimuovi il dipendente dal database
 				entityManager.remove(dipendente);
-				System.out.println("Dipendente con ID " + long1 + " eliminato.");
-			} else {
-				System.out.println("Dipendente non trovato.");
-			}
-
-			// Completare la transazione
+			} 
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {
-			// Se c'è un errore, fare il rollback
 			if (entityManager.getTransaction().isActive()) {
 				entityManager.getTransaction().rollback();
 			}

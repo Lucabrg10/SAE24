@@ -17,7 +17,6 @@ import model.service.TerminaTurnoService;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
