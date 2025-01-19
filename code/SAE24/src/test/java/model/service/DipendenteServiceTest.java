@@ -66,7 +66,7 @@ public class DipendenteServiceTest {
 
         CommessaInstance commessaInstance = new CommessaInstance();
         commessaInstance.setCommessa(commessa);
-        commessaInstance.setId(1L); // Supponendo che CommessaInstance abbia un ID
+        commessaInstance.setId(11L); // Supponendo che CommessaInstance abbia un ID
         em.persist(commessaInstance);
 
         // Crea alcuni task assegnati al dipendente
@@ -81,7 +81,7 @@ public class DipendenteServiceTest {
         em.persist(task2);
 
         em.getTransaction().commit();
- System.out.println("id dipendente    "+dipendente.getId());
+        em.clear();
         // Recupera i task tramite il servizio
         List<Task> tasks = dipendenteService.getTasksByDipendente(dipendente.getId());
        

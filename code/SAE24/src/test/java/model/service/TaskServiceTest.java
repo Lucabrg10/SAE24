@@ -60,7 +60,7 @@ public class TaskServiceTest {
         
         CommessaInstance commessaInstance= new CommessaInstance();
         commessaInstance.setCommessa(commessa);
-        commessaInstance.setId(4L);
+        commessaInstance.setId(6L);
         em.persist(commessaInstance);
         
     em.getTransaction().commit();

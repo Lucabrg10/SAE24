@@ -71,7 +71,7 @@ public class LoginServiceTest {
 
         // Crea un manager di test
         Manager manager = new Manager();
-        manager.setMatricola("54321");
+        manager.setMatricola("543215");
         manager.setPassword("passwordManager");
         manager.setNome("mario");
         manager.setCognome("Rossi");
@@ -81,10 +81,10 @@ public class LoginServiceTest {
         em.getTransaction().commit();
 
         // Prova ad autenticare
-        Object result = loginService.authenticate("54321", "passwordManager");
+        Object result = loginService.authenticate("543215", "passwordManager");
         assertNotNull("L'autenticazione del manager dovrebbe riuscire", result);
         assertTrue("Il risultato dovrebbe essere un'istanza di Manager", result instanceof Manager);
-        assertEquals("La matricola del manager autenticato non corrisponde", "54321", ((Manager) result).getMatricola());
+        assertEquals("La matricola del manager autenticato non corrisponde", "543215", ((Manager) result).getMatricola());
     }
 
     @Test
@@ -93,7 +93,7 @@ public class LoginServiceTest {
 
         // Crea un dipendente di test
         Dipendente dipendente = new Dipendente();
-        dipendente.setMatricola("12345");
+        dipendente.setMatricola("12346");
         dipendente.setPassword("passwordDipendente");
         dipendente.setNome("mario");
         dipendente.setCognome("Rossi");

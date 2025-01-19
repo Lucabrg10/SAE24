@@ -61,7 +61,7 @@ public class TaskDipendenteServiceTest {
         
         CommessaInstance commessaInstance= new CommessaInstance();
         commessaInstance.setCommessa(commessa);
-        commessaInstance.setId(4L);
+        commessaInstance.setId(7L);
         em.persist(commessaInstance);
 
         Task task = new Task();
@@ -107,7 +107,7 @@ public class TaskDipendenteServiceTest {
         
         CommessaInstance commessaInstance= new CommessaInstance();
         commessaInstance.setCommessa(commessa);
-        commessaInstance.setId(1L);
+        commessaInstance.setId(10L);
         em.persist(commessaInstance);
 
         Task task = new Task();

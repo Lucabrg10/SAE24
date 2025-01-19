@@ -5,10 +5,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.entity.Commessa;
+import model.entity.CommessaInstance;
+import model.entity.Dipendente;
 import model.entity.Reparto;
+import model.entity.Task;
+import model.entity.TaskDipendente;
 import model.service.CommessaService;
 
 import static org.junit.Assert.*;
+
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -45,7 +51,7 @@ public class CommessaServiceTest {
 
 	@Test
 	public void testAddCommessaSuccess() {
-		String nome = "Commessa Test";
+		String nome = "Commessa Test nome";
 		String descrizione = "Descrizione di test";
 		String durata = "60";
 		Reparto reparto = Reparto.CONFIGURAZIONE; // Supponiamo che il reparto sia già presente nel database
@@ -101,5 +107,241 @@ public class CommessaServiceTest {
         em.clear();
         Commessa foundCommessa = em.find(Commessa.class, parentCommessa.getId());
         assertNotNull("La commessa non è stata eliminata", foundCommessa);
+    }
+    @Test
+    public void testStatusFigli_AllTasksCompleted_ReturnsTrue() {
+        // Crea una commessa padre e figlia
+        Commessa padre = new Commessa();
+        padre.setNome("Padre");
+        Commessa figlia = new Commessa();
+        figlia.setNome("Figlia");
+        padre.addCommessaFiglia(figlia);
+
+        // Persisti le commesse
+        em.getTransaction().begin();
+        em.persist(padre);
+        em.persist(figlia);
+        em.getTransaction().commit();
+
+        // Crea un'istanza di CommessaInstance
+        CommessaInstance instance = new CommessaInstance();
+        instance.setCommessa(padre);
+        instance.setId(21L); 
+        em.getTransaction().begin();
+        em.persist(instance);
+        em.getTransaction().commit();
+
+        // Aggiungi un Task completato alla commessa figlia
+        Task task = new Task(figlia, instance);
+        em.getTransaction().begin();
+        em.persist(task);
+        
+        Dipendente dipendente = new Dipendente();
+        dipendente.setMatricola("123499");
+      //  dipendente.setId(12331L);
+        dipendente.setPassword("passwordDipendente");
+        dipendente.setNome("Mario Rossi");
+        dipendente.setReparto(Reparto.CABLAGGIO);
+        em.persist(dipendente);
+
+        TaskDipendente taskDipendente = new TaskDipendente(task, dipendente);
+        taskDipendente.setStatus("COMPLETATA");
+        em.persist(taskDipendente);
+        em.getTransaction().commit();
+
+        // Verifica che lo statusFigli ritorni true
+        boolean result = commessaService.statusFigli(padre, instance);
+        assertTrue("Tutti i task dei figli sono completati, ma il metodo ha restituito false.", result);
+    }
+
+    @Test
+    public void testStatusFigli_OneTaskNotCompleted_ReturnsFalse() {
+        // Crea una commessa padre e figlia
+        Commessa padre = new Commessa();
+        padre.setNome("Padre");
+        Commessa figlia = new Commessa();
+        figlia.setNome("Figlia");
+        padre.addCommessaFiglia(figlia);
+
+        // Persisti le commesse
+        em.getTransaction().begin();
+        em.persist(padre);
+        em.persist(figlia);
+        em.getTransaction().commit();
+
+        // Crea un'istanza di CommessaInstance
+        CommessaInstance instance = new CommessaInstance();
+        instance.setCommessa(padre);
+        instance.setId(29L); 
+        em.getTransaction().begin();
+        em.persist(instance);
+        em.getTransaction().commit();
+
+        // Aggiungi un Task non completato alla commessa figlia
+        Task task = new Task(figlia, instance);
+        em.getTransaction().begin();
+        em.persist(task);
+
+        Dipendente dipendente = new Dipendente();
+        dipendente.setMatricola("123496");
+      //  dipendente.setId(12331L);
+        dipendente.setPassword("passwordDipendente");
+        dipendente.setNome("Mario Rossi");
+        dipendente.setReparto(Reparto.CABLAGGIO);
+        em.persist(dipendente);
+        
+        TaskDipendente taskDipendente = new TaskDipendente(task, dipendente);
+        taskDipendente.setStatus("IN_CORSO");
+        em.persist(taskDipendente);
+        em.getTransaction().commit();
+
+        // Verifica che lo statusFigli ritorni false
+        boolean result = commessaService.statusFigli(padre, instance);
+        assertFalse("Esistono task non completati, ma il metodo ha restituito true.", result);
+    }
+
+    @Test
+    public void testTasksAssegnate_ReturnsCorrectTasks() {
+        // Crea una commessa e un task
+    	 
+        Commessa commessa = new Commessa();
+        commessa.setNome("Commessa Test");
+        em.getTransaction().begin();
+        em.createQuery("DELETE FROM TaskDipendente").executeUpdate();
+        em.persist(commessa);
+        em.getTransaction().commit();
+
+        CommessaInstance instance = new CommessaInstance();
+        instance.setCommessa(commessa);
+        instance.setId(22L); 
+        em.getTransaction().begin();
+        em.persist(instance);
+        em.getTransaction().commit();
+
+        Task task = new Task(commessa, instance);
+        em.getTransaction().begin();
+        em.persist(task);
+        em.getTransaction().commit();
+
+        // Aggiungi due TaskDipendente
+        Dipendente dipendente = new Dipendente();
+        dipendente.setMatricola("123492");
+      //  dipendente.setId(12331L);
+        dipendente.setPassword("passwordDipendente");
+        dipendente.setNome("Mario Rossi");
+        dipendente.setReparto(Reparto.CABLAGGIO);
+        em.persist(dipendente);
+        TaskDipendente td1 = new TaskDipendente(task, dipendente);
+        TaskDipendente td2 = new TaskDipendente(task, dipendente);
+        em.getTransaction().begin();
+        em.persist(td1);
+        em.persist(td2);
+        em.getTransaction().commit();
+
+        // Verifica che il metodo ritorni entrambi i task
+        List<TaskDipendente> result = commessaService.tasksAssegnate(task);
+        assertNotNull(result);
+        assertEquals("Il numero di TaskDipendente non corrisponde.", 2, result.size());
+    }
+
+    @Test
+    public void testScegliDipendente_ReturnsDipendente() {
+        // Crea un Dipendente
+        Dipendente dipendente = new Dipendente();
+        dipendente.setNome("Dipendente Test");
+        dipendente.setReparto(Reparto.CABLAGGIO);
+        em.getTransaction().begin();
+        em.persist(dipendente);
+        em.getTransaction().commit();
+
+        // Verifica che il metodo trovi il dipendente
+        Dipendente result = commessaService.scegliDipendente(Reparto.CABLAGGIO);
+        assertNotNull("Il metodo non ha trovato il dipendente.", result);
+        assertEquals("Il dipendente trovato non corrisponde.", dipendente.getNome(), result.getNome());
+    }
+
+    @Test
+    public void testAssegnaTasksSistema() {
+        // Crea una commessa senza figli
+        Commessa commessa = new Commessa();
+        commessa.setNome("Commessa Test22");
+        commessa.setReparto(Reparto.CABLAGGIO);
+        em.getTransaction().begin();
+        em.persist(commessa);
+        em.getTransaction().commit();
+
+        // Crea una CommessaInstance
+  
+        CommessaInstance instance = new CommessaInstance();
+        instance.setCommessa(commessa);
+        instance.setId(299L); // Supponendo che CommessaInstance abbia un ID
+
+        em.getTransaction().begin();
+        em.persist(instance);
+        em.getTransaction().commit();
+
+        // Chiama il metodo e verifica che il task sia assegnato
+        int result = commessaService.assegnaTasksSistema(commessa, instance);
+        assertEquals("Il numero di task assegnati non corrisponde.", 1, result);
+
+        List<Task> tasks = em.createQuery("SELECT t FROM Task t WHERE t.commessa = :commessa", Task.class)
+                .setParameter("commessa", commessa).getResultList();
+        assertEquals("Il numero di task creati non corrisponde.", 1, tasks.size());
+    }
+
+    @Test
+    public void testCompletaTask() {
+        // Crea una commessa padre e figlia
+        Commessa padre = new Commessa();
+        padre.setNome("Padre");
+        Commessa figlia = new Commessa();
+        figlia.setNome("Figlia");
+        figlia.setCommessaPadre(padre);
+        padre.addCommessaFiglia(figlia);
+
+        em.getTransaction().begin();
+        em.createQuery("DELETE FROM TaskDipendente").executeUpdate();
+        em.persist(padre);
+        em.persist(figlia);
+        em.getTransaction().commit();
+
+        // Crea un'istanza di CommessaInstance
+        CommessaInstance instance = new CommessaInstance();
+        instance.setCommessa(padre);
+        instance.setId(24L); 
+        em.getTransaction().begin();
+        em.persist(instance);
+        em.getTransaction().commit();
+
+        // Aggiungi un Task completato per la figlia
+        Task taskFiglia = new Task(figlia, instance);
+        em.getTransaction().begin();
+        em.persist(taskFiglia);
+        
+        Dipendente dipendente = new Dipendente();
+        dipendente.setMatricola("123493");
+      //  dipendente.setId(12331L);
+        dipendente.setPassword("passwordDipendente");
+        dipendente.setNome("Mario Rossi");
+        dipendente.setReparto(Reparto.CABLAGGIO);
+        em.persist(dipendente);
+
+        TaskDipendente tdFiglia = new TaskDipendente(taskFiglia, dipendente);
+        tdFiglia.setStatus("ASSEGNATA");
+        em.persist(tdFiglia);
+        em.getTransaction().commit();
+
+        // Crea un TaskDipendente non completato per il padre
+        Task taskPadre = new Task(padre, instance);
+        em.getTransaction().begin();
+        em.persist(taskPadre);
+        em.getTransaction().commit();
+
+        // Completa il task della figlia e verifica che il padre sia aggiornato
+        commessaService.completaTask(tdFiglia);
+        em.clear();
+        List<TaskDipendente> tasksPadre = em.createQuery("SELECT td FROM TaskDipendente td WHERE td.task.commessa = :padre",
+                TaskDipendente.class).setParameter("padre", padre).getResultList();
+        assertEquals("Il numero di task completati per il padre non corrisponde.", 1, tasksPadre.size());
     }
 }

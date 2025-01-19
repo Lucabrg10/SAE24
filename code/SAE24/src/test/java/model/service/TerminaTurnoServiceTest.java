@@ -73,7 +73,7 @@ public class TerminaTurnoServiceTest {
 
         CommessaInstance commessaInstance= new CommessaInstance();
         commessaInstance.setCommessa(commessa);
-        commessaInstance.setId(4L);
+        commessaInstance.setId(13L);
         em.persist(commessaInstance);
       
         Task task = new Task();

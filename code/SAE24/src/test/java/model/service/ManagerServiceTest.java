@@ -67,7 +67,7 @@ public class ManagerServiceTest {
     public void testAddDipendente_Success() {
         String nome = "Mario";
         String cognome = "Rossi";
-        String matricola = "12345";
+        String matricola = "123452";
         Reparto reparto = Reparto.CABLAGGIO;
 
         String risultato = managerService.addDipendente(nome, cognome, matricola, reparto);
@@ -89,11 +89,11 @@ public class ManagerServiceTest {
         Dipendente existingDipendente = new Dipendente();
         existingDipendente.setNome("Luigi");
         existingDipendente.setCognome("Bianchi");
-        existingDipendente.setMatricola("54321");
+        existingDipendente.setMatricola("543211");
         em.persist(existingDipendente);
         em.getTransaction().commit();
 
-        String risultato = managerService.addDipendente("Marco", "Verdi", "54321", Reparto.MONTAGGIO);
+        String risultato = managerService.addDipendente("Marco", "Verdi", "543211", Reparto.MONTAGGIO);
 
         assertEquals("Dovrebbe essere restituito un messaggio di errore per matricola duplicata",
                 "Errore: la matricola non è univoca o si è verificato un altro errore.", risultato);
@@ -102,7 +102,7 @@ public class ManagerServiceTest {
     @Test
     public void testGetAllDipendenti() {
         em.getTransaction().begin();
-
+        em.createQuery("DELETE FROM Dipendente").executeUpdate();
         Dipendente dipendente1 = new Dipendente();
         dipendente1.setNome("Alessandro");
         dipendente1.setMatricola("001");
@@ -126,7 +126,7 @@ public class ManagerServiceTest {
     @Test
     public void testGetAllCommessePrincipali() {
         em.getTransaction().begin();
-
+        em.createQuery("DELETE FROM Commessa").executeUpdate();
         Commessa principale = new Commessa();
         principale.setNome("Commessa Principale");
         em.persist(principale);
