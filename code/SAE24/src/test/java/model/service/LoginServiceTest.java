@@ -27,7 +27,7 @@ public class LoginServiceTest {
     public void setUp() {
         emf = Persistence.createEntityManagerFactory("dip-test");
         em = emf.createEntityManager();
-        loginService = new LoginService();
+        loginService = new LoginService("test");
     }
 
     @After

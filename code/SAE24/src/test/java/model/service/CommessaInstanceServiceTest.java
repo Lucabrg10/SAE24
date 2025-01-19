@@ -15,11 +15,10 @@ public class CommessaInstanceServiceTest {
 	@Test
 	public void testCreaNewCommessaInstance() {
 	CommessaService service = new CommessaService("test");
-	service.addCommessa("PRova", null, null, null, null);
+	service.addCommessa("PRova", null, "0", null, null);
 	Commessa c = new Commessa("PRova",null,null);
 	CommessaInstance cminstance = cm.creaNewCommessaInstance(c);	
 	assertNotNull(cminstance);
-		
 	}
 
 }

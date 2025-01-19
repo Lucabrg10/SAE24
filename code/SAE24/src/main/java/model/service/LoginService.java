@@ -12,7 +12,20 @@ public class LoginService {
     private EntityManager entityManager = Persistence.createEntityManagerFactory("dip").createEntityManager();
 
 
-    public Object authenticate(String matricola, String password) {
+    public LoginService(String utilizzo) {
+
+    		if(utilizzo.equals("test")) {
+    			this.entityManager = Persistence.createEntityManagerFactory("dip-test").createEntityManager();
+    		}
+    	}
+    
+    public LoginService()
+    {
+    	this.entityManager = Persistence.createEntityManagerFactory("dip").createEntityManager();
+    }
+	
+
+	public Object authenticate(String matricola, String password) {
         // Verifica prima se è un dipendente
         Dipendente dipendente = findDipendenteByMatricola(matricola);
         if (dipendente != null ) {
