@@ -167,8 +167,11 @@ public class TaskDipendenteServiceTest {
         em.getTransaction().commit();
 
         // Avvia l'attività
+        
+        
         taskDipendenteService.iniziaAttività(taskDipendente.getId());
-
+        
+        em.clear();
         // Recupera l'oggetto aggiornato
         TaskDipendente aggiornato = em.find(TaskDipendente.class, taskDipendente.getId());
         assertNotNull("Il task dovrebbe essere aggiornato", aggiornato.getInizio());
@@ -212,7 +215,7 @@ public class TaskDipendenteServiceTest {
 
         // Termina l'attività
         taskDipendenteService.stopAttività(taskDipendente.getId());
-
+        em.clear();
         // Recupera l'oggetto aggiornato
         TaskDipendente aggiornato = em.find(TaskDipendente.class, taskDipendente.getId());
         System.out.println("stato   "+aggiornato.getStatus());

@@ -38,11 +38,11 @@ public class ManagerServiceTest {
             emf.close();
         }
     }
-    
     @Test
     public void testGetAllCommesse() {
+  
         em.getTransaction().begin();
-
+        em.createQuery("DELETE FROM Commessa").executeUpdate();
         Commessa commessa1 = new Commessa();
         commessa1.setNome("Commessa 1");
         commessa1.setReparto(Reparto.CABLAGGIO);
@@ -56,7 +56,8 @@ public class ManagerServiceTest {
         em.persist(commessa2);
 
         em.getTransaction().commit();
-
+        
+        em.clear();
         List<Commessa> commesse = managerService.getAllCommesse();
 
         assertNotNull("La lista delle commesse non dovrebbe essere null", commesse);
@@ -155,9 +156,9 @@ public class ManagerServiceTest {
         em.getTransaction().commit();
 
         managerService.deleteDipendente(dipendente.getId());
-
+        em.clear();
         Dipendente deletedDipendente = em.find(Dipendente.class, dipendente.getId());
-        System.out.println("NOME "+deletedDipendente.getNome());
+
 
         assertNull("Il dipendente dovrebbe essere eliminato", deletedDipendente);
     }

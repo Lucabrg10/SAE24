@@ -40,7 +40,7 @@ public class DipendenteServiceTest {
             emf.close();
         }
     }
-
+    	//testGetTasksByDipendente funziona??viene usato?
     @Test
     public void testGetTasksByDipendente_Success() {
         em.getTransaction().begin();
@@ -81,9 +81,10 @@ public class DipendenteServiceTest {
         em.persist(task2);
 
         em.getTransaction().commit();
-
+ System.out.println("id dipendente    "+dipendente.getId());
         // Recupera i task tramite il servizio
         List<Task> tasks = dipendenteService.getTasksByDipendente(dipendente.getId());
+       
         assertNotNull("La lista dei task non dovrebbe essere null", tasks);
         assertEquals("Il numero di task assegnati al dipendente non è corretto", 2, tasks.size());
     }
@@ -105,10 +106,11 @@ public class DipendenteServiceTest {
         String risultato = dipendenteService.modificaPasswordDipendente("1", "passwordNuova");
 
         assertEquals("La password dovrebbe essere aggiornata con successo.", "Password aggiornata con successo.", risultato);
-
+        em.clear();
         // Verifica la modifica
         Dipendente aggiornato = em.find(Dipendente.class, dipendente.getId());
         assertNotNull("Il dipendente dovrebbe essere presente nel database", aggiornato);
+        System.out.println("pass     "+aggiornato.getPassword());
         assertEquals("La password non è stata aggiornata correttamente", "passwordNuova", aggiornato.getPassword());
     }
 

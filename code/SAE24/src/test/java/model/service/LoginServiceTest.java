@@ -46,21 +46,23 @@ public class LoginServiceTest {
 
         // Crea un dipendente di test
         Dipendente dipendente = new Dipendente();
-        dipendente.setMatricola("12345");
+        dipendente.setMatricola("123456");
         dipendente.setPassword("passwordDipendente");
-        dipendente.setNome("mario");
-        dipendente.setCognome("Rossi");
+        dipendente.setNome("l");
+        dipendente.setCognome("f");
         dipendente.setReparto(Reparto.CABLAGGIO);
         em.persist(dipendente);
 
         em.getTransaction().commit();
 
         // Prova ad autenticare
-        Object result = loginService.authenticate("12345", "passwordDipendente");
+    
+       
+        Object result = loginService.authenticate("123456", "passwordDipendente");
 
         assertNotNull("L'autenticazione del dipendente dovrebbe riuscire", result);
         assertTrue("Il risultato dovrebbe essere un'istanza di Dipendente", result instanceof Dipendente);
-        assertEquals("La matricola del dipendente autenticato non corrisponde", "12345", ((Dipendente) result).getMatricola());
+        assertEquals("La matricola del dipendente autenticato non corrisponde", "123456", ((Dipendente) result).getMatricola());
     }
 
     @Test
@@ -80,7 +82,6 @@ public class LoginServiceTest {
 
         // Prova ad autenticare
         Object result = loginService.authenticate("54321", "passwordManager");
-
         assertNotNull("L'autenticazione del manager dovrebbe riuscire", result);
         assertTrue("Il risultato dovrebbe essere un'istanza di Manager", result instanceof Manager);
         assertEquals("La matricola del manager autenticato non corrisponde", "54321", ((Manager) result).getMatricola());
