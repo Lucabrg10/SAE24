@@ -251,9 +251,11 @@ public class CommessaServiceTest {
         dipendente.setNome("Dipendente Test");
         dipendente.setReparto(Reparto.CABLAGGIO);
         em.getTransaction().begin();
+        em.createQuery("DELETE FROM Dipendente").executeUpdate();
         em.persist(dipendente);
         em.getTransaction().commit();
-
+        em.clear();
+        
         // Verifica che il metodo trovi il dipendente
         Dipendente result = commessaService.scegliDipendente(Reparto.CABLAGGIO);
         assertNotNull("Il metodo non ha trovato il dipendente.", result);
