@@ -266,22 +266,25 @@ public class CommessaServiceTest {
         Commessa commessa = new Commessa();
         commessa.setNome("Commessa Test22");
         commessa.setReparto(Reparto.CABLAGGIO);
-        em.getTransaction().begin();
-        em.persist(commessa);
-        em.getTransaction().commit();
-
-        // Crea una CommessaInstance
-  
         CommessaInstance instance = new CommessaInstance();
         instance.setCommessa(commessa);
-        instance.setId(299L); // Supponendo che CommessaInstance abbia un ID
-
+        instance.setId(100034L); 
+        
         em.getTransaction().begin();
+        em.createQuery("DELETE FROM Task").executeUpdate();
+        em.createQuery("DELETE FROM CommessaInstance").executeUpdate();
+        em.persist(commessa);
+        
+
+      
         em.persist(instance);
         em.getTransaction().commit();
-
+        em.clear();
+        CommessaInstance test = em.find(CommessaInstance.class, instance.getId());
+       System.out.println("\n\ntest    "+test);
+        
         // Chiama il metodo e verifica che il task sia assegnato
-        int result = commessaService.assegnaTasksSistema(commessa, instance);
+        int result = commessaService.assegnaTasksSistema(commessa, test);
         assertEquals("Il numero di task assegnati non corrisponde.", 1, result);
 
         List<Task> tasks = em.createQuery("SELECT t FROM Task t WHERE t.commessa = :commessa", Task.class)
@@ -296,8 +299,10 @@ public class CommessaServiceTest {
         padre.setNome("Padre");
         Commessa figlia = new Commessa();
         figlia.setNome("Figlia");
+        figlia.setReparto(Reparto.CABLAGGIO);
         figlia.setCommessaPadre(padre);
         padre.addCommessaFiglia(figlia);
+        padre.setReparto(Reparto.CABLAGGIO);
 
         em.getTransaction().begin();
         em.createQuery("DELETE FROM TaskDipendente").executeUpdate();
@@ -331,17 +336,14 @@ public class CommessaServiceTest {
         em.persist(tdFiglia);
         em.getTransaction().commit();
 
-        // Crea un TaskDipendente non completato per il padre
-        Task taskPadre = new Task(padre, instance);
-        em.getTransaction().begin();
-        em.persist(taskPadre);
-        em.getTransaction().commit();
+        
 
         // Completa il task della figlia e verifica che il padre sia aggiornato
         commessaService.completaTask(tdFiglia);
         em.clear();
         List<TaskDipendente> tasksPadre = em.createQuery("SELECT td FROM TaskDipendente td WHERE td.task.commessa = :padre",
                 TaskDipendente.class).setParameter("padre", padre).getResultList();
+       
         assertEquals("Il numero di task completati per il padre non corrisponde.", 1, tasksPadre.size());
     }
 }

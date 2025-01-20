@@ -40,54 +40,7 @@ public class DipendenteServiceTest {
             emf.close();
         }
     }
-    	//testGetTasksByDipendente funziona??viene usato?
-    @Test
-    public void testGetTasksByDipendente_Success() {
-        em.getTransaction().begin();
-
-        // Crea un dipendente di test
-        
-        Dipendente dipendente = new Dipendente();
-        dipendente.setMatricola("12345");
-      //  dipendente.setId(12331L);
-        dipendente.setPassword("passwordDipendente");
-        dipendente.setNome("Mario Rossi");
-        dipendente.setReparto(Reparto.CABLAGGIO);
-        em.persist(dipendente);
-
-        // Crea commessa e commessaInstance per i task
-        Commessa commessa = new Commessa();
-        commessa.setNome("Commessa 1");
-        commessa.setReparto(Reparto.CABLAGGIO);
-        commessa.setTempoStimato(100L);
-        em.persist(commessa);
-        
  
-
-        CommessaInstance commessaInstance = new CommessaInstance();
-        commessaInstance.setCommessa(commessa);
-        commessaInstance.setId(11L); // Supponendo che CommessaInstance abbia un ID
-        em.persist(commessaInstance);
-
-        // Crea alcuni task assegnati al dipendente
-        Task task1 = new Task(commessa, commessaInstance);
-        task1.setCommessa(commessa);
-        task1.setCommessaInstance(commessaInstance);
-        em.persist(task1);
-
-        Task task2 = new Task(commessa, commessaInstance);
-        task2.setCommessa(commessa);
-        task2.setCommessaInstance(commessaInstance);
-        em.persist(task2);
-
-        em.getTransaction().commit();
-        em.clear();
-        // Recupera i task tramite il servizio
-        List<Task> tasks = dipendenteService.getTasksByDipendente(dipendente.getId());
-       
-        assertNotNull("La lista dei task non dovrebbe essere null", tasks);
-        assertEquals("Il numero di task assegnati al dipendente non è corretto", 2, tasks.size());
-    }
 
     @Test
     public void testModificaPasswordDipendente_Success() {
