@@ -33,9 +33,25 @@ Il secondo Sprint sarà dedicato al completamento delle funzioni principali e al
 -Implementazioni logiche dei controller
 -Aggiornamento documentazione
 
+### Sprint 2 Review: 6 dicembre - 19 dicembre
+Lo sprint due è stato molto prolifico in quanto sono state svolte alcune delle principali funzionalità del software:
+sono state create le interfacce per la visualizzzazione delle funzionalità che i manager e i dipendenti avevano a disposizione come forma di prototipo per la visualizazione del desing finale 
+sono state inoltre create e implementate le principali logiche dei controller come la possibilità di accedere come dipendente visualizzare le task iniziarle e terminarle,
+
 
 ## Sprint 3: 20 dicembre - 2 gennaio
-**Scrum Master**: [Nome Scrum Master 3]
+**Scrum Master**: [Lorenzo Capelli]
+
+Il terzo sprint sarà dedicato all'implementazione del service per la gestione del database e sul perfezionamento della logica legata al manager.
+
+**Obiettivi principali**:
+- Sviluppo delle classi service (manager) per ;a gestione delle operazioni sul database
+- Implementazione delle chiamate al database nelle classi che lo necessitano
+- uniformazione del css
+- Aggiornamento documentazione
+
+### Sprint 3 Review: 20 dicembre - 2 gennaio
+L'implementazione di tutte le funzionalità previste è stata completata rispettando i tempi di sviluppo pianificati. Non sono stati riscontrati ritardi o problematiche durante lo sprint.
 
 ## Sprint 4: 3 gennaio - 16 gennaio
 **Scrum Master**: [Luca Brugnetti]
