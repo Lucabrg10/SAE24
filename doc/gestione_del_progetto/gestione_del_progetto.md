@@ -50,7 +50,7 @@ Il terzo sprint sarà dedicato all'implementazione del service per la gestione d
 - uniformazione del css
 - Aggiornamento documentazione
 
-## Sprint 4 Review: 20 dicembre - 2 gennaio
+### Sprint 3 Review: 20 dicembre - 2 gennaio
 L'implementazione di tutte le funzionalità previste è stata completata rispettando i tempi di sviluppo pianificati. Non sono stati riscontrati ritardi o problematiche durante lo sprint.
 
 ## Sprint 4: 3 gennaio - 16 gennaio
