@@ -64,7 +64,7 @@ Analisi dei risultati: I risultati sono stati analizzati per identificare eventu
 ## 6.1 Copertura del Codice
 
 La copertura del codice ha riportato le seguenti statistiche
-![grafico con percentuali di test per le varie classi](doc/test/Immagine1.png "Grafico dei test")
+![grafico con percentuali di test per le varie classi](/Immagine1.png)
 
 
 
