@@ -130,9 +130,14 @@ Configurazione Maven:
 ## 3. Design pattern
 
 1) Abstraction - Occurrence Pattern
-    Utilizzato per instanziare Commessa: nel programma è necessario avere una Commessa unica che però può essere assegnata più volta così abbiamo realizzato la classe CommessaInstance che contiene una Commessa e il suo numero di istanza.
 
+    Utilizzato per instanziare Commessa: nel programma è necessario avere una Commessa unica che però può essere assegnata più volte così abbiamo realizzato la classe CommessaInstance che contiene una Commessa e il suo numero di istanza.
 
+![Abstraction - Occurrence Pattern](../uml/pattern1.png)
 
-2) General Hierarchy Pattern
-    Utilizzato per gestire le Commesse figlie e padri, ovvero una Commessa può essere padre di tante Commesse ma a sua volta anche figlia di una Commessa
+2) General Hierarchy Pattern Adattato
+
+    Utilizzato per gestire le Commesse figlie e padri, ovvero una Commessa può essere padre di tante Commesse ma a sua volta anche figlia di una Commessa. 
+    Questo pattern è stato implementato in modo leggermente differente in quanto l'unica cosa che differisce tra una commessa padre da una commessa base è che la commessa padre possiede una lista di figlie mentre una commessa base possiede una lista vuota. Quindi per limitare la complessità nell'implementazione è stata realizzata una sola classe.
+
+![General Hierarchy Pattern Adattato](../uml/pattern2.png)
