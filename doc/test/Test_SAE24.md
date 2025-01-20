@@ -1,7 +1,4 @@
 # Casi Test SAE
-
----
-
 ## 1. Introduzione
 
 Il testing del software è una fase cruciale del ciclo di vita dello sviluppo software. Ha lo scopo di garantire che il prodotto finale soddisfi i requisiti definiti e funzioni correttamente in tutti i contesti previsti. Questo documento illustra le tipologie di testing adottate, le strategie utilizzate e i risultati ottenuti nel processo di verifica del software.
