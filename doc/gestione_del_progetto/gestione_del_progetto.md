@@ -33,6 +33,11 @@ Il secondo Sprint sarà dedicato al completamento delle funzioni principali e al
 -Implementazioni logiche dei controller
 -Aggiornamento documentazione
 
+### Sprint 2 Review: 6 dicembre - 19 dicembre
+Lo sprint due è stato molto prolifico in quanto sono state svolte alcune delle principali funzionalità del software:
+sono state create le interfacce per la visualizzzazione delle funzionalità che i manager e i dipendenti avevano a disposizione come forma di prototipo per la visualizazione del desing finale 
+sono state inoltre create e implementate le principali logiche dei controller come la possibilità di accedere come dipendente visualizzare le task iniziarle e terminarle,
+
 
 ## Sprint 3: 20 dicembre - 2 gennaio
 **Scrum Master**: [Nome Scrum Master 3]
