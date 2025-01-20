@@ -23,19 +23,6 @@ public class DipendenteService {
 	
 	
 	/**
-	 * Recupera tutte le task assegnate a un dipendente.
-	 *
-	 * @param employeeId ID del dipendente.
-	 * @return Lista di task del dipendente.
-	 */
-	public List<Task> getTasksByDipendente(Long dipendenteId) {
-		TypedQuery<Task> query = entityManager.createQuery("SELECT t FROM Task t WHERE t.dipendente.id = :dipendenteId",
-				Task.class);
-		query.setParameter("dipendenteId", dipendenteId);
-		return query.getResultList();
-	}
-	
-	/**
 	 * Modifica la password di un dipendente.
 	 *
 	 * @param matricola La matricola del dipendente.

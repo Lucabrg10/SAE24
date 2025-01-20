@@ -21,6 +21,7 @@ public class Commessa {
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "commessa_padre_id")
 	private Commessa commessaPadre;
+	
 
 	@OneToMany(mappedBy = "commessaPadre", cascade = CascadeType.ALL)
 	private List<Commessa> commesseFiglie = new ArrayList<>();

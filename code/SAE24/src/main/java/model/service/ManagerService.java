@@ -38,7 +38,8 @@ public class ManagerService extends DipendenteService {
 			entityManager.persist(dipendente);
 			entityManager.getTransaction().commit();
 		} catch (PersistenceException e) {
-			if (entityManager.getTransaction().isActive()) {
+			if (entityManager.getTransaction().isActive()) 
+			{
 				entityManager.getTransaction().rollback(); // Fai il rollback in caso di errore
 			}
 
