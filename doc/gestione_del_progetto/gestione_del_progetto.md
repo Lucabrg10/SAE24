@@ -38,4 +38,16 @@ Il secondo Sprint sarà dedicato al completamento delle funzioni principali e al
 **Scrum Master**: [Nome Scrum Master 3]
 
 ## Sprint 4: 3 gennaio - 16 gennaio
-**Scrum Master**: [Nome Scrum Master 4]
+**Scrum Master**: [Luca Brugnetti]
+
+L'ultimo Sprint sarà necessario per completare le ultime funzioni dell'applicazione e completare la documentazione.
+
+**Obiettivi principali**:
+- Correzione delle interazioni tra applicativo Dipendente e Manager
+- Sviluppo grafici di andamento commessa e personale
+- Correzione interfaccia
+- Refactor codice
+
+### Sprint 4 Review: 22 novembre - 5 dicembre
+
+Tutte le funzioni sono state implementate in modo corretto, il technical debt c'è ancora anche se è stato fatto comunque una grande operazione di refactor
