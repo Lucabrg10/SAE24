@@ -6,6 +6,6 @@ ___
 # START APPLICAZIONE
 Per poter avviare l'applicazione:
 
-1) Clona la repo
-2)Per startare: Click sul progetto-> **Maven Build**--> come **Goals** inserire: [javafx:run]
+1) Clona la repository
+2) Per startare: Click sul progetto --> **Maven Build** --> come **Goals** inserire: [javafx:run]
  
