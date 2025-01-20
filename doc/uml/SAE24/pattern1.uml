@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_pq8TgNdNEe-jW6_mO0_rwQ" name="SAE24">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_prcp0NdNEe-jW6_mO0_rwQ">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_snBqINdNEe-jW6_mO0_rwQ" name="Commessa">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_snBqIddNEe-jW6_mO0_rwQ" name="Nome">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_snBqItdNEe-jW6_mO0_rwQ" name="Id">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_snBqI9dNEe-jW6_mO0_rwQ" name="Descrizione">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_snBqJNdNEe-jW6_mO0_rwQ" name="Reparto">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_snBqJddNEe-jW6_mO0_rwQ" name="figlia" type="_snBqINdNEe-jW6_mO0_rwQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_snBqJtdNEe-jW6_mO0_rwQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_snBqJ9dNEe-jW6_mO0_rwQ" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_z8QyUNdNEe-jW6_mO0_rwQ" name="descrizione">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_z8SngNdNEe-jW6_mO0_rwQ" name="reparto">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_z8W48NdNEe-jW6_mO0_rwQ" name="id">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_z8YHENdNEe-jW6_mO0_rwQ" name="nome">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_snBqKNdNEe-jW6_mO0_rwQ" name="creaIstanza"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_wqMkoNdNEe-jW6_mO0_rwQ" name="CommessaInstance">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_wqMkoddNEe-jW6_mO0_rwQ" name="commessa">
+      <type xmi:type="uml:Class" href="DiagrammaDelleClassi.uml#_HxykwNT9Ee-808asRZmZYg"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_wqMkotdNEe-jW6_mO0_rwQ" name="instance">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_wqMko9dNEe-jW6_mO0_rwQ" name="dataInizio">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDate"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_wqMkpNdNEe-jW6_mO0_rwQ" name="commessa" aggregation="shared">
+      <type xmi:type="uml:Class" href="DiagrammaDelleClassi.uml#_HxykwNT9Ee-808asRZmZYg"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_7GBDQNdNEe-jW6_mO0_rwQ" name="instance">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_7GBDQddNEe-jW6_mO0_rwQ" name="dataInizio">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDate"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_b4bJYNdOEe-jW6_mO0_rwQ" name="id">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_B0-OkNdOEe-jW6_mO0_rwQ" memberEnd="_B0-Ok9dOEe-jW6_mO0_rwQ _B0-OltdOEe-jW6_mO0_rwQ">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_B0-OkddOEe-jW6_mO0_rwQ" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_B0-OktdOEe-jW6_mO0_rwQ" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_B0-OltdOEe-jW6_mO0_rwQ" name="commessa" type="_snBqINdNEe-jW6_mO0_rwQ" association="_B0-OkNdOEe-jW6_mO0_rwQ"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_B0-Ok9dOEe-jW6_mO0_rwQ" name="commessainstance" type="_wqMkoNdNEe-jW6_mO0_rwQ" association="_B0-OkNdOEe-jW6_mO0_rwQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Htp5MNdOEe-jW6_mO0_rwQ" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Model>

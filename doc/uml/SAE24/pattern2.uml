@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_dW_uQNdQEe-jW6_mO0_rwQ" name="SAE24">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_dXe2cNdQEe-jW6_mO0_rwQ">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_e9SWoNdQEe-jW6_mO0_rwQ" name="CommessaBase">
+    <generalization xmi:type="uml:Generalization" xmi:id="_xvZx0NdQEe-jW6_mO0_rwQ" general="_h2kQ4NdQEe-jW6_mO0_rwQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_gT91sNdQEe-jW6_mO0_rwQ" name="ComessaPadre">
+    <generalization xmi:type="uml:Generalization" xmi:id="_2AIAINdQEe-jW6_mO0_rwQ" general="_h2kQ4NdQEe-jW6_mO0_rwQ"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_BNmlM9dREe-jW6_mO0_rwQ" name="commessa" type="_h2kQ4NdQEe-jW6_mO0_rwQ" aggregation="shared" association="_BNmlMNdREe-jW6_mO0_rwQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_BNmlNddREe-jW6_mO0_rwQ" value="*"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_h2kQ4NdQEe-jW6_mO0_rwQ" name="Commessa"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_BNmlMNdREe-jW6_mO0_rwQ" memberEnd="_BNmlM9dREe-jW6_mO0_rwQ _BNmlNtdREe-jW6_mO0_rwQ">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_BNmlMddREe-jW6_mO0_rwQ" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_BNmlMtdREe-jW6_mO0_rwQ" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_BNmlNtdREe-jW6_mO0_rwQ" name="comessapadre" type="_gT91sNdQEe-jW6_mO0_rwQ" association="_BNmlMNdREe-jW6_mO0_rwQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_NJw1MNdREe-jW6_mO0_rwQ" name="Commessa">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_VbrBAtdREe-jW6_mO0_rwQ" name="figlia" type="_NJw1MNdREe-jW6_mO0_rwQ" aggregation="shared" association="_VbqZ8NdREe-jW6_mO0_rwQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_VbroENdREe-jW6_mO0_rwQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_VbroEddREe-jW6_mO0_rwQ" value="*"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_VbqZ8NdREe-jW6_mO0_rwQ" memberEnd="_VbrBAtdREe-jW6_mO0_rwQ _VbroEtdREe-jW6_mO0_rwQ">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_VbrBANdREe-jW6_mO0_rwQ" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_VbrBAddREe-jW6_mO0_rwQ" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_VbroEtdREe-jW6_mO0_rwQ" name="padre" type="_NJw1MNdREe-jW6_mO0_rwQ" association="_VbqZ8NdREe-jW6_mO0_rwQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_k8Y84NdREe-jW6_mO0_rwQ"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Model>

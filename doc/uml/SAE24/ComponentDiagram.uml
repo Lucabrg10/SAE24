@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_X-as4NNnEe-uVN9X19xJyA" name="model">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_X_Lh4NNnEe-uVN9X19xJyA">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Component" xmi:id="_sMtLINNnEe-uVN9X19xJyA" name="Controller">
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_JFNngNNoEe-uVN9X19xJyA" client="_sMtLINNnEe-uVN9X19xJyA" supplier="_mBVOANNnEe-uVN9X19xJyA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_x4XGYNNnEe-uVN9X19xJyA" name="View">
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_YRN3oNNoEe-uVN9X19xJyA" client="_x4XGYNNnEe-uVN9X19xJyA" supplier="_sMtLINNnEe-uVN9X19xJyA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_2Xs_gNNnEe-uVN9X19xJyA" name="Database"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_lTzkMNNoEe-uVN9X19xJyA" name="model">
+    <packagedElement xmi:type="uml:Component" xmi:id="_mBVOANNnEe-uVN9X19xJyA" name="Service">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_TIoNMNNoEe-uVN9X19xJyA" client="_mBVOANNnEe-uVN9X19xJyA" supplier="_sMtLINNnEe-uVN9X19xJyA"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_a76jUNNoEe-uVN9X19xJyA" client="_mBVOANNnEe-uVN9X19xJyA" supplier="_2Xs_gNNnEe-uVN9X19xJyA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_jMhuoNNoEe-uVN9X19xJyA" name="Entity">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_jMhuodNoEe-uVN9X19xJyA" client="_jMhuoNNoEe-uVN9X19xJyA" supplier="_mBVOANNnEe-uVN9X19xJyA"/>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>
