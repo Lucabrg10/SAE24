@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_DNzL8NZMEe-eeqxTs4cOKg" name="StateMachineDiagramDipendente">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_DQhIwNZMEe-eeqxTs4cOKg">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:StateMachine" xmi:id="_DOMNgNZMEe-eeqxTs4cOKg" name="StateMachine_dipendente">
+    <region xmi:type="uml:Region" xmi:id="_DOYawNZMEe-eeqxTs4cOKg" name="Region1">
+      <transition xmi:type="uml:Transition" xmi:id="_C7qBINZOEe-eeqxTs4cOKg" name="Inserimento matricola, inserimento password" source="_7NLSgNZNEe-eeqxTs4cOKg" target="_BPVpQNZOEe-eeqxTs4cOKg"/>
+      <transition xmi:type="uml:Transition" xmi:id="_I8VxMNZOEe-eeqxTs4cOKg" name="[matricola o password errate]" source="_BPVpQNZOEe-eeqxTs4cOKg" target="_7NLSgNZNEe-eeqxTs4cOKg">
+        <effect xmi:type="uml:Activity" xmi:id="_SkeJENZOEe-eeqxTs4cOKg" name="Print: credenziali non valide"/>
+      </transition>
+      <transition xmi:type="uml:Transition" xmi:id="_WMmGUNZOEe-eeqxTs4cOKg" name="[username e password corretti]" source="_BPVpQNZOEe-eeqxTs4cOKg" target="_UdoDENZOEe-eeqxTs4cOKg"/>
+      <transition xmi:type="uml:Transition" xmi:id="_fO-FwNZOEe-eeqxTs4cOKg" name="Menu == profilo" source="_UdoDENZOEe-eeqxTs4cOKg" target="_a3zRMNZOEe-eeqxTs4cOKg"/>
+      <transition xmi:type="uml:Transition" xmi:id="_qV26oNZOEe-eeqxTs4cOKg" name="Menu == visualizza task" source="_UdoDENZOEe-eeqxTs4cOKg" target="_jCgo0NZOEe-eeqxTs4cOKg"/>
+      <transition xmi:type="uml:Transition" xmi:id="_xrJtMNZOEe-eeqxTs4cOKg" name="&quot;Salva password&quot; button [textfield password modificato]" source="_a3zRMNZOEe-eeqxTs4cOKg" target="_a3zRMNZOEe-eeqxTs4cOKg">
+        <effect xmi:type="uml:Activity" xmi:id="_6WbbQNZOEe-eeqxTs4cOKg" name="Aggiornamento password"/>
+      </transition>
+      <transition xmi:type="uml:Transition" xmi:id="_nxoN4NZPEe-eeqxTs4cOKg" name="&quot;Start button&quot;" source="_jCgo0NZOEe-eeqxTs4cOKg" target="_jCgo0NZOEe-eeqxTs4cOKg">
+        <effect xmi:type="uml:Activity" xmi:id="_BM68gNZQEe-eeqxTs4cOKg" name="Avvia esecuzione task"/>
+      </transition>
+      <transition xmi:type="uml:Transition" xmi:id="_HKJv8NZQEe-eeqxTs4cOKg" name="&quot;Stop&quot; button" source="_jCgo0NZOEe-eeqxTs4cOKg" target="_jCgo0NZOEe-eeqxTs4cOKg">
+        <effect xmi:type="uml:Activity" xmi:id="_PjdkQNZQEe-eeqxTs4cOKg" name="Interrompi esecuzione task"/>
+      </transition>
+      <transition xmi:type="uml:Transition" xmi:id="_wDObMNZQEe-eeqxTs4cOKg" name="&quot;termina turno&quot; button" source="_jCgo0NZOEe-eeqxTs4cOKg" target="_UKy7wNZQEe-eeqxTs4cOKg"/>
+      <transition xmi:type="uml:Transition" xmi:id="_2W2VYNZQEe-eeqxTs4cOKg" name="&quot;annulla&quot; button" source="_UKy7wNZQEe-eeqxTs4cOKg" target="_jCgo0NZOEe-eeqxTs4cOKg"/>
+      <transition xmi:type="uml:Transition" xmi:id="_SD0LsNZREe-eeqxTs4cOKg" name="&quot;Conferma attivita&quot; button" source="_UKy7wNZQEe-eeqxTs4cOKg" target="_QBzQoNZREe-eeqxTs4cOKg"/>
+      <transition xmi:type="uml:Transition" xmi:id="_koQ-UNZREe-eeqxTs4cOKg" name="Necessità cambio schermata" source="_a3zRMNZOEe-eeqxTs4cOKg" target="_UdoDENZOEe-eeqxTs4cOKg"/>
+      <transition xmi:type="uml:Transition" xmi:id="_qU-CcNZREe-eeqxTs4cOKg" name="Necessità cambio schermata" source="_jCgo0NZOEe-eeqxTs4cOKg" target="_UdoDENZOEe-eeqxTs4cOKg"/>
+      <transition xmi:type="uml:Transition" xmi:id="_wIp4UNZREe-eeqxTs4cOKg" source="_03PEINZNEe-eeqxTs4cOKg" target="_7NLSgNZNEe-eeqxTs4cOKg"/>
+      <subvertex xmi:type="uml:Pseudostate" xmi:id="_03PEINZNEe-eeqxTs4cOKg"/>
+      <subvertex xmi:type="uml:State" xmi:id="_7NLSgNZNEe-eeqxTs4cOKg" name="Login"/>
+      <subvertex xmi:type="uml:Pseudostate" xmi:id="_BPVpQNZOEe-eeqxTs4cOKg" name="" kind="choice"/>
+      <subvertex xmi:type="uml:Pseudostate" xmi:id="_UdoDENZOEe-eeqxTs4cOKg" name="" kind="choice"/>
+      <subvertex xmi:type="uml:State" xmi:id="_a3zRMNZOEe-eeqxTs4cOKg" name="Profilo">
+        <doActivity xmi:type="uml:Activity" xmi:id="_dqI18NZOEe-eeqxTs4cOKg" name="Visualizza dati profilo"/>
+      </subvertex>
+      <subvertex xmi:type="uml:State" xmi:id="_jCgo0NZOEe-eeqxTs4cOKg" name="Visualizza task">
+        <doActivity xmi:type="uml:Activity" xmi:id="_n9NoQNZOEe-eeqxTs4cOKg" name="Visualizza task assegnate"/>
+      </subvertex>
+      <subvertex xmi:type="uml:State" xmi:id="_UKy7wNZQEe-eeqxTs4cOKg" name="Termina turno"/>
+      <subvertex xmi:type="uml:Pseudostate" xmi:id="_QBzQoNZREe-eeqxTs4cOKg" kind="terminate"/>
+    </region>
+  </packagedElement>
+</uml:Model>
