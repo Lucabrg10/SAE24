@@ -6,9 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
-
 import model.entity.Dipendente;
-import model.entity.Task;
 
 public class DipendenteService {
 	protected final EntityManager entityManager;

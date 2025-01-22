@@ -1,11 +1,6 @@
 package model.service;
 
 import model.entity.Dipendente;
-import model.entity.Reparto;
-import model.entity.Task;
-import model.entity.Commessa;
-import model.entity.CommessaInstance;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,8 +8,6 @@ import org.junit.Test;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
-import java.util.List;
 
 import static org.junit.Assert.*;
 

@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class CommessaInstance {
-	private static long instanceCounter = 0;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
