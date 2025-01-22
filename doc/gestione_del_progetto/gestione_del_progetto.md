@@ -64,6 +64,6 @@ L'ultimo Sprint sarà necessario per completare le ultime funzioni dell'applicaz
 - Correzione interfaccia
 - Refactor codice
 
-### Sprint 4 Review: 22 novembre - 5 dicembre
+### Sprint 4 Review: 3 gennaio - 16 gennaio
 
 Tutte le funzioni sono state implementate in modo corretto, il technical debt c'è ancora anche se è stato fatto comunque una grande operazione di refactor
